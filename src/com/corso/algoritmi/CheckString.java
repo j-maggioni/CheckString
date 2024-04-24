@@ -1,32 +1,40 @@
 package com.corso.algoritmi;
 
- import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
+import com.corso.standard.*;
 
 public abstract class CheckString {
 
-    private Collection<String> standards;
+    private List<Standard> standards;
     private CheckString next;
 
 
-    public boolean check( String input){
-        standards = new ArrayList<>();
+    public boolean check(String input){
+        /*standards = new ArrayList<>();
         standards.add("Philippines");
         standards.add("Philippine");
-        standards.add("The islands of Philippine");
+        standards.add("The islands of Philippine");*/
+    	
+    	ParoleStandard s = new FileParoleStandard();
+    	/*ParoleStandard s = new DBParoleStandard();
+    	ParoleStandard s = new LocaleParoleStandard();*/
+    	standards = s.getStandards();
 
         System.out.println("Provo con l'algoritmo " + this.getClass().getSimpleName());
 
-        for(String standard : standards){
-            if(check(input,standard)){
-                System.out.println("Parola " + standard + " trovata con " + this.getClass().getSimpleName());
+        /* TODO: fare controllo da DB world-country se lunghezza di input =2 o =3 
+         * implementare lettura da DB*/
+        
+        for(Standard standard : standards){
+            if(check(input,standard.getValue())){
+                System.out.println("Parola " + standard.getValue() + " trovata con " + this.getClass().getSimpleName());
                 return true;
             }
             else{
                 // passa un altro algoritmo con setNext()
             }
         }
-        if( next != null){
+        if (next != null){
             System.out.println("procedo con il successivo\n");
             next.check(input);
 
