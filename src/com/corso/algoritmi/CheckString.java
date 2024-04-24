@@ -51,6 +51,9 @@ public abstract class CheckString {
     // TEMPLATE
     protected abstract boolean check(String input, String standard);
 
+    protected String getName() {
+    	return this.getClass().getSimpleName();
+    }
 
 
 }
