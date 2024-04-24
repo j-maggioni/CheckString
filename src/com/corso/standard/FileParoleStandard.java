@@ -15,7 +15,7 @@ public class FileParoleStandard implements ParoleStandard {
 
     private void readFile() {
         try{
-            File file = new File("Nazioni2.txt");
+            File file = new File("./res/Nazioni2.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
                 String parola = scanner.nextLine();

@@ -40,7 +40,7 @@ public abstract class CheckString {
     public void setNext(CheckString checkString){
         this.next = checkString;
     }
-// TEMPLATE
+    // TEMPLATE
     protected abstract boolean check(String input, String standard);
 
 
