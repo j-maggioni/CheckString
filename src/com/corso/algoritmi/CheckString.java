@@ -21,18 +21,23 @@ public abstract class CheckString {
     	standards = s.getStandards();
 
         System.out.println("Provo con l'algoritmo " + this.getClass().getSimpleName());
-
+        ArrayList<String> tokens = Tokenizer.tokenize(input);
+        
         /* TODO: fare controllo da DB world-country se lunghezza di input =2 o =3 
          * implementare lettura da DB*/
         
-        for(Standard standard : standards){
-            if(check(input,standard.getValue())){
+        for(String word : tokens){
+        	for(Standard standard : standards) {
+        		//System.out.println(word);
+            if(check(word, standard.getValue())){
+            	
                 System.out.println("Parola " + standard.getValue() + " trovata con " + this.getClass().getSimpleName());
                 return true;
             }
             else{
                 // passa un altro algoritmo con setNext()
             }
+        }
         }
         if (next != null){
             System.out.println("procedo con il successivo\n");
