@@ -42,7 +42,7 @@ public class Levenstein extends CheckString {
 
     @Override
     public String getName() {
-        return super.getName()+getSoglia();
+        return super.getName()+" "+getSoglia();
     }
     
 
