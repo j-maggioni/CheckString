@@ -9,7 +9,7 @@ public abstract class CheckString {
     private CheckString next;
 
 
-    public boolean check(String input){
+    public boolean check(String input) throws Exception{
         /*standards = new ArrayList<>();
         standards.add("Philippines");
         standards.add("Philippine");

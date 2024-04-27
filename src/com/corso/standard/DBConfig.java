@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public abstract class DBConfig {
 
 	public static String dbName = "checkstring" ;
-	public static String dburl = "jdbc:mysql://localhost:3306/"+dbName ;
-	public static String dbuser = "root";
-	public static String dbpass = "Ramadan14" ;
+	private static String dburl = "jdbc:mysql://localhost:3306/"+dbName ;
+	private static String dbuser = "root";
+	private static String dbpass = "Ramadan14" ;
 	
 	public static void loadDriver () {  
 	try {
@@ -24,17 +24,17 @@ public abstract class DBConfig {
 		System.out.println("Error loading driver, msg : " +e);
 	    }
 	}// LoadDriver method
-    public static Connection getConnection () {
+    public static Connection newConnection ()  {
     	try {
 			Connection cn = DriverManager.getConnection(dburl, dbuser, dbpass);
-			//System.out.println("Connection ok !! to DB name : " +dbName);
+			System.out.println("Connection ok !! to DB name : " +dbName);
 			return cn ;
 		} catch (Exception e) {
 			System.out.println("Error connecting to db " +dburl+ " msg : " +e);
 			return null ;
 		}
     }
-    public static Statement getStatement (Connection cn) {
+    public static Statement newStatement (Connection cn) {
     Statement st = null;
 	try {
 		st = cn.createStatement();
@@ -47,29 +47,34 @@ public abstract class DBConfig {
 		return st ;
 	}
     };
-    
-    
-    // ****** Main Method of the class 
-	public static void connectToDB() throws Exception {
-  	  loadDriver() ;
-  	  //getConnection() ;
-  	  Connection connection = getConnection() ;
-  	  //getStatement(connection);
-  	  Statement statement = getStatement(connection);
-  	  
-      try {
-    	  statement.execute("use "+dbName);
-    	  String queryTest = "Select name from world ;" ;
-    	  ResultSet rs1 = statement.executeQuery(queryTest) ;
-    	  String nomiPaesiDB = rs1.getString(1);
-    	  System.out.println("Nome pese :  "+nomiPaesiDB);
-	} catch (SQLException e) {
-		statement.cancel();
-		System.out.println("error while connecting to db");
-	} finally {
-		//connection.close();
-		System.out.println("Closing connection to db !! ");
 
+    // ****** Main Method of the class 
+	public static Statement connectToDB()   { 	   
+      try {
+    	  loadDriver() ;
+      	  Connection connection = newConnection() ;
+      	  Statement statement = newStatement(connection);
+    	  statement.execute("use "+dbName); 
+    	  System.out.println("Statement created ok !!");
+    	  return statement;
+	} catch (SQLException e) {
+		System.out.println("error while connecting to db");
+		return null ;
+	} 
+//      finally {
+//		//connection.close();
+//		System.out.println("Closing connection to db !! ");
+//
+//	}
 	}
+	public boolean closeConnection (Connection cn , Statement st) {
+		try {
+			cn.close();
+			st.close();
+			return true ;
+		} catch (Exception e) {
+			System.out.println("error while closing the connection");
+			return false ;
+		}
 	}
 }
