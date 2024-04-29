@@ -27,7 +27,7 @@ public abstract class DBConfig {
     public static Connection newConnection ()  {
     	try {
 			Connection cn = DriverManager.getConnection(dburl, dbuser, dbpass);
-			System.out.println("Connection ok !! to DB name : " +dbName);
+			//System.out.println("Connection ok !! to DB name : " +dbName);
 			return cn ;
 		} catch (Exception e) {
 			System.out.println("Error connecting to db " +dburl+ " msg : " +e);
@@ -55,7 +55,7 @@ public abstract class DBConfig {
       	  Connection connection = newConnection() ;
       	  Statement statement = newStatement(connection);
     	  statement.execute("use "+dbName); 
-    	  System.out.println("Statement created ok !!");
+    	//  System.out.println("Statement created ok !!");
     	  return statement;
 	} catch (SQLException e) {
 		System.out.println("error while connecting to db");
