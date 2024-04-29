@@ -10,10 +10,14 @@ public abstract class CheckString {
 
     public Esito check(String input){
     	System.out.println("Provo con l'algoritmo " + this.getName());
-
-        /* TODO: fare controllo da DB world-country se lunghezza di input =2 o =3 
-         * implementare lettura da DB*/
-        
+    	//AGGIUNTO METODO PER CERCARE PAROLA NEL DB RICERCHE RECENTI
+    	Client c = new Client();
+    	String output = c.isWordInDatabase(input);
+    	if (output!=null) {
+            System.out.println("Parola " + input + " trovata nel database ed è associata a " + output);
+            return true;
+        }
+    	
         for(Standard standard : standards){
         	if(check(input,standard.getValue())){
                 return new Esito(true, input, standard.getValue(),this.getName());
