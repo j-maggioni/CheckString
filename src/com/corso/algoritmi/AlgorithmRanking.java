@@ -43,7 +43,9 @@ public class AlgorithmRanking {
 		
 		statement.executeUpdate("ALTER TABLE ranking_algoritmi ORDER BY score ASC;");
 		
-		connection.close();
+		//connection.close();
+		DBConfig.closeConnection();
+		
 	}
 
 	private static void insertRow(CheckString c) throws Exception {

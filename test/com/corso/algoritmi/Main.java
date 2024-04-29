@@ -5,7 +5,7 @@ import com.corso.standard.*;
 public class Main {
     
 	public static void main(String[] args) {
-    	boolean setRanking = false;
+    	boolean setRanking = true;
         try {
         	ParoleStandard s = new FileParoleStandard();
         	//ParoleStandard s = new DBParoleStandard();
