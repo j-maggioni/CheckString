@@ -2,12 +2,14 @@ package com.corso.algoritmi;
 
 public class Esito {
     private  boolean esito;
-    private String parola;
+    private String parolaInput;
+    private String parolaStandard;
     private String algoritmo;
 
-    public Esito(boolean esito, String parola, String algoritmo){
+    public Esito(boolean esito, String parolaInput, String parolaStandard, String algoritmo){
         this.esito = esito;
-        this.parola = parola;
+        this.parolaInput = parolaInput.trim();
+        this.parolaStandard = parolaStandard.trim();
         this.algoritmo = algoritmo;
     }
 
@@ -15,12 +17,23 @@ public class Esito {
         return this.esito;
     }
     
-    public String getParola(){
-        return this.parola;
+    public String getParolaInput(){
+        return this.parolaInput;
+    }
+    
+    public String getParolaStandard(){
+        return this.parolaStandard;
     }
     
     public String getAlgoritmo(){
         return this.algoritmo;
     }
+
+	@Override
+	public String toString() {
+		return "Esito [esito=" + esito + ", parolaInput=" + parolaInput + ", parolaStandard=" + parolaStandard
+				+ ", algoritmo=" + algoritmo + "]";
+	}
+    
 
 }

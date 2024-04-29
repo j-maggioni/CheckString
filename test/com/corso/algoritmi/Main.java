@@ -1,20 +1,35 @@
 package com.corso.algoritmi;
-
-
-import com.corso.paesiSpeciali.ManagerRicerca;
+ 
 import com.corso.standard.*;
+ 
+import com.corso.standard.FileParoleStandard;
+ 
 public class Main {
-    public static void main(String[] args) throws Exception {
-
-//     System.out.println("Test main");
-//     DBParoleStandard db = new DBParoleStandard() ;
-//     System.out.println(db.getParoleStandard());
-//     LocaleParoleStandard db2 = new LocaleParoleStandard();
-//     System.out.println(db2.getParoleStandard() ); // Da piu risultati 
-    	
-    	// se mi passi una stringa con almeno 2 caratteri 
-    	ManagerRicerca manager = new ManagerRicerca() ;
-    	manager.getParola("Ind") ;
+    public static void main(String[] args) {
+    	boolean setRanking = false;
+        try {
+        	ParoleStandard s = new FileParoleStandard();
+        	//ParoleStandard s = new DBParoleStandard();
+        	//ParoleStandard s = new LocaleParoleStandard();
+        	CheckString.setParoleStandard(s);
+    		
+        	if(setRanking) {
+    			AlgorithmRanking.algorithmRanking();
+    		}
+    		
+    		CheckString algoritmo = AlgorithmRanking.getFirstAlgorithm();
+    		Esito esito = algoritmo.check("Isole vergini della britannica");
+    		System.out.println(esito);
+    		
+    		Esito esito1 = algoritmo.check("Aruba");
+    		System.out.println(esito1);
+    		
+    		Esito esito2 = algoritmo.check("Banana");
+    		System.out.println(esito2);
+    	} catch (Exception e) {
+    	  e.printStackTrace();
+    	}
     	
     }
+ 
 }
