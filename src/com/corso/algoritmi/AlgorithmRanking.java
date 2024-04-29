@@ -16,12 +16,13 @@ public class AlgorithmRanking {
 	
 	public static void algorithmRanking() throws Exception {
 		paesiFromDB = new ArrayList<String>();		
-		DBConfig.loadDriver();
+		/*DBConfig.loadDriver();
 		connection = DBConfig.getConnection();
-		statement = DBConfig.getStatement(connection);
+		statement = DBConfig.getStatement(connection);*/
+		statement = DBConfig.connectToDB();
 
 		try {
-			statement.execute("use "+DBConfig.dbName);
+			//statement.execute("use "+DBConfig.dbName);
 			ResultSet result = statement.executeQuery("Select name from country;");
 			while (result.next()) {
 				paesiFromDB.add(result.getString("name"));
@@ -59,11 +60,12 @@ public class AlgorithmRanking {
 	}
 	
 	public static CheckString getFirstAlgorithm() throws Exception {
-		DBConfig.loadDriver();
+		/*DBConfig.loadDriver();
 		Connection connection = DBConfig.getConnection();
-		Statement statement = DBConfig.getStatement(connection);
+		Statement statement = DBConfig.getStatement(connection);*/
+		statement = DBConfig.connectToDB();
 		
-		statement.execute("use "+DBConfig.dbName);
+		//statement.execute("use "+DBConfig.dbName);
 		ResultSet result = statement.executeQuery("SELECT * FROM ranking_algoritmi;");
 		
 		ArrayList<CheckString> algoritmi = new ArrayList<CheckString>();

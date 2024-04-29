@@ -8,7 +8,6 @@ public class Tokenizer {
         ArrayList<String> tokens = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(input);
         
-        
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             // Se il token non è incluso tra le parole escluse, lo aggiungiamo alla lista dei token

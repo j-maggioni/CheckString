@@ -6,29 +6,6 @@ import java.util.List;
 public class ManagerRicerca {
 	public ArrayList<RichercaPaesiSpeciali> algoritmi ;
 	
-
-
-//	public String getParola(String paeseSpeciale) {
-//		  boolean boo = false ;
-//		  for (RichercaPaesiSpeciali algo : algoritmi) {
-//			 String risultatoAlgoritmo = algo.cercaPaeseSpeciale(paeseSpeciale) ;
-//			 if (!(risultatoAlgoritmo.equals("")) // && !risultatoAlgoritmo.equals(null) &&
-//					 ) {
-//				boo = true ;
-//			    return risultatoAlgoritmo ;
-//		     }
-//			 if (boo) {
-//				 System.out.println("trovato da getParola : " +risultatoAlgoritmo );
-//					return risultatoAlgoritmo ;
-//				} else {
-//                  return "Non trovato da getParola"  ;
-//				}
-//		} // for
-//		return paeseSpeciale;
-//		  
-//
-//		}
-	
 	public String getParola(String paeseSpeciale) {
 		System.out.println("---ricerca in corso in metodo get .....");
 	  String stringToReturn = ""  ;
@@ -60,9 +37,4 @@ public class ManagerRicerca {
 
 		this.algoritmi = x ;
 	}
-	
-	
-
-
-	
 }

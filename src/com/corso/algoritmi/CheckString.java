@@ -5,57 +5,40 @@ import com.corso.standard.*;
  
 public abstract class CheckString {
 
-
-    private static List<Standard> standards = new ArrayList<Standard>();
+	private static List<Standard> standards = new ArrayList<Standard>();
     private CheckString next;
-
-
+    
     public Esito check(String input){
     	System.out.println("Provo con l'algoritmo " + this.getName());
       	ArrayList<String> tokens = Tokenizer.tokenize(input);
+      	
     	//AGGIUNTO METODO PER CERCARE PAROLA NEL DB RICERCHE RECENTI
-    	Client c = new Client();
+    	/*Client c = new Client();
     	String output = c.isWordInDatabase(input);
     	if (output!=null) {
             System.out.println("Parola " + input + " trovata nel database ed è associata a " + output);
             return true;
-        }
+        }*/
     	
     	for(Standard standard : standards) {
-    	        	if (tokens.size()==1) {
-    		        	if(check(input,standard.getValue())){
-    		        		return new Esito(true, input, standard.getValue(),this.getName());
-
-    		            } 
-
-    		        } else if (tokens.size()>1) {
-
-    		        	String res = checkTokens(tokens);
-
-    		        	if (res != "") {
-
-    		        		return new Esito(true, input, res, this.getName());
-
-    		        	}
-
-    		        }
-
-    	        }
-
-    	        if (next != null){
-
-    	            return next.check(input);
-
-    	        } else {
-
-    	        	return new Esito(false, input, "", "None");
-
-    	        }
+        	if (tokens.size()==1) {
+	        	if(check(input,standard.getValue())){
+	        		return new Esito(true, input, standard.getValue(),this.getName());
+	        	} 
+        	} else if (tokens.size()>1) {
+        		String res = checkTokens(tokens);
+        		if (res != "") {
+        			return new Esito(true, input, res, this.getName());
+        		}
+        	}
+        }
+    	if (next != null){
+    		return next.check(input);
+    	} else {
+    		return new Esito(false, input, "", "None");
+    	}
     }
 
-
- 
- 
     private String checkTokens(ArrayList<String> tokens) {
 		ArrayList<String> results = new ArrayList<String>();
         
@@ -87,13 +70,11 @@ public abstract class CheckString {
         	}
         }       
  
-        return parolaMaxOccorrenze;
-    	    
+        return parolaMaxOccorrenze;  
 	}
     
 	public void setNext(CheckString checkString){
-
-        this.next = checkString;
+		this.next = checkString;
     }
     
     // TEMPLATE

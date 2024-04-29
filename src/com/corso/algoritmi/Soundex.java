@@ -43,12 +43,6 @@ public class Soundex extends CheckString {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-    /*public static void main(String[] args) {
-        String word = "Philippine";
-        String soundexCode = encode(word);
-        System.out.println("Soundex code for '" + word + "' is: " + soundexCode);
-    }*/
 }
 
 	

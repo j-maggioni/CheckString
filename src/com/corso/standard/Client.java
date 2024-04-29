@@ -16,7 +16,7 @@ public class Client implements ParoleStandard {
     private static final String USER = "root";
     private static final String PASSWORD = "Winnie2022.";
     private Connection connection;
-
+	
     public Client() {
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -87,9 +87,6 @@ public class Client implements ParoleStandard {
             return;
         }
     }
-
-
-
 
     // Chiusura connessione db
     public void closeConnection() {
