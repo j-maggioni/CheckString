@@ -10,22 +10,23 @@ public abstract class CheckString {
 	private static List<Standard> standards = new ArrayList<Standard>();
     private CheckString next;
     
-    public Esito check(String input){
+    public Esito check(String input) throws Exception{
     	System.out.println("Provo con l'algoritmo " + this.getName());
       	ArrayList<String> tokens = Tokenizer.tokenize(input);
       	
     	//AGGIUNTO METODO PER CERCARE PAROLA NEL DB RICERCHE RECENTI
-    	/*Client c = new Client();
+    	RicercaRapida c = new RicercaRapida();
     	String output = c.isWordInDatabase(input);
     	if (output!=null) {
             System.out.println("Parola " + input + " trovata nel database ed è associata a " + output);
-            return true;
-        }*/
+            return new Esito (true, input, output, this.getName());
+        }
     	
       	if (input.length() == 2 || input.length() == 3 ) {
       		ManagerRicerca manager = new ManagerRicerca();
       		String res1 = manager.getParola(input) ;
       		if (!(res1.equals(""))) {
+      			//c.addInDB(input, res1, this.getName());
         		return new Esito(true, input, res1,this.getName()); 
         	}
 		}
@@ -33,11 +34,13 @@ public abstract class CheckString {
     	for(Standard standard : standards) {
         	if (tokens.size()==1) {
 	        	if(check(input,standard.getValue())){
+	        		//c.addInDB(input, standard.getValue(), this.getName());
 	        		return new Esito(true, input, standard.getValue(),this.getName());
 	        	} 
         	} else if (tokens.size()>1) {
         		String res = checkTokens(tokens);
         		if (res != "") {
+        			//c.addInDB(input, res, this.getName());
         			return new Esito(true, input, res, this.getName());
         		}
         	}
