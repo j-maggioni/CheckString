@@ -1,6 +1,8 @@
 package com.corso.algoritmi;
  
 import java.util.*;
+
+import com.corso.paesiSpeciali.ManagerRicerca;
 import com.corso.standard.*;
  
 public abstract class CheckString {
@@ -20,6 +22,14 @@ public abstract class CheckString {
             return true;
         }*/
     	
+      	if (input.length() == 2 || input.length() == 3 ) {
+      		ManagerRicerca manager = new ManagerRicerca();
+      		String res1 = manager.getParola(input) ;
+      		if (!(res1.equals(""))) {
+        		return new Esito(true, input, res1,this.getName()); 
+        	}
+		}
+      	
     	for(Standard standard : standards) {
         	if (tokens.size()==1) {
 	        	if(check(input,standard.getValue())){

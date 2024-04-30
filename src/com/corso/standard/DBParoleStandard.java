@@ -12,7 +12,6 @@ public class DBParoleStandard implements ParoleStandard {
         ArrayList<Standard> arrayStandard = new ArrayList<Standard>(); 
 		Statement statement = DBConfig.connectToDB(); 
 		String query1 = " Select * from Country order by name asc ;" ;
-			
 		try {
 			ResultSet res = statement.executeQuery(query1) ;
 			while (res.next()) {

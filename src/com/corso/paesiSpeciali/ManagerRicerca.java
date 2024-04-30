@@ -13,13 +13,12 @@ public class ManagerRicerca {
 		 String risultatoAlgoritmo = algo.cercaPaeseSpeciale(paeseSpeciale) ;
 		 if (!(risultatoAlgoritmo.equals("")) // && !risultatoAlgoritmo.equals(null) &&
 				 ) {
-		  System.out.println("---Paese Speciale che corrisponde a " +paeseSpeciale+ " --> " +risultatoAlgoritmo);
+		  System.out.println("---Paese Speciale che corrisponde a " +paeseSpeciale+ " --> " +risultatoAlgoritmo + "get parola ManagerRicerca");
 		  return risultatoAlgoritmo ;
 	     }
 	} // for
 	System.out.println("-----Paese Speciale non trovato");
       return stringToReturn ;
-
 	}
 	
 	// Costr
@@ -32,7 +31,6 @@ public class ManagerRicerca {
 		x.add(new RicercaLocale()) ;
 		x.add(new RicercaFile()) ;
 		x.add(new RicercaQuery()) ;
-		x.add(new RicercaDB()) ;
 
 
 		this.algoritmi = x ;
