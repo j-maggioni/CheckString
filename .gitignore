@@ -1,7 +1,6 @@
 
 .classpath
 /target/
-*.xml
 .settings/org.eclipse.core.resources.prefs
 .settings/org.eclipse.m2e.core.prefs
 *.iml
@@ -12,3 +11,9 @@
 bin/com/corso/algoritmi/AlgorithmRanking.class
 bin/com/corso/algoritmi/CheckString.class
 *.class
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
