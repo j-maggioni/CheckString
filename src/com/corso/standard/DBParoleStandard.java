@@ -1,5 +1,7 @@
 package com.corso.standard;
 import com.corso.*;
+import com.corso.bean.Standard;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.corso.standard;
+package com.corso.bean;
 
-public class Standard {
+public class Standard implements Bean{
 	private String code;
 	private String value;
 	

@@ -2,6 +2,8 @@ package com.corso.algoritmi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.corso.bean.Standard;
 import com.corso.standard.*;
 
 import java.sql.Connection;

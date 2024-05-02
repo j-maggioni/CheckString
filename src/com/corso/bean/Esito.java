@@ -1,6 +1,6 @@
-package com.corso.algoritmi;
+package com.corso.bean;
 
-public class Esito {
+public class Esito implements Bean{
     private  boolean esito;
     private String parolaInput;
     private String parolaStandard;

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.corso.bean.Standard;
+
 public class FileParoleStandard implements ParoleStandard {
     private List<Standard> paroleStandard = new ArrayList<Standard>();
 

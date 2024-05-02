@@ -1,6 +1,7 @@
 package com.corso.standard;
  
 import com.corso.algoritmi.*;
+import com.corso.bean.Esito;
  
 public class Client {
     
