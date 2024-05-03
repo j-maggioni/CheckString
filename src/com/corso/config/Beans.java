@@ -29,7 +29,7 @@ public class Beans {
     private static String dbName = "checkstring";
     private static String dburl = "jdbc:mysql://localhost:3306/"+dbName+"?useSSL=false";
     private static String dbuser = "root";
-    private static String dbpass = "Jessy1999";
+    private static String dbpass = "";
 
 	@Bean(name="dataSource")
     public DataSource getDataSource () {
