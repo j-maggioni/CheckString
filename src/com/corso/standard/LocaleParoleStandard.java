@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.corso.bean.Standard;
-
 public class LocaleParoleStandard implements ParoleStandard{
 	private ArrayList<Standard> paroleStandard ;
 	

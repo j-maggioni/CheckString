@@ -1,7 +1,16 @@
-package com.corso.bean;
+package com.corso.standard;
 
-public class Standard implements Bean{
+import com.corso.bean.Bean;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
+
+public class Standard {
+	@Column(name="Code", unique = true)
 	private String code;
+	@Column(name="Code", unique = true)
 	private String value;
 	
 	public String getCode() {

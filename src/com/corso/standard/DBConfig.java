@@ -12,7 +12,7 @@ public abstract class DBConfig {
 	private static String dbName = "checkstring" ;
 	private static String dburl = "jdbc:mysql://localhost:3306/"+dbName+"?useSSL=false" ;
 	private static String dbuser = "root";
-	private static String dbpass = "";
+	private static String dbpass = "Jessy1999";
 	
 	private static Connection connection;
 	private static Statement statement;

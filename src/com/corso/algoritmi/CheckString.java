@@ -2,8 +2,7 @@ package com.corso.algoritmi;
  
 import java.util.*;
 
-import com.corso.bean.Esito;
-import com.corso.bean.Standard;
+import com.corso.standard.Standard;
 import com.corso.paesiSpeciali.ManagerRicerca;
 import com.corso.standard.*;
  

@@ -2,7 +2,7 @@ package com.corso.paesiSpeciali;
 
 import java.util.ArrayList;
 
-import com.corso.bean.Standard;
+import com.corso.standard.Standard;
 import com.corso.standard.FileParoleStandard;
 
 public class RicercaFile implements RichercaPaesiSpeciali {

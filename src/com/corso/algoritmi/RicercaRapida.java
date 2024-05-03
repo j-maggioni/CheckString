@@ -3,15 +3,12 @@ package com.corso.algoritmi;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.corso.bean.Standard;
+import com.corso.standard.Standard;
 import com.corso.standard.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 
 
 public class RicercaRapida implements ParoleStandard {

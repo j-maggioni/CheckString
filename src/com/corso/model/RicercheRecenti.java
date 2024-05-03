@@ -1,102 +1,95 @@
 package com.corso.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import com.sun.istack.NotNull;
 
-@Entity
+import javax.persistence.*;
+import java.util.Date;
 
-@Table (name="categoria")
-@NamedQueries({
-    @NamedQuery(name="Categoria.CountDescrizione",
-                query="select descrizione, count(descrizione) as cd "
-                	+ "	from Categoria "
-                	+ " where nome like :nome" 
-                	+ "	group by (descrizione)"
-                	+ "	having count(descrizione) >= 1"
-                	+ "	order by cd"
-                	/*,lockMode = LockModeType.READ*/ )
-})
-
-@NamedNativeQuery(name="Categoria.CountDescrizioneSQL",
-query=" select descrizione, count(descrizione) as cd "
-	+ "	from categoria "
-	+ " where nome like :nome" 
-	+ "	group by (descrizione)"
-	+ "	having cd >= 1"
-	+ "	order by cd"
-	+ " limit 2")
-
+@Entity(name = "ricerche_recenti")
+//TODO: aggiungere namedQuery
 public class RicercheRecenti {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)   // AUTO: genera il valore Hibernate
-	private Integer id; 
-	
-	@Column(name="nome", length = 20, unique = true)
+	private Integer id;
 
-	//@NotNull
-	//@Size(min=2, max=30, message=" inserire almeno due caratteri e non superare i 30 caratteri")
-	
-	//@NotNull
-	//@Pattern(regexp = "[a-zA-Z]{5}", message = "non rispetta il formato")
-	private String nome; 
+	@Column(name="data_inserimento")
+	@NotNull
+	private Date data_inserimento;
 
-	
-	@Column(name="descrizione")
-	private String descrizione;
-	
-    private Integer version; // integer o timestamp 
-	
-	
-	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoria")
-	//@Fetch(FetchMode.SELECT)
-	//private List<Prodotto> prodotti; 
+	@Column(name="input")
+	@NotNull
+	private String input;
 
-	public int getId() {
+	@Column(name="standard")
+	@NotNull
+	private String standard;
+
+	@Column(name="algoritmo")
+	@NotNull
+	private String algortimo;
+
+	@Column(name="approvazione")
+	@NotNull
+	private boolean approvazione;
+
+	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
-   
-	public String getNome() {
-		return nome;
+
+	public Date getDataInserimento() {
+		return data_inserimento;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDataInserimento(Date dataInserimento) {
+		this.data_inserimento = dataInserimento;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
+	public String getInput() {
+		return input;
 	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setInput(String input) {
+		this.input = input;
 	}
 
-	/*
-	public List<Prodotto> getProdotti() {
-		return prodotti;
+	public String getStandard() {
+		return standard;
 	}
 
-	public void setProdotti(List<Prodotto> prodotti) {
-		this.prodotti = prodotti;
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
-*/
+
+	public String getAlgortimo() {
+		return algortimo;
+	}
+
+	public void setAlgortimo(String algortimo) {
+		this.algortimo = algortimo;
+	}
+
+	public boolean isApprovazione() {
+		return approvazione;
+	}
+
+	public void setApprovazione(boolean approvazione) {
+		this.approvazione = approvazione;
+	}
+
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + "]";
+		return "RicercheRecenti{" +
+				"id=" + id +
+				", data=" + data_inserimento +
+				", input='" + input + '\'' +
+				", standard='" + standard + '\'' +
+				", algortimo='" + algortimo + '\'' +
+				", approvazione=" + approvazione +
+				'}';
 	}
-
-	
-	
 }

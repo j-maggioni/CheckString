@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.corso.bean.Esito;
 import com.corso.standard.DBConfig;
 
 public class AlgorithmRanking {

@@ -1,12 +1,12 @@
 package com.corso.standard;
  
 import com.corso.algoritmi.*;
-import com.corso.bean.Esito;
+import com.corso.algoritmi.Esito;
  
 public class Client {
     
 	public Client () {
-    	boolean setRanking = true;
+    	boolean setRanking = false;
         try {
         	ParoleStandard s = new FileParoleStandard();
         	//ParoleStandard s = new DBParoleStandard();
