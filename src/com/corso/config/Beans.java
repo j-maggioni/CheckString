@@ -116,7 +116,7 @@ public class Beans {
         return service;
     }
 
-    @Bean(name="paesiService")
+    @Bean(name="rankingAlgoritmiService")
     public RankingAlgoritmiService getRankingAlgoritmiService (){
         RankingAlgoritmiService service = new RankingAlgoritmiServiceImpl();
         service.setDao(getRankingAlgoritmiDao());

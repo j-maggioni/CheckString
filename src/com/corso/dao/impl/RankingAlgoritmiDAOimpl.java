@@ -25,7 +25,7 @@ public class RankingAlgoritmiDAOimpl extends BaseDAOimpl implements RankingAlgor
 
     @Override
     public List<AlgoritmoEseguito> all() {
-        Query q = manager.createQuery("from RankingAlgoritmi", RankingAlgoritmi.class);
+        Query q = manager.createQuery("from ranking_algoritmi", RankingAlgoritmi.class);
         @SuppressWarnings("unchecked")
         List<AlgoritmoEseguito> algoritmi = q.getResultList();
         return algoritmi;
