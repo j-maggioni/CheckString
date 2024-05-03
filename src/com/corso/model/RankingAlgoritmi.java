@@ -1,38 +1,50 @@
 package com.corso.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.NamedNativeQuery;
 
 @Entity(name = "ranking_algoritmi")
-//TODO: aggiungere namedQuery
+
+@Table (name="ranking_algoritmi")
+@NamedNativeQueries({
+		@NamedNativeQuery(name = "RankingAlgoritmi.TruncateTable",
+				query = "TRUNCATE TABLE ranking_algoritmi;"),
+		@NamedNativeQuery(name = "RankingAlgoritmi.SortTable",
+				query = "ALTER TABLE ranking_algoritmi ORDER BY score ASC;")
+})
+
 public class RankingAlgoritmi {
 
 	@Id
 	@Column(name="nome", unique = true)
-	@NotNull
 	private String nome;
 
 	@Column(name="occorrenze")
-	@NotNull
 	private int occorrenze;
 
 	@Column(name="esatti")
-	@NotNull
 	private int esatti;
 
 	@Column(name="totali")
-	@NotNull
 	private int totali;
 
 	@Column(name="score")
-	@NotNull
 	private double score;
 
 	@Column(name="attivo")
-	@NotNull
 	private boolean attivo;
+
+	public RankingAlgoritmi() {
+	}
+
+	public RankingAlgoritmi(String nome, int esatti, int totali, double score) {
+		this.nome = nome;
+		this.occorrenze = 0;
+		this.esatti = esatti;
+		this.totali = totali;
+		this.score = score;
+		this.attivo = true;
+	}
 
 	public String getNome() {
 		return nome;

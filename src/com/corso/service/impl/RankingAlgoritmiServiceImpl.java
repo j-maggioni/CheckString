@@ -1,9 +1,8 @@
 package com.corso.service.impl;
 
-import com.corso.bean.AlgoritmoEseguito;
-import com.corso.bean.PaeseSpeciale;
 import com.corso.dao.RankingAlgoritmiDAO;
 import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.service.RankingAlgoritmiService;
 import com.corso.service.SigleSpecialiService;
 
@@ -20,17 +19,27 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
     }
 
     @Override
-    public AlgoritmoEseguito addAlgoritmo(AlgoritmoEseguito algoritmo) {
+    public RankingAlgoritmi addAlgoritmo(RankingAlgoritmi algoritmo) {
         return dao.add(algoritmo);
     }
 
     @Override
-    public void updateRankingAlgoritmi(AlgoritmoEseguito algoritmo) {
+    public void updateRankingAlgoritmi(RankingAlgoritmi algoritmo) {
         dao.update(algoritmo);
     }
 
     @Override
-    public List<AlgoritmoEseguito> getAlgoritmi() {
+    public List<RankingAlgoritmi> getAlgoritmi() {
         return dao.all();
+    }
+
+    @Override
+    public void truncateRankingTable() {
+        dao.truncate();
+    }
+
+    @Override
+    public void sortRankingTable() {
+        dao.sortTable();
     }
 }
