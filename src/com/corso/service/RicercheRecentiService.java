@@ -1,16 +1,14 @@
 package com.corso.service;
 
-import com.corso.bean.PaeseSpeciale;
-import com.corso.bean.RicercaUtente;
 import com.corso.dao.RicercheRecentiDAO;
 import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.RicercheRecenti;
 
 public interface RicercheRecentiService {
 
-    public void setDao(RicercheRecentiDAO ricercheRecentiDAO);
-
-    public RicercaUtente addRicerca(RicercaUtente ricerca);
-    public void updateRicerche(RicercaUtente ricerca);
-    public RicercaUtente findRicerca(String input);
+    void setDao(RicercheRecentiDAO ricercheRecentiDAO);
+    void addRicerca(RicercheRecenti ricerca);
+    void updateRicerche(RicercheRecenti ricerca);
+    RicercheRecenti findRicerca(String id);
 
 }

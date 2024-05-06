@@ -1,12 +1,17 @@
 package com.corso.dao;
 
-import com.corso.bean.Bean;
-import com.corso.bean.RicercaUtente;
+import com.corso.model.RicercheRecenti;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface RicercheRecentiDAO{
-    public RicercaUtente add(RicercaUtente ricerca);
 
-    public void update(RicercaUtente ricerca);
+    @Transactional
+    void add(RicercheRecenti ricerca);
 
-    public RicercaUtente find(String input);
+
+    @Transactional
+    void update(RicercheRecenti ricerca);
+
+    @Transactional
+    RicercheRecenti find(String input);
 }

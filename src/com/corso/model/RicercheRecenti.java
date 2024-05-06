@@ -1,36 +1,36 @@
 package com.corso.model;
 
 import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "ricerche_recenti")
-//TODO: aggiungere namedQuery
+@NamedQueries({
+		@NamedQuery(
+				name = "RicercheRecenti.findInput",
+				query = "SELECT rr FROM ricerche_recenti rr WHERE rr.input = :input"
+		)
+})
+
 public class RicercheRecenti {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)   // AUTO: genera il valore Hibernate
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="data_inserimento")
-	@NotNull
-	private Date data_inserimento;
+	private String data_inserimento;
 
 	@Column(name="input")
-	@NotNull
 	private String input;
 
 	@Column(name="standard")
-	@NotNull
 	private String standard;
 
 	@Column(name="algoritmo")
-	@NotNull
 	private String algortimo;
 
 	@Column(name="approvazione")
-	@NotNull
 	private boolean approvazione;
 
 	public Integer getId() {
@@ -41,11 +41,11 @@ public class RicercheRecenti {
 		this.id = id;
 	}
 
-	public Date getDataInserimento() {
+	public String getDataInserimento() {
 		return data_inserimento;
 	}
 
-	public void setDataInserimento(Date dataInserimento) {
+	public void setDataInserimento(String dataInserimento) {
 		this.data_inserimento = dataInserimento;
 	}
 
@@ -73,7 +73,7 @@ public class RicercheRecenti {
 		this.algortimo = algortimo;
 	}
 
-	public boolean isApprovazione() {
+	public boolean getApprovazione() {
 		return approvazione;
 	}
 
