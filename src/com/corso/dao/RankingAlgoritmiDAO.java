@@ -2,7 +2,6 @@ package com.corso.dao;
 
 import com.corso.model.RankingAlgoritmi;
 
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 

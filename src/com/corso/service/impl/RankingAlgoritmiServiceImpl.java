@@ -18,7 +18,7 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
     @Override
     public void addAlgoritmo(RankingAlgoritmi algoritmo) {
         if(algoritmo != null && dao.find(algoritmo.getNome()) == null){
-                dao.add(algoritmo);
+            dao.add(algoritmo);
         }
     }
 

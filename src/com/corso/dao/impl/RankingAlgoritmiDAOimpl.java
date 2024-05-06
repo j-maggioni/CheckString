@@ -1,9 +1,7 @@
 package com.corso.dao.impl;
 
-import com.corso.bean.AlgoritmoEseguito;
 import com.corso.dao.RankingAlgoritmiDAO;
 import com.corso.model.RankingAlgoritmi;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -18,14 +16,14 @@ public class RankingAlgoritmiDAOimpl extends BaseDAOimpl implements RankingAlgor
 
     @Override
     @Transactional
-    public AlgoritmoEseguito add(AlgoritmoEseguito algoritmo) {
+    public RankingAlgoritmi add(RankingAlgoritmi algoritmo) {
         manager.persist(algoritmo);
         return algoritmo;
     }
 
     @Override
     @Transactional
-    public void update(AlgoritmoEseguito algoritmo) {
+    public void update(RankingAlgoritmi algoritmo) {
         manager.merge(algoritmo);
     }
 
