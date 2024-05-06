@@ -2,29 +2,29 @@ package com.corso.algoritmi;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.corso.config.Beans;
+import com.corso.dao.RicercheRecentiDAO;
+import com.corso.model.RicercheRecenti;
 import com.corso.standard.Standard;
 import com.corso.standard.*;
-
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+public class RicercaRapida {
 
-public class RicercaRapida implements ParoleStandard {
-	
-	private static Statement statement;
-	
-    public RicercaRapida() throws Exception {
-    	statement = DBConfig.connectToDB();
-    	statement.execute("CREATE TABLE IF NOT EXISTS ricerche_recenti (PK INT AUTO_INCREMENT PRIMARY KEY, data_inserimento DATE,"
-    			+ "input VARCHAR(255),"
-    			+ "standard VARCHAR(255)," 
-    			+ "algoritmo VARCHAR(200));" );
+    //TEORICAMENTE QUESTA CLASSE NON SERVE PIù
+
+    private RicercheRecentiDAO dao;
+    BeanFactory factory = new AnnotationConfigApplicationContext(Beans.class);
+
+    public RicercaRapida() {
+        dao = factory.getBean("ricercheRecentiDAO", RicercheRecentiDAO.class);
     }
 
-
-    //recupero di tutti gli input in ricerche recenti
+    /*recupero di tutti gli input in ricerche recenti
     @Override
     public List<Standard> getStandards() {
         List<Standard> standards = new ArrayList<>();
@@ -40,43 +40,24 @@ public class RicercaRapida implements ParoleStandard {
             e.printStackTrace();
         }
         return standards;
+    }*/
+
+    public String isWordInDatabase(String input) {
+        BeanFactory factory = new AnnotationConfigApplicationContext(Beans.class);
+        dao = factory.getBean("ricercheRecentiDAO", RicercheRecentiDAO.class);
+        RicercheRecenti r = dao.find(input);
+        return r.getStandard();
     }
 
-    
-    //ricerca input nel db ricerche recenti
-    public String isWordInDatabase(String input) {
-        try {
-            String query = "SELECT standard FROM ricerche_recenti WHERE input = \'" + input + "\';";
-            ResultSet resultSet = statement.executeQuery(query);
-            if (resultSet.next()) {
-                return resultSet.getString("standard");
-            } else {
-                return null; // Se non trova una corrispondenza, restituisce null
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    
-    
-    //aggiunta riga nel db ricerche recenti
-    public static void addInDB(String input, String output, String algoritmo) {
+    public void addInDB(RicercheRecenti r) {
+        BeanFactory factory = new AnnotationConfigApplicationContext(Beans.class);
+        dao = factory.getBean("ricercheRecentiDAO", RicercheRecentiDAO.class);
     	 try {
-             String query = "SELECT * FROM ricerche_recenti WHERE input = \'" + input + "\';";
-             ResultSet resultSet = statement.executeQuery(query);
-             if (!resultSet.next()) {
-            	 String query1 = "INSERT INTO checkstring.ricerche_recenti (data_inserimento, input, standard, algoritmo) "
-                 		+ "VALUES (CURDATE(), \'" + input + "\', \'" + output + "\', \'" + algoritmo + "\' );";
-                 int rowsInserted = statement.executeUpdate(query1);
-                 if (rowsInserted > 0) {
-                     System.out.println("Riga aggiunta al database con successo.");
-                 } else {
-                     System.out.println("Errore durante l'aggiunta della riga al database.");
-                 }
+             RicercheRecenti f = dao.find(r.getInput());
+             if (f != null) {
+                 dao.add(r);
              }
-         } catch (SQLException e) {
+         } catch (Exception e) {
              e.printStackTrace();
          }
     }
