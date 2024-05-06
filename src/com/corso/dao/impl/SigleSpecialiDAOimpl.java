@@ -1,8 +1,7 @@
 package com.corso.dao.impl;
 
-import com.corso.bean.PaeseSpeciale;
-import com.corso.bean.RicercaUtente;
 import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.SigleSpeciali;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -14,15 +13,15 @@ public class SigleSpecialiDAOimpl extends BaseDAOimpl implements SigleSpecialiDA
 
     @Transactional
     @Override
-    public PaeseSpeciale add(PaeseSpeciale paese) {
+    public SigleSpeciali add(SigleSpeciali paese) {
         manager.persist(paese);
         return paese;
     }
 
     @Override
     @Transactional
-    public PaeseSpeciale find(Integer id) {
-        PaeseSpeciale paeseSpeciale =  manager.find(PaeseSpeciale.class,id);
+    public SigleSpeciali find(Integer id) {
+        SigleSpeciali paeseSpeciale =  manager.find(SigleSpeciali.class,id);
         //	manager.lock(categoria, LockModeType.OPTIMISTIC );
         return paeseSpeciale;
     }

@@ -1,12 +1,11 @@
 package com.corso.dao;
 
-import com.corso.bean.Bean;
-import com.corso.bean.PaeseSpeciale;
+import com.corso.model.SigleSpeciali;
 
 public interface SigleSpecialiDAO {
-    public PaeseSpeciale add(PaeseSpeciale categoria);
+    public SigleSpeciali add(SigleSpeciali categoria);
 
-    public PaeseSpeciale find(Integer id);
+    public SigleSpeciali find(Integer id);
 
 
 }
