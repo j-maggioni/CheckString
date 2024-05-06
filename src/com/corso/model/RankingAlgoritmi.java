@@ -2,15 +2,27 @@ package com.corso.model;
 
 import javax.persistence.*;
 import javax.persistence.NamedNativeQuery;
+import java.util.Objects;
 
 @Entity(name = "ranking_algoritmi")
 
 @Table (name="ranking_algoritmi")
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "RankingAlgoritmi.TruncateTable",
-				query = "TRUNCATE TABLE ranking_algoritmi;"),
-		@NamedNativeQuery(name = "RankingAlgoritmi.SortTable",
-				query = "ALTER TABLE ranking_algoritmi ORDER BY score ASC;")
+				query = "TRUNCATE TABLE ranking_algoritmi;",
+				resultClass = RankingAlgoritmi.class),
+		@NamedNativeQuery(name = "RankingAlgoritmi.SortingResults",
+				query = "SELECT * FROM ranking_algoritmi ORDER BY score ASC",
+				resultClass = RankingAlgoritmi.class),
+		@NamedNativeQuery(name = "RankingAlgoritmi.ActiveAlgorithms",
+				query = "SELECT * FROM ranking_algoritmi WHERE attivo ORDER BY score ASC;",
+				resultClass = RankingAlgoritmi.class),
+		@NamedNativeQuery(name = "RankingAlgoritmi.DisableAlgorithm",
+				query = "UPDATE ranking_algoritmi SET attivo=0 WHERE nome=:nome ;",
+				resultClass = RankingAlgoritmi.class),
+		@NamedNativeQuery(name = "RankingAlgoritmi.ActivateAlgorithm",
+				query = "UPDATE ranking_algoritmi SET attivo=1 WHERE nome=:nome ;",
+				resultClass = RankingAlgoritmi.class)
 })
 
 public class RankingAlgoritmi {
@@ -37,61 +49,46 @@ public class RankingAlgoritmi {
 	public RankingAlgoritmi() {
 	}
 
-	public RankingAlgoritmi(String nome, int esatti, int totali, double score) {
+	public RankingAlgoritmi(String nome, int esatti, int totali) {
 		this.nome = nome;
 		this.occorrenze = 0;
 		this.esatti = esatti;
 		this.totali = totali;
-		this.score = score;
 		this.attivo = true;
+		setScore();
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public int getOccorrenze() {
 		return occorrenze;
 	}
 
-	public void setOccorrenze(int occorrenze) {
-		this.occorrenze = occorrenze;
+	public void setOccorrenze() {
+		this.occorrenze++;
 	}
 
 	public int getEsatti() {
 		return esatti;
 	}
 
-	public void setEsatti(int esatti) {
-		this.esatti = esatti;
-	}
-
 	public int getTotali() {
 		return totali;
-	}
-
-	public void setTotali(int totali) {
-		this.totali = totali;
 	}
 
 	public double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
-		this.score = score;
+	public void setScore() {
+		//this.score = score;
+		this.score = (double) (this.esatti+this.occorrenze)/(this.totali+this.occorrenze);
 	}
 
 	public boolean isAttivo() {
 		return attivo;
-	}
-
-	public void setAttivo(boolean attivo) {
-		this.attivo = attivo;
 	}
 
 	@Override
@@ -104,5 +101,18 @@ public class RankingAlgoritmi {
 				", score=" + score +
 				", attivo=" + attivo +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		RankingAlgoritmi that = (RankingAlgoritmi) o;
+		return Objects.equals(this.nome, ((RankingAlgoritmi) o).nome);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(nome);
 	}
 }
