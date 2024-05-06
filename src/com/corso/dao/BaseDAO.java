@@ -1,7 +1,5 @@
 package com.corso.dao;
 
-import com.corso.bean.Bean;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;

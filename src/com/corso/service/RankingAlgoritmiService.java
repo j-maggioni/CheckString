@@ -1,9 +1,7 @@
 package com.corso.service;
 
-import com.corso.bean.AlgoritmoEseguito;
-import com.corso.bean.PaeseSpeciale;
 import com.corso.dao.RankingAlgoritmiDAO;
-import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.RankingAlgoritmi;
 
 import java.util.List;
 
@@ -11,8 +9,10 @@ public interface RankingAlgoritmiService {
 
     public void setDao(RankingAlgoritmiDAO rankingAlgoritmiDAO);
 
-    public AlgoritmoEseguito addAlgoritmo(AlgoritmoEseguito algoritmo);
-    public void updateRankingAlgoritmi(AlgoritmoEseguito algoritmo);
-    public List<AlgoritmoEseguito> getAlgoritmi();
-
+    public void addAlgoritmo(RankingAlgoritmi algoritmo);
+    public void updateOccorrenzeAlgoritmo(String algoritmo);
+    public List<RankingAlgoritmi> getAlgoritmi();
+    public List<RankingAlgoritmi> getAlgoritmiAttivi();
+    public boolean findAlgoritmo(RankingAlgoritmi algoritmo);
+    public void changeAlgorithmActivation(String algoritmo, boolean attivo);
 }

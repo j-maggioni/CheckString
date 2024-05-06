@@ -1,7 +1,5 @@
 package com.corso.algoritmi;
 
-import com.corso.bean.Bean;
-
 public class Esito {
     private  boolean esito;
     private String parolaInput;
@@ -36,6 +34,5 @@ public class Esito {
 		return "Esito [esito=" + esito + ", parolaInput=" + parolaInput + ", parolaStandard=" + parolaStandard
 				+ ", algoritmo=" + algoritmo + "]";
 	}
-    
 
 }
