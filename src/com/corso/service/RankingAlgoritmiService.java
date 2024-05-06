@@ -9,9 +9,10 @@ public interface RankingAlgoritmiService {
 
     public void setDao(RankingAlgoritmiDAO rankingAlgoritmiDAO);
 
-    public RankingAlgoritmi addAlgoritmo(RankingAlgoritmi algoritmo);
-    public void updateRankingAlgoritmi(RankingAlgoritmi algoritmo);
+    public void addAlgoritmo(RankingAlgoritmi algoritmo);
+    public void updateOccorrenzeAlgoritmo(String algoritmo);
     public List<RankingAlgoritmi> getAlgoritmi();
-    public void truncateRankingTable();
-    public void sortRankingTable();
+    public List<RankingAlgoritmi> getAlgoritmiAttivi();
+    public boolean findAlgoritmo(RankingAlgoritmi algoritmo);
+    public void changeAlgorithmActivation(String algoritmo, boolean attivo);
 }

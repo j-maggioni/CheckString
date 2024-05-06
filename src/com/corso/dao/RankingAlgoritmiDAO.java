@@ -2,6 +2,7 @@ package com.corso.dao;
 
 import com.corso.model.RankingAlgoritmi;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -20,8 +21,11 @@ public interface RankingAlgoritmiDAO {
     public RankingAlgoritmi find(String id);
 
     @Transactional
-    public void truncate();
+    public List<RankingAlgoritmi> algoritmiAttivi();
 
     @Transactional
-    public void sortTable();
+    public void attivaAlgoritmo(String nome);
+
+    @Transactional
+    public void disattivaAlgoritmo(String nome);
 }

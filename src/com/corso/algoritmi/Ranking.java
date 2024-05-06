@@ -5,38 +5,37 @@ import java.util.ArrayList;
 
 import com.corso.config.Beans;
 import com.corso.dao.PaesiDAO;
-import com.corso.dao.RankingAlgoritmiDAO;
 import com.corso.model.Paesi;
 import com.corso.model.RankingAlgoritmi;
+import com.corso.service.RankingAlgoritmiService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Ranking {
 
 	private static ArrayList<String> paesiFromDB;
-	private static RankingAlgoritmiDAO daoRanking;
-	private static String[] algoritmiName = {"ContainedCheckString","ContainsCheckString","Levenstein 1",
+	private static String[] algoritmiUsati = {"ContainedCheckString","ContainsCheckString","Levenstein 1",
 											"Levenstein 2","Levenstein 3","Levenstein 4","Soundex"};
-	
+
+	private static BeanFactory factory;
+	private static RankingAlgoritmiService serviceRanking;
+	static {
+		factory = new AnnotationConfigApplicationContext(Beans.class);
+		serviceRanking = factory.getBean("rankingAlgoritmiService", RankingAlgoritmiService.class);
+	}
+
 	public static void algorithmRanking() throws Exception {
 		paesiFromDB = new ArrayList<String>();
 
-		BeanFactory factory = new AnnotationConfigApplicationContext(Beans.class);
 		PaesiDAO daoPaesi = factory.getBean("paesiDAO", PaesiDAO.class);
 
 		for (Paesi p: daoPaesi.all()){
 			paesiFromDB.add(p.getNome());
 		}
 
-		daoRanking = factory.getBean("rankingAlgoritmiDAO", RankingAlgoritmiDAO.class);
-		daoRanking.truncate();
-
-		for (String name: algoritmiName) {
+		for (String name: algoritmiUsati) {
 			insertRow(createCheckStringInstance("com.corso.algoritmi."+name));  
 		}
-		System.out.println(daoRanking.all());
-		daoRanking.sortTable();
-		System.out.println(daoRanking.all());
 		
 	}
 
@@ -48,17 +47,17 @@ public class Ranking {
 				esatti++;
 			}
 		}
-		double score = (double) esatti/paesiFromDB.size();
 
-		RankingAlgoritmi algoritmo = new RankingAlgoritmi(checkString.getName(),esatti,paesiFromDB.size(),score);
-		RankingAlgoritmi algoritmoAggiunto = daoRanking.add(algoritmo);
-		System.out.println(algoritmoAggiunto);
+		RankingAlgoritmi algoritmo = new RankingAlgoritmi(checkString.getName(),esatti,paesiFromDB.size());
+		if (!serviceRanking.findAlgoritmo(algoritmo)){
+			serviceRanking.addAlgoritmo(algoritmo);
+		}
 	}
-	
+
 	public static CheckString getFirstAlgorithm() throws Exception {
 
 		ArrayList<CheckString> algoritmi = new ArrayList<CheckString>();
-		for (RankingAlgoritmi algoritmo : daoRanking.all()) {
+		for (RankingAlgoritmi algoritmo : serviceRanking.getAlgoritmiAttivi()) {
 			CheckString c = createCheckStringInstance("com.corso.algoritmi."+algoritmo.getNome());
 	        algoritmi.add(c);  
 		}
@@ -88,5 +87,12 @@ public class Ranking {
 		}
 		return (CheckString) object;
    }
-	
+
+	public static void changeAlgorithmActivation(String algoritmo, boolean active) throws Exception {
+		serviceRanking.changeAlgorithmActivation(algoritmo, active);
+	}
+
+	public static void updateRankingAlgoritmi(String algoritmo) {
+		serviceRanking.updateOccorrenzeAlgoritmo(algoritmo);
+	}
 }
