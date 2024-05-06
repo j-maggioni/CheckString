@@ -1,9 +1,8 @@
 package com.corso.service;
 
-import com.corso.bean.Paese;
-import com.corso.bean.PaeseSpeciale;
 import com.corso.dao.PaesiDAO;
 import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.SigleSpeciali;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface SigleSpecialiService {
 
     public void setDao(SigleSpecialiDAO sigleSpecialiDAO);
 
-    public PaeseSpeciale addSigla(PaeseSpeciale paese);
-    public PaeseSpeciale findPaese(Integer id);
+    public SigleSpeciali addSigla(SigleSpeciali paese);
+    public SigleSpeciali findPaese(Integer id);
 
 }

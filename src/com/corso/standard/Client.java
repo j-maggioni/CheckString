@@ -14,21 +14,21 @@ public class Client {
         	CheckString.setParoleStandard(s);
     		
         	if(setRanking) {
-    			AlgorithmRanking.algorithmRanking();
+    			Ranking.algorithmRanking();
     		}
     		
-    		CheckString algoritmo = AlgorithmRanking.getFirstAlgorithm();
+    		CheckString algoritmo = Ranking.getFirstAlgorithm();
     		Esito esito = algoritmo.check("Isole b");
-    		RicercaRapida.addInDB(esito.getParolaInput(), esito.getParolaStandard(), esito.getAlgoritmo());
+    		//RicercaRapida.addInDB(esito.getParolaInput(), esito.getParolaStandard(), esito.getAlgoritmo());
     		System.out.println(esito);
     		
     		Esito esito1 = algoritmo.check("italia");
-    		RicercaRapida.addInDB(esito1.getParolaInput(), esito1.getParolaStandard(), esito1.getAlgoritmo());
+    		//RicercaRapida.addInDB(esito1.getParolaInput(), esito1.getParolaStandard(), esito1.getAlgoritmo());
     		
     		System.out.println(esito1);
     		
     		Esito esito2 = algoritmo.check("german");
-    		RicercaRapida.addInDB(esito2.getParolaInput(), esito2.getParolaStandard(), esito2.getAlgoritmo());
+    		//RicercaRapida.addInDB(esito2.getParolaInput(), esito2.getParolaStandard(), esito2.getAlgoritmo());
     		
     		System.out.println(esito2);
     	} catch (Exception e) {

@@ -1,6 +1,5 @@
 package com.corso.dao.impl;
 
-import com.corso.bean.Paese;
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
 
@@ -16,17 +15,17 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
     public EntityManager getManager() {return manager;}
 
     @Override
-    public Paese find(Integer id) {
-        Paese paese =  manager.find(Paese.class,id);
+    public Paesi find(Integer id) {
+        Paesi paese =  manager.find(Paesi.class,id);
         //	manager.lock(paese, LockModeType.OPTIMISTIC );
         return paese;
     }
 
     @Override
-    public List<Paese> all() {
+    public List<Paesi> all() {
         Query q = manager.createQuery("from Paesi", Paesi.class);
         @SuppressWarnings("unchecked")
-        List<Paese> paesi = q.getResultList();
+        List<Paesi> paesi = q.getResultList();
         return paesi;
     }
 }

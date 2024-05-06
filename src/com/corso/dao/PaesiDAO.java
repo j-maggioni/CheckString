@@ -1,15 +1,14 @@
 package com.corso.dao;
 
-import com.corso.bean.Bean;
-import com.corso.bean.Paese;
+import com.corso.model.Paesi;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
 public interface PaesiDAO {
-    public Paese find(Integer id);
+    public Paesi find(Integer id);
 
-    public List<Paese> all();
+    public List<Paesi> all();
 
 }

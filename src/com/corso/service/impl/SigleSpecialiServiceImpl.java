@@ -1,9 +1,8 @@
 package com.corso.service.impl;
 
-import com.corso.bean.Paese;
-import com.corso.bean.PaeseSpeciale;
 import com.corso.dao.PaesiDAO;
 import com.corso.dao.SigleSpecialiDAO;
+import com.corso.model.SigleSpeciali;
 import com.corso.service.PaesiService;
 import com.corso.service.SigleSpecialiService;
 
@@ -19,14 +18,14 @@ public class SigleSpecialiServiceImpl implements SigleSpecialiService {
     }
 
     @Override
-    public PaeseSpeciale addSigla(PaeseSpeciale paese) {
-        return dao.add(paese);
+    public SigleSpeciali addSigla(SigleSpeciali paese) {
+        //return dao.add(paese);
+        return null;
     }
 
     @Override
-    public PaeseSpeciale findPaese(Integer id) {
-        return dao.find(id);
+    public SigleSpeciali findPaese(Integer id) {
+        return null;
     }
-
 
 }

@@ -1,7 +1,8 @@
 package com.corso.service.impl;
 
-import com.corso.bean.Paese;
+
 import com.corso.dao.PaesiDAO;
+import com.corso.model.Paesi;
 import com.corso.service.PaesiService;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class PaesiServiceImpl implements PaesiService {
     }
 
     @Override
-    public Paese findPaese(Integer id) {
+    public Paesi findPaese(Integer id) {
         return  dao.find(id);
     }
 
     @Override
-    public List<Paese> getPaesi() {
+    public List<Paesi> getPaesi() {
         return dao.all();
     }
 }
