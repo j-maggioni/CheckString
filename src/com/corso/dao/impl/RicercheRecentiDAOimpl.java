@@ -1,6 +1,7 @@
 package com.corso.dao.impl;
 
 import com.corso.dao.RicercheRecentiDAO;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,29 +18,10 @@ public class RicercheRecentiDAOimpl extends BaseDAOimpl implements RicercheRecen
     @Transactional
     @Override
     public void add(RicercheRecenti ricerca) {
-        // Controlla se l'input è già presente nella tabella
-        RicercheRecenti existingRicerca = find(ricerca.getInput());
-
-        if (existingRicerca == null) { // Se non c'è un record con lo stesso input, aggiungi la nuova riga
-            RicercheRecenti nuovaRicerca = new RicercheRecenti();
-            nuovaRicerca.setInput(ricerca.getInput());
-            nuovaRicerca.setStandard(ricerca.getStandard());
-            nuovaRicerca.setAlgortimo(ricerca.getAlgortimo());
-            nuovaRicerca.setApprovazione(ricerca.getApprovazione());
-            Date currentDate = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            String formattedDate = dateFormat.format(currentDate);
-            nuovaRicerca.setDataInserimento(formattedDate);
-            manager.persist(nuovaRicerca);
-            manager.flush();
-        } else {
-            System.out.println("Input già presente nella tabella, non è necessario inserirlo di nuovo.");
-        }
+        manager.persist(ricerca);
+        manager.flush();
     }
 
-
-
-    //per approvazione MI MANCA QUESTO
     @Override
     @Transactional
     public void update(RicercheRecenti ricerca) {
@@ -51,13 +33,11 @@ public class RicercheRecentiDAOimpl extends BaseDAOimpl implements RicercheRecen
     public RicercheRecenti find(String input) {
         Query query = manager.createNamedQuery("RicercheRecenti.findInput");
         query.setParameter("input", input);
-        RicercheRecenti result = null;
-        try {
-            result = (RicercheRecenti) query.getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println("Eccezione: " + e);
-        }
-        return result;
+
+        List<RicercheRecenti> resultList = query.getResultList();
+        RicercheRecenti result = resultList.get(0);
+
+        return manager.find(RicercheRecenti.class,result.getId());
     }
 
 }

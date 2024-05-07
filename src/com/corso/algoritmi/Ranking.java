@@ -92,7 +92,4 @@ public class Ranking {
 		serviceRanking.changeAlgorithmActivation(algoritmo, active);
 	}
 
-	public static void updateRankingAlgoritmi(String algoritmo) {
-		serviceRanking.updateOccorrenzeAlgoritmo(algoritmo);
-	}
 }

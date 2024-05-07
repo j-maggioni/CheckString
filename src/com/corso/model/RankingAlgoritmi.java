@@ -107,7 +107,6 @@ public class RankingAlgoritmi {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		RankingAlgoritmi that = (RankingAlgoritmi) o;
 		return Objects.equals(this.nome, ((RankingAlgoritmi) o).nome);
 	}
 

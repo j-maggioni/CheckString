@@ -2,13 +2,16 @@ package com.corso.model;
 
 import com.sun.istack.NotNull;
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(name = "ricerche_recenti")
-@NamedQueries({
-		@NamedQuery(
+@NamedNativeQueries({
+		@NamedNativeQuery(
 				name = "RicercheRecenti.findInput",
-				query = "SELECT rr FROM ricerche_recenti rr WHERE rr.input = :input"
+				query = "SELECT * FROM ricerche_recenti WHERE input=:input ",
+				resultClass = RicercheRecenti.class
 		)
 })
 
@@ -33,28 +36,34 @@ public class RicercheRecenti {
 	@Column(name="approvazione")
 	private boolean approvazione;
 
-	public Integer getId() {
-		return id;
+	public RicercheRecenti() {
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public RicercheRecenti(String input, String standard, String algortimo) {
+		setDataInserimento();
+		this.input = input;
+		this.standard = standard;
+		this.algortimo = algortimo;
+		this.approvazione = false;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getDataInserimento() {
 		return data_inserimento;
 	}
 
-	public void setDataInserimento(String dataInserimento) {
-		this.data_inserimento = dataInserimento;
+	private void setDataInserimento() {
+		//this.data_inserimento = dataInserimento;
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.data_inserimento = dateFormat.format(currentDate);
 	}
 
 	public String getInput() {
 		return input;
-	}
-
-	public void setInput(String input) {
-		this.input = input;
 	}
 
 	public String getStandard() {
@@ -92,4 +101,5 @@ public class RicercheRecenti {
 				", approvazione=" + approvazione +
 				'}';
 	}
+
 }
