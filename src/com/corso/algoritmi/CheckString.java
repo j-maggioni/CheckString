@@ -4,10 +4,11 @@ import java.util.*;
 
 import com.corso.config.Beans;
 import com.corso.model.RicercheRecenti;
+import com.corso.paesiSpecialiAlgo.RichercaPaesiSpeciali;
 import com.corso.service.RankingAlgoritmiService;
 import com.corso.service.RicercheRecentiService;
 import com.corso.standard.Standard;
-import com.corso.paesiSpeciali.ManagerRicerca;
+import com.corso.paesiSpecialiAlgo.ManagerRicerca;
 import com.corso.standard.*;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -34,14 +35,14 @@ public abstract class CheckString {
             return new Esito (true, ricerca.getInput(), ricerca.getStandard(), ricerca.getAlgortimo());
         }
 
-		// RICERCA DI SIGLE DI 2 o 3 CARATTERI
-      	if (input.length() == 2 || input.length() == 3 ) {
-      		ManagerRicerca manager = new ManagerRicerca();
-      		String res1 = manager.getParola(input) ;
-      		if (!(res1.isEmpty())) {
-				return new Esito(true, input, res1,this.getName());
-        	}
-		}
+//		// RICERCA DI SIGLE DI 2 o 3 CARATTERI
+//      	if (input.length() == 2 || input.length() == 3 ) {
+//      		RichercaPaesiSpeciali manager = new RicercaPaesiSpeciali();
+//      		String res1 = manager.getParola(input) ;
+//      		if (!(res1.isEmpty())) {
+//				return new Esito(true, input, res1,this.getName());
+//        	}
+//		}
 
 		// CHECK CON ALGORITMI
     	for(Standard standard : standards) {

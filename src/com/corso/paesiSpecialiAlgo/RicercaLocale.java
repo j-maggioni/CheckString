@@ -1,7 +1,6 @@
 package com.corso.paesiSpecialiAlgo;
 
 import java.util.ArrayList;
-
 import com.corso.standard.Standard;
 import com.corso.standard.LocaleParoleStandard;
 
