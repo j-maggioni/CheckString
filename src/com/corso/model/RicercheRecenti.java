@@ -27,11 +27,14 @@ public class RicercheRecenti {
 	@Column(name="input")
 	private String input;
 
-	@Column(name="standard")
+	//@OneToOne
+	//@JoinColumn (name="standard", referencedColumnName = "nome")
+	@Column(name = "standard")
 	private String standard;
 
-	@Column(name="algoritmo")
-	private String algortimo;
+	@OneToOne
+	@JoinColumn(name="algoritmo", referencedColumnName = "nome")
+	private RankingAlgoritmi algortimo;
 
 	@Column(name="approvazione")
 	private boolean approvazione;
@@ -39,7 +42,7 @@ public class RicercheRecenti {
 	public RicercheRecenti() {
 	}
 
-	public RicercheRecenti(String input, String standard, String algortimo) {
+	public RicercheRecenti(String input, String standard, RankingAlgoritmi algortimo) {
 		setDataInserimento();
 		this.input = input;
 		this.standard = standard;
@@ -74,11 +77,11 @@ public class RicercheRecenti {
 		this.standard = standard;
 	}
 
-	public String getAlgortimo() {
+	public RankingAlgoritmi getAlgortimo() {
 		return algortimo;
 	}
 
-	public void setAlgortimo(String algortimo) {
+	public void setAlgortimo(RankingAlgoritmi algortimo) {
 		this.algortimo = algortimo;
 	}
 

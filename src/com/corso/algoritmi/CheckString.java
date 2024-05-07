@@ -3,6 +3,9 @@ package com.corso.algoritmi;
 import java.util.*;
 
 import com.corso.config.Beans;
+import com.corso.dao.RankingAlgoritmiDAO;
+import com.corso.dao.RicercheRecentiDAO;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import com.corso.paesiSpecialiAlgo.RichercaPaesiSpeciali;
 import com.corso.service.RankingAlgoritmiService;
@@ -20,6 +23,8 @@ public abstract class CheckString {
 
 	private static BeanFactory factory;
 	private static RicercheRecentiService serviceRicerche;
+	private static RankingAlgoritmiDAO daoRicerche;
+
 	static {
 		ParoleStandard s = new FileParoleStandard();
 		//ParoleStandard s = new DBParoleStandard();
@@ -28,6 +33,7 @@ public abstract class CheckString {
 
 		factory = new AnnotationConfigApplicationContext(Beans.class);
 		serviceRicerche = factory.getBean("ricercheRecentiService", RicercheRecentiService.class);
+		daoRicerche = factory.getBean("rankingAlgoritmiDAO", RankingAlgoritmiDAO.class);
 	}
 
     public Esito check(String input) throws Exception{
@@ -37,7 +43,7 @@ public abstract class CheckString {
     	// RICERCA PAROLA NEL DB RICERCHE RECENTI
 		RicercheRecenti ricerca = serviceRicerche.findRicerca(input);
 		if (ricerca != null) {
-            return new Esito (true, ricerca.getInput(), ricerca.getStandard(), ricerca.getAlgortimo());
+            return new Esito (true, ricerca.getInput(), ricerca.getStandard(), ricerca.getAlgortimo().getNome());
         }
 
 //		// RICERCA DI SIGLE DI 2 o 3 CARATTERI

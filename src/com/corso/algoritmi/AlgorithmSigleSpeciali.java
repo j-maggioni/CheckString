@@ -2,7 +2,7 @@ package com.corso.algoritmi;
 
 import com.corso.paesiSpecialiAlgo.RicercaFile;
 import com.corso.paesiSpecialiAlgo.RicercaLocale;
-import com.corso.paesiSpecialiAlgo.RicercaQuery;
+//import com.corso.paesiSpecialiAlgo.RicercaQuery;
 import com.corso.paesiSpecialiAlgo.RichercaPaesiSpeciali;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class AlgorithmSigleSpeciali {
 		ArrayList<RichercaPaesiSpeciali> x = new ArrayList<RichercaPaesiSpeciali>();
 		x.add(new RicercaLocale()) ;
 		x.add(new RicercaFile()) ;
-		x.add(new RicercaQuery()) ;
+	//	x.add(new RicercaQuery()) ;
 
 
 		this.algoritmi = x ;

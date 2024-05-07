@@ -1,6 +1,6 @@
 package com.corso.algoritmi;
 
-public class ContainsCheckString extends CheckString{
+public class Contains extends CheckString{
 
 	@Override
     public boolean check (String input, String standard) {
