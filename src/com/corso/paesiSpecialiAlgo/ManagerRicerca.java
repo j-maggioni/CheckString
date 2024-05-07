@@ -1,7 +1,6 @@
-package com.corso.paesiSpeciali;
+package com.corso.paesiSpecialiAlgo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ManagerRicerca {
 	public ArrayList<RichercaPaesiSpeciali> algoritmi ;
@@ -11,9 +10,9 @@ public class ManagerRicerca {
 	  String stringToReturn = ""  ;
 	  for (RichercaPaesiSpeciali algo : algoritmi) {
 		 String risultatoAlgoritmo = algo.cercaPaeseSpeciale(paeseSpeciale) ;
-		 if (!(risultatoAlgoritmo.equals("")) // && !risultatoAlgoritmo.equals(null) &&
+		 if (!("".equals(risultatoAlgoritmo )) // && !risultatoAlgoritmo.equals(null) &&
 				 ) {
-		  System.out.println("---Paese Speciale che corrisponde a " +paeseSpeciale+ " --> " +risultatoAlgoritmo + "get parola ManagerRicerca");
+		  System.out.println("---Paese Speciale che corrisponde a " +paeseSpeciale+ " --> " +risultatoAlgoritmo + "  via getparola ManagerRicerca" + algo.toString());
 		  return risultatoAlgoritmo ;
 	     }
 	} // for

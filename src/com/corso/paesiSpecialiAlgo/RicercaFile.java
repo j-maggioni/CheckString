@@ -1,4 +1,4 @@
-package com.corso.paesiSpeciali;
+package com.corso.paesiSpecialiAlgo;
 
 import java.util.ArrayList;
 

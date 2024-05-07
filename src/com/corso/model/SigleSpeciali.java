@@ -1,33 +1,41 @@
 package com.corso.model;
 
 import com.sun.istack.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import javax.sql.DataSource;
 import java.util.List;
 
-@Entity(name = "sigle_speciali")
-//TODO: aggiungere namedNativeQuery
-//@Table (name="sigle_speciali")
-//@NamedNativeQuery(name="Categoria.CountDescrizioneSQL",
-//		query=" select descrizione, count(descrizione) as cd "
-//				+ "	from categoria "
-//				+ " where nome like :nome"
-//				+ "	group by (descrizione)"
-//				+ "	having cd >= 1"
-//				+ "	order by cd"
-//				+ " limit 2")
+
 
 // PER RICHIAMARE QUERY IN SigleSpecialiDAOimpl
 // Query query = manager.createNamedQuery("Categoria.CountDescrizione");
 //query.setParameter("nome", "%Nome%" );
 //List<Object[]> results = query.getResultList();
 //return results;
+@Entity
+@Table(name = "sigle_speciali")
+@NamedNativeQueries({
+		@NamedNativeQuery(name = "SigleSpeciali.BySigla",
+				query = "SELECT * FROM sigle_speciali  WHERE sigla = :siglaInput ;",
+				resultClass = SigleSpeciali.class),
+		@NamedNativeQuery(name = "SigleSpeciali.ById",
+				query = "SELECT * FROM sigle_speciali WHERE id = :id ;",
+				resultClass = SigleSpeciali.class),
+		@NamedNativeQuery(name = "SigleSpeciali.All",
+				query = "SELECT * FROM sigle_speciali ;",
+				resultClass = SigleSpeciali.class)
+		// SELECT s FROM SigleSpeciali s
+})
 
 public class SigleSpeciali {
 
+
+	//
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)   // AUTO: genera il valore Hibernate
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	@Column(name = "sigla", unique = true)
 	@NotNull
@@ -37,13 +45,22 @@ public class SigleSpeciali {
 	@NotNull
 	private String paese;
 
+	public SigleSpeciali(String sigla, String paese) {
+		this.sigla = sigla;
+		this.paese = paese;
+	}
+	public SigleSpeciali() {
+
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getSigla() {
 		return sigla;

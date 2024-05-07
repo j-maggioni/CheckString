@@ -1,6 +1,5 @@
 package com.corso.algoritmi;
 
-import com.corso.bean.Bean;
 
 public class Esito {
     private  boolean esito;

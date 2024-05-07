@@ -1,6 +1,5 @@
 package com.corso.standard;
 
-import com.corso.bean.Bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
