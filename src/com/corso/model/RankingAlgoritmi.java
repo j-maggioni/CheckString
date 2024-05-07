@@ -8,9 +8,6 @@ import java.util.Objects;
 
 @Table (name="ranking_algoritmi")
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "RankingAlgoritmi.TruncateTable",
-				query = "TRUNCATE TABLE ranking_algoritmi;",
-				resultClass = RankingAlgoritmi.class),
 		@NamedNativeQuery(name = "RankingAlgoritmi.SortingResults",
 				query = "SELECT * FROM ranking_algoritmi ORDER BY score ASC",
 				resultClass = RankingAlgoritmi.class),
