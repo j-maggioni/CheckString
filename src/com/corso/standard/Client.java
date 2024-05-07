@@ -18,11 +18,6 @@ public class Client {
 	private static RankingAlgoritmiService serviceRanking;
 
 	static{
-		ParoleStandard s = new FileParoleStandard();
-		//ParoleStandard s = new DBParoleStandard();
-		//ParoleStandard s = new LocaleParoleStandard();
-		CheckString.setParoleStandard(s);
-
 		factory = new AnnotationConfigApplicationContext(Beans.class);
 		serviceRicerche = factory.getBean("ricercheRecentiService", RicercheRecentiService.class);
 		serviceRanking = factory.getBean("rankingAlgoritmiService", RankingAlgoritmiService.class);
@@ -37,7 +32,7 @@ public class Client {
     		}
 
     		CheckString algoritmo = Ranking.getFirstAlgorithm();
-    		Esito esito = algoritmo.check("Ciaoxyzxyzxyz");
+    		Esito esito = algoritmo.check("Ita");
 			saveEsito(esito);
     		
 //    		Esito esito1 = algoritmo.check("italia");

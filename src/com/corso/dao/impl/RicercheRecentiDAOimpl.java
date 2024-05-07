@@ -35,9 +35,11 @@ public class RicercheRecentiDAOimpl extends BaseDAOimpl implements RicercheRecen
         query.setParameter("input", input);
 
         List<RicercheRecenti> resultList = query.getResultList();
-        RicercheRecenti result = resultList.get(0);
-
-        return manager.find(RicercheRecenti.class,result.getId());
+        if (!resultList.isEmpty()) {
+            RicercheRecenti result = resultList.get(0);
+            return manager.find(RicercheRecenti.class,result.getId());
+        }
+        return null;
     }
 
 }

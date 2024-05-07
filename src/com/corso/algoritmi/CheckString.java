@@ -21,6 +21,11 @@ public abstract class CheckString {
 	private static BeanFactory factory;
 	private static RicercheRecentiService serviceRicerche;
 	static {
+		ParoleStandard s = new FileParoleStandard();
+		//ParoleStandard s = new DBParoleStandard();
+		//ParoleStandard s = new LocaleParoleStandard();
+		setParoleStandard(s);
+
 		factory = new AnnotationConfigApplicationContext(Beans.class);
 		serviceRicerche = factory.getBean("ricercheRecentiService", RicercheRecentiService.class);
 	}
