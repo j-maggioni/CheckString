@@ -2,6 +2,7 @@ package com.corso.dao.impl;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import com.corso.model.SigleSpeciali;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,13 +29,6 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
         Query queryinit = manager.createNamedQuery("Paesi.init", Paesi.class);
         List<Paesi> resultList = queryinit.getResultList();
         return resultList;
-        //System.out.println(manager.contains(resultList.get(0)));
-       // manager.persist(resultList.get(0));
-//        for (Paesi paese : resultList) {
-//           addPaese(paese);
-//        }
-
-       // manager.flush();
     }
 
     @Transactional
@@ -57,6 +51,12 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
 //        query.setParameter("id", id);
 //        return (Paesi) query.getSingleResult();
 //    }
+
+    @Override
+    @Transactional
+    public void update(Paesi paese) {
+        manager.merge(paese);
+    }
 
     @Override
     @Transactional

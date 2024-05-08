@@ -3,6 +3,7 @@ package com.corso.service.impl;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.service.PaesiService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,20 @@ public class PaesiServiceImpl implements PaesiService {
     public boolean addPaese() throws SQLException {
         List<Paesi> p = dao.initPaesi();
         for (Paesi paesi : p) {
-            dao.addPaese(paesi);
+            Paesi paeseFind = dao.findByCodice2(paesi.getCodice2());
+            if(paeseFind == null){
+                dao.addPaese(paeseFind);
+                return true;
+            } else {
+                if(paesi.getCodice2().equalsIgnoreCase(paeseFind.getCodice2())) {
+                    paeseFind.setNome(paesi.getNome());
+                    paeseFind.setCodice2(paesi.getCodice2());
+                    paeseFind.setCodice3(paesi.getCodice3());
+                    dao.update(paeseFind);
+                    return true;
+                }
+            }
+
         }
         return false;
     }

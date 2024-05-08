@@ -1,6 +1,7 @@
 package com.corso.dao;
 
 import com.corso.model.Paesi;
+import com.corso.model.RankingAlgoritmi;
 import com.corso.model.SigleSpeciali;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ public interface PaesiDAO {
     @Transactional
     List<Paesi> initPaesi() throws SQLException ;
     // Paesi findById(int id) throws SQLException;
+    @Transactional
+    public void update(Paesi paese);
     @Transactional
     Paesi findByCodice2(String Codice2) throws SQLException;
     @Transactional
