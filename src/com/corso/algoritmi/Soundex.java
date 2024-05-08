@@ -40,8 +40,7 @@ public class Soundex extends CheckString {
 
 	@Override
 	protected boolean check(String input, String standard) {
-		// TODO Auto-generated method stub
-		return false;
+        return encode(input).equals(encode(standard));
 	}
 }
 

@@ -3,7 +3,6 @@ package com.corso.standard;
 import com.corso.algoritmi.*;
 import com.corso.algoritmi.Esito;
 import com.corso.config.Beans;
-import com.corso.dao.RankingAlgoritmiDAO;
 import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import com.corso.service.RankingAlgoritmiService;
@@ -11,6 +10,8 @@ import com.corso.service.RicercheRecentiService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
@@ -18,30 +19,39 @@ public class Client {
 	private static BeanFactory factory;
 	private static RicercheRecentiService serviceRicerche;
 	private static RankingAlgoritmiService serviceRanking;
-	private static RankingAlgoritmiDAO daoRicerche;
 
 	static{
 		factory = new AnnotationConfigApplicationContext(Beans.class);
 		serviceRicerche = factory.getBean("ricercheRecentiService", RicercheRecentiService.class);
 		serviceRanking = factory.getBean("rankingAlgoritmiService", RankingAlgoritmiService.class);
-		daoRicerche = factory.getBean("rankingAlgoritmiDAO", RankingAlgoritmiDAO.class);
 	}
 
 	public Client () {
-    	boolean setRanking = true;
+		System.out.print("\nAddestrare gli algoritmi? Y/N ");
+		Scanner in = new Scanner(System.in);
+		switch (in.next().charAt(0)){
+			case 'Y':
+			case 'y':
+				Ranking.setRanking(true);
+				break;
+			default: // case 'N' o 'n'
+				Ranking.setRanking(false);
+				break;
+		}
         try {
-
-			if(setRanking) {
-    			Ranking.algorithmRanking();
+			if(Ranking.isRanking()) {
+				//Ranking.changeAllActivations();
+				Ranking.algorithmRanking();
     		}
 
-    		CheckString algoritmo = Ranking.getFirstAlgorithm();
+			CheckString algoritmo = Ranking.getFirstAlgorithm();
 			System.out.print("\nInput: ");
-			Scanner in = new Scanner(System.in);
+			in = new Scanner(System.in);
 			String response = in.nextLine();
-    		Esito esito = algoritmo.check(response);
-			saveEsito(esito);
-
+			if(!response.isEmpty()){
+				Esito esito = algoritmo.check(response);
+				saveEsito(esito);
+			}
     	} catch (Exception e) {
     	  e.printStackTrace();
     	}
@@ -50,7 +60,7 @@ public class Client {
 
 	private void saveEsito(Esito esito){
 		RicercheRecenti nuovaRicerca = new RicercheRecenti(esito.getParolaInput(), esito.getParolaStandard(),
-				daoRicerche.find(esito.getAlgoritmo()));
+				serviceRanking.findAlgoritmo(esito.getAlgoritmo()));
 		if (approvazioneUtente(esito)){
 			nuovaRicerca.setApprovazione(true);
 			serviceRicerche.addRicerca(nuovaRicerca);
@@ -60,7 +70,7 @@ public class Client {
 			Scanner in = new Scanner(System.in);
 			String response = in.nextLine();
 			nuovaRicerca.setStandard(response);
-			nuovaRicerca.setAlgortimo(daoRicerche.find("Manual CheckString"));
+			nuovaRicerca.setAlgortimo(serviceRanking.findAlgoritmo("Manuale"));
 			serviceRicerche.addRicerca(nuovaRicerca);
 		}
 	}
@@ -80,7 +90,5 @@ public class Client {
 		}
 
 	}
-
-
 
 }

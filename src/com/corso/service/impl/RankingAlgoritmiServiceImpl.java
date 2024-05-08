@@ -17,8 +17,18 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
 
     @Override
     public void addAlgoritmo(RankingAlgoritmi algoritmo) {
-        if(algoritmo != null && dao.find(algoritmo.getNome()) == null){
+        RankingAlgoritmi existingAlgoritmo = dao.find(algoritmo.getNome());
+        if(algoritmo != null && existingAlgoritmo == null){
             dao.add(algoritmo);
+        } else {
+            if(algoritmo.getNome().equalsIgnoreCase(existingAlgoritmo.getNome())) {
+                existingAlgoritmo.setOccorrenze(algoritmo.getOccorrenze());
+                existingAlgoritmo.setEsatti(algoritmo.getEsatti());
+                existingAlgoritmo.setTotali(algoritmo.getTotali());
+                existingAlgoritmo.setScore();
+                existingAlgoritmo.setAttivo(algoritmo.isAttivo());
+                dao.update(existingAlgoritmo);
+            }
         }
     }
 
@@ -27,7 +37,7 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
         if(!algoritmo.isEmpty()){
             RankingAlgoritmi alg = dao.find(algoritmo);
             if(alg != null){
-                alg.setOccorrenze();
+                alg.setOccorrenze(alg.getOccorrenze()+1);
                 alg.setScore();
                 dao.update(alg);
             }
@@ -45,18 +55,18 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
     }
 
     @Override
-    public boolean findAlgoritmo(RankingAlgoritmi algoritmo) {
-        if ((dao.all()).contains(algoritmo)){
-            return true;
+    public RankingAlgoritmi findAlgoritmo(String algoritmo) {
+        if (!algoritmo.isEmpty()){
+            return dao.find(algoritmo);
         }
-        return false;
+        return null;
     }
 
     @Override
     public void changeAlgorithmActivation (String algoritmo, boolean attivo) {
         if(!algoritmo.isEmpty()){
             RankingAlgoritmi alg = dao.find(algoritmo);
-            if(alg != null && !alg.isAttivo() && attivo){
+            if(alg != null && attivo){
                 dao.attivaAlgoritmo(algoritmo);
             } else {
                 dao.disattivaAlgoritmo(algoritmo);

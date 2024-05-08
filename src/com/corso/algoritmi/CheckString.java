@@ -37,23 +37,25 @@ public abstract class CheckString {
 	}
 
     public Esito check(String input) throws Exception{
-		System.out.println("Provo con l'algoritmo " + this.getName());
-      	ArrayList<String> tokens = Tokenizer.tokenize(input);
-      	
-    	// RICERCA PAROLA NEL DB RICERCHE RECENTI
-		RicercheRecenti ricerca = serviceRicerche.findRicerca(input);
-		if (ricerca != null) {
-            return new Esito (true, ricerca.getInput(), ricerca.getStandard(), ricerca.getAlgortimo().getNome());
-        }
+		ArrayList<String> tokens = Tokenizer.tokenize(input);
+		if(!Ranking.isRanking()){
+			System.out.println("Provo con l'algoritmo " + this.getName());
 
-//		// RICERCA DI SIGLE DI 2 o 3 CARATTERI
+
+			// RICERCA PAROLA NEL DB RICERCHE RECENTI
+			RicercheRecenti ricerca = serviceRicerche.findRicerca(input);
+			if (ricerca != null) {
+				return new Esito (true, ricerca.getInput(), ricerca.getStandard(), ricerca.getAlgortimo().getNome());
+			}
+
+			// RICERCA DI SIGLE DI 2 o 3 CARATTERI
 //      	if (input.length() == 2 || input.length() == 3 ) {
 //      		RichercaPaesiSpeciali manager = new RicercaPaesiSpeciali();
 //      		String res1 = manager.getParola(input) ;
 //      		if (!(res1.isEmpty())) {
 //				return new Esito(true, input, res1,this.getName());
 //        	}
-//		}
+		}
 
 		// CHECK CON ALGORITMI
     	for(Standard standard : standards) {

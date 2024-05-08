@@ -63,16 +63,24 @@ public class RankingAlgoritmi {
 		return occorrenze;
 	}
 
-	public void setOccorrenze() {
-		this.occorrenze++;
+	public void setOccorrenze(int occorrenze) {
+		this.occorrenze = occorrenze;
 	}
 
 	public int getEsatti() {
 		return esatti;
 	}
 
+	public void setEsatti(int esatti) {
+		this.esatti = esatti;
+	}
+
 	public int getTotali() {
 		return totali;
+	}
+
+	public void setTotali(int totali) {
+		this.totali = totali;
 	}
 
 	public double getScore() {
@@ -80,12 +88,19 @@ public class RankingAlgoritmi {
 	}
 
 	public void setScore() {
-		//this.score = score;
-		this.score = (double) (this.esatti+this.occorrenze)/(this.totali+this.occorrenze);
+		if (this.esatti != 0 && this.totali != 0) {
+			this.score = (double) (this.esatti + this.occorrenze) / (this.totali + this.occorrenze);
+		} else {
+			this.score = 0;
+		}
 	}
 
 	public boolean isAttivo() {
 		return attivo;
+	}
+
+	public void setAttivo(boolean attivo) {
+		this.attivo = attivo;
 	}
 
 	@Override

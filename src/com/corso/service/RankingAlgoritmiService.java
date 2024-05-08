@@ -13,6 +13,6 @@ public interface RankingAlgoritmiService {
     public void updateOccorrenzeAlgoritmo(String algoritmo);
     public List<RankingAlgoritmi> getAlgoritmi();
     public List<RankingAlgoritmi> getAlgoritmiAttivi();
-    public boolean findAlgoritmo(RankingAlgoritmi algoritmo);
+    public RankingAlgoritmi findAlgoritmo(String algoritmo);
     public void changeAlgorithmActivation(String algoritmo, boolean attivo);
 }
