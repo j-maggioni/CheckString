@@ -12,6 +12,6 @@ public interface PaesiService {
      //Paesi findById(int id) throws SQLException;
      List<Paesi> findAll() throws SQLException;
      Paesi findBySigla(String codice) throws SQLException;
-     boolean addPaese (Paesi paese) throws SQLException;
+     boolean addPaese () throws SQLException;
 
 }

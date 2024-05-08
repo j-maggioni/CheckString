@@ -4,18 +4,16 @@ import com.corso.dao.impl.PaesiDAOimpl;
 import com.sun.istack.NotNull;
 import org.springframework.cglib.proxy.Factory;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import java.sql.SQLException;
 
 @Entity(name = "paesi")
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "Paesi.init",
-				query = //"use checkstring ;\n" +
-						//"INSERT INTO paesi (id, Codice1, Codice2, nome) \n" +
-						"SELECT Code as codice3,Code2 as codice2, Name as nome\n " +
-						"FROM world.country\n" +
-						"WHERE NOT EXISTS (SELECT 1 FROM checkstring.paesi);",
+		@NamedNativeQuery(
+				name = "Paesi.init",
+				query = "SELECT Code as codice3,Code2 as codice2, Name as nome " +
+						"FROM world.country",
+						//"WHERE NOT EXISTS (SELECT 1 FROM checkstring.paesi);",
 				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.All",
@@ -43,10 +41,10 @@ public class Paesi {
 	private String nome;
 
 	@Id
-	@Column(name="codice2", length = 2, unique = true)
+	@Column(name="codice2")
 	private String codice2;
 
-	@Column(name="codice3", length = 3, unique = true)
+	@Column(name="codice3")
 	private String codice3;
 
 //	@Transactional

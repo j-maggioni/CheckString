@@ -40,8 +40,11 @@ public class PaesiServiceImpl implements PaesiService {
     }
 
     @Override
-    public boolean addPaese(Paesi paese) throws SQLException {
-        dao.addPaese(paese) ;
+    public boolean addPaese() throws SQLException {
+        List<Paesi> p = dao.initPaesi();
+        for (Paesi paesi : p) {
+            dao.addPaese(paesi);
+        }
         return false;
     }
 

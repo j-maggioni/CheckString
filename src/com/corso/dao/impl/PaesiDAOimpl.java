@@ -2,9 +2,9 @@ package com.corso.dao.impl;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
+import com.corso.model.RicercheRecenti;
 import com.corso.model.SigleSpeciali;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,17 +13,30 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
+
     @PersistenceContext
     EntityManager manager;
 
-    public EntityManager getManager() {return manager;}
+//    public EntityManager getManager() {
+//        return manager;
+//    }
+
 
     @Transactional
-    @PostConstruct // significa il metodo di init del bean
-    public void initPaesi() throws SQLException {
-            Query queryinit = manager.createNamedQuery("Paesi.init",Paesi.class) ;
-            queryinit.getResultList();
-        }
+    @Override
+    public List<Paesi> initPaesi() throws SQLException {
+        Query queryinit = manager.createNamedQuery("Paesi.init", Paesi.class);
+        List<Paesi> resultList = queryinit.getResultList();
+        return resultList;
+        //System.out.println(manager.contains(resultList.get(0)));
+       // manager.persist(resultList.get(0));
+//        for (Paesi paese : resultList) {
+//           addPaese(paese);
+//        }
+
+       // manager.flush();
+    }
+
     @Transactional
     @Override
     public List<Paesi> findAll() {
