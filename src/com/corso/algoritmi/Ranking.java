@@ -3,7 +3,9 @@ package com.corso.algoritmi;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.corso.config.Beans;
 import com.corso.model.RankingAlgoritmi;
@@ -44,8 +46,15 @@ public class Ranking {
 			paesiFromDB.add(p.getValue());
 		}
 
-		for (RankingAlgoritmi algoritmo: serviceRanking.getAlgoritmiAttivi()) {
-			insertRow(createCheckStringInstance("com.corso.algoritmi."+algoritmo.getNome()));
+		List<String> l;
+		if (serviceRanking.getAlgoritmiAttivi().isEmpty()){
+            l = new ArrayList<String>(Arrays.asList(algoritmiUsati));
+		} else {
+			l = serviceRanking.getAlgoritmiAttivi().stream().map(RankingAlgoritmi::getNome).collect(Collectors.toList());;
+		}
+
+		for (String algoritmo: l) {
+			insertRow(createCheckStringInstance("com.corso.algoritmi."+algoritmo));
 		}
 		RankingAlgoritmi inserimentoManuale = new RankingAlgoritmi("InserimentoManuale",0,0);
 		inserimentoManuale.setAttivo(false);
@@ -68,9 +77,16 @@ public class Ranking {
 	public static CheckString getFirstAlgorithm() throws Exception {
 
 		ArrayList<CheckString> algoritmi = new ArrayList<CheckString>();
-		for (RankingAlgoritmi algoritmo : serviceRanking.getAlgoritmiAttivi()) {
-			if(!Arrays.asList(algoritmiIgnorati).contains(algoritmo.getNome())){
-				CheckString c = createCheckStringInstance("com.corso.algoritmi." + algoritmo.getNome());
+		List<String> l;
+		if (serviceRanking.getAlgoritmiAttivi().isEmpty()){
+			l = new ArrayList<String>(Arrays.asList(algoritmiUsati));
+		} else {
+			l = serviceRanking.getAlgoritmiAttivi().stream().map(RankingAlgoritmi::getNome).collect(Collectors.toList());;
+		}
+
+		for (String algoritmo: l) {
+			if(!Arrays.asList(algoritmiIgnorati).contains(algoritmo)){
+				CheckString c = createCheckStringInstance("com.corso.algoritmi." + algoritmo);
 				algoritmi.add(c);
 			}
 		}
