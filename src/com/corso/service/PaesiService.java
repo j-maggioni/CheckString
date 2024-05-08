@@ -2,14 +2,16 @@ package com.corso.service;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PaesiService {
 
-    public void setDao(PaesiDAO paesiDAO);
-    public Paesi findPaese(Integer id);
-    public List<Paesi> getPaesi();
+     void setDao(PaesiDAO paesiDAO);
+     //Paesi findById(int id) throws SQLException;
+     List<Paesi> findAll() throws SQLException;
+     Paesi findBySigla(String codice) throws SQLException;
+     boolean addPaese (Paesi paese) throws SQLException;
 
 }
