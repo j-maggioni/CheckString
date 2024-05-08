@@ -29,7 +29,6 @@ public class ManagerRicerca {
 		ArrayList<RichercaPaesiSpeciali> x = new ArrayList<RichercaPaesiSpeciali>();
 		x.add(new RicercaLocale()) ;
 		x.add(new RicercaFile()) ;
-		x.add(new RicercaQuery()) ;
 
 
 		this.algoritmi = x ;
