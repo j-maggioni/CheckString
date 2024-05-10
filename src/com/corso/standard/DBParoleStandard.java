@@ -1,38 +1,42 @@
 package com.corso.standard;
 
-import java.sql.*;
+import com.corso.config.Beans;
+import com.corso.model.Paesi;
+import com.corso.service.PaesiService;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBParoleStandard implements ParoleStandard {
-	private ArrayList<Standard> paroleStandard ;  
-	
-	@Override
-	public List<Standard> getStandards()  {
-        ArrayList<Standard> arrayStandard = new ArrayList<Standard>(); 
-		Statement statement = DBConfig.connectToDB(); 
-		String query1 = " Select * from Country order by name asc ;" ;
-		try {
-			ResultSet res = statement.executeQuery(query1) ;
-			while (res.next()) {
-				String nomePaese = res.getNString("name") ;
-				String codePaese = res.getNString("Code") ; 
-				Standard st = new Standard(codePaese,nomePaese) ;
-                arrayStandard.add(st) ;
-			};
-			this.paroleStandard = arrayStandard ;
-			return arrayStandard ;
-		} catch (SQLException e) {
-			System.out.println("Error while excetuting the query !!, sql error : " +e);
-			e.printStackTrace();
-			return arrayStandard ;
-		}
-	}	
-	// Costr + getter , (setter presente nel metodo getParoleStandard ) 
-	public DBParoleStandard() throws Exception {
-		getStandards() ; 
+	private ArrayList<Standard> paroleStandard;
+
+    private static BeanFactory factory;
+    private static PaesiService servicePaesi;
+
+    static {
+        factory = new AnnotationConfigApplicationContext(Beans.class);
+        servicePaesi = factory.getBean("paesiService", PaesiService.class);
+    }
+
+    public DBParoleStandard() throws Exception {
+        readStandards();
+    }
+
+	private List<Standard> readStandards() throws SQLException {
+        List<Paesi> paesi = servicePaesi.findAll();
+
+        for (Paesi paese: paesi){
+            paroleStandard.add(new Standard(paese.getCodice2(),paese.getNome()));
+        }
+        return paroleStandard;
 	}
-	public ArrayList<Standard> getParoleStandard() {
-		return paroleStandard;
-	}
+
+
+    @Override
+    public List<Standard> getStandards() {
+        return paroleStandard;
+    }
 }
