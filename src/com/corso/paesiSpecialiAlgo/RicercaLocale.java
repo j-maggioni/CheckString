@@ -1,8 +1,9 @@
 package com.corso.paesiSpecialiAlgo;
 
-import java.util.ArrayList;
-import com.corso.standard.Standard;
 import com.corso.standard.LocaleParoleStandard;
+import com.corso.standard.Standard;
+
+import java.util.ArrayList;
 
 public class RicercaLocale implements RichercaPaesiSpeciali {
 	private final static ArrayList<Standard> StandardsFromLocaleJava = new LocaleParoleStandard().getParoleStandard() ;

@@ -9,9 +9,9 @@ import java.util.List;
 public interface PaesiService {
 
      void setDao(PaesiDAO paesiDAO);
-     //Paesi findById(int id) throws SQLException;
-     List<Paesi> findAll() throws SQLException;
-     Paesi findBySigla(String codice) throws SQLException;
-     boolean addPaese () throws SQLException;
+     List<Paesi> findAll();
+     Paesi findBySigla(String codice);
+     Paesi findByNome(String nome);
+     boolean addPaese ();
 
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface SigleSpecialiDAO  {
-     boolean add(SigleSpeciali siglaSpeciale) throws SQLException;
-    SigleSpeciali findById(int id) throws SQLException;
-    List<SigleSpeciali> findAll () throws SQLException;
-    SigleSpeciali findBySigla(String sigla) throws SQLException;
+     boolean add(SigleSpeciali siglaSpeciale);
+    SigleSpeciali findById(int id);
+    List<SigleSpeciali> findAll ();
+    SigleSpeciali findBySigla(String sigla);
 
 }

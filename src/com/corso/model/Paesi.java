@@ -1,11 +1,6 @@
 package com.corso.model;
 
-import com.corso.dao.impl.PaesiDAOimpl;
-import com.sun.istack.NotNull;
-import org.springframework.cglib.proxy.Factory;
-import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
-import java.sql.SQLException;
 
 @Entity(name = "paesi")
 @NamedNativeQueries({
@@ -22,19 +17,18 @@ import java.sql.SQLException;
 
 		@NamedNativeQuery(name = "Paesi.ByCode2",
 				query = "SELECT * FROM paesi WHERE codice2 = :codice2 ",
-				resultClass = Paesi.class) ,
+				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.ByCode3",
 				query = "SELECT * FROM paesi WHERE codice3 = :codice3 ;",
-				resultClass = Paesi.class)
+				resultClass = Paesi.class),
+
+		@NamedNativeQuery(name = "Paesi.ByNome",
+				query = "SELECT * FROM paesi WHERE nome = :nome ;",
+				resultClass = Paesi.class) ,
 })
 
 public class Paesi {
-
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)    // AUTO: genera il valore Hibernate
-//	private Integer id;
-
 
 	@Column(name="nome")
 	//@NotNull
@@ -46,12 +40,6 @@ public class Paesi {
 
 	@Column(name="codice3")
 	private String codice3;
-
-//	@Transactional
-//	static private void initPaese () throws SQLException {
-//		PaesiDAOimpl dao = new PaesiDAOimpl() ;
-//		dao.initPaesi() ;
-//	}
 
 
 	public String getNome() {

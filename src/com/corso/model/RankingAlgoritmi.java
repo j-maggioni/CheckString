@@ -1,7 +1,6 @@
 package com.corso.model;
 
 import javax.persistence.*;
-import javax.persistence.NamedNativeQuery;
 import java.util.Objects;
 
 @Entity(name = "ranking_algoritmi")
@@ -13,12 +12,6 @@ import java.util.Objects;
 				resultClass = RankingAlgoritmi.class),
 		@NamedNativeQuery(name = "RankingAlgoritmi.ActiveAlgorithms",
 				query = "SELECT * FROM ranking_algoritmi WHERE attivo ORDER BY score ASC;",
-				resultClass = RankingAlgoritmi.class),
-		@NamedNativeQuery(name = "RankingAlgoritmi.DisableAlgorithm",
-				query = "UPDATE ranking_algoritmi SET attivo=0 WHERE nome=:nome ;",
-				resultClass = RankingAlgoritmi.class),
-		@NamedNativeQuery(name = "RankingAlgoritmi.ActivateAlgorithm",
-				query = "UPDATE ranking_algoritmi SET attivo=1 WHERE nome=:nome ;",
 				resultClass = RankingAlgoritmi.class)
 })
 
@@ -88,8 +81,8 @@ public class RankingAlgoritmi {
 	}
 
 	public void setScore() {
-		if (this.esatti != 0 && this.totali != 0) {
-			this.score = (double) (this.esatti + this.occorrenze) / (this.totali + this.occorrenze);
+		if (totali != 0 || occorrenze != 0) {
+			score = (double) (esatti + occorrenze) / (totali + occorrenze);
 		} else {
 			this.score = 0;
 		}

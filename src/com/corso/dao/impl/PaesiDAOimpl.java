@@ -2,11 +2,8 @@ package com.corso.dao.impl;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
-import com.corso.model.RankingAlgoritmi;
-import com.corso.model.RicercheRecenti;
-import com.corso.model.SigleSpeciali;
 import org.springframework.transaction.annotation.Transactional;
-import javax.annotation.PostConstruct;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -18,14 +15,9 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
     @PersistenceContext
     EntityManager manager;
 
-//    public EntityManager getManager() {
-//        return manager;
-//    }
-
-
     @Transactional
     @Override
-    public List<Paesi> initPaesi() throws SQLException {
+    public List<Paesi> initPaesi() {
         Query queryinit = manager.createNamedQuery("Paesi.init", Paesi.class);
         List<Paesi> resultList = queryinit.getResultList();
         return resultList;
@@ -40,17 +32,10 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
 
     @Transactional
     @Override
-    public boolean addPaese(Paesi paese) throws SQLException {
+    public boolean addPaese(Paesi paese){
         manager.persist(paese);
         return true ;
     }
-
-//    @Transactional
-//    public Paesi findById(int id) throws SQLException {
-//        Query query  = manager.createNamedQuery("Paesi.ById" , SigleSpeciali.class) ;
-//        query.setParameter("id", id);
-//        return (Paesi) query.getSingleResult();
-//    }
 
     @Override
     @Transactional
@@ -60,21 +45,37 @@ public class PaesiDAOimpl extends BaseDAOimpl implements PaesiDAO {
 
     @Override
     @Transactional
-    public Paesi findByCodice2(String codice2) throws SQLException {
-        Query queryCodivce2 = manager.createNamedQuery("Paesi.ByCode2",Paesi.class) ;
-        queryCodivce2.setParameter("codice2", codice2);
-        if (!queryCodivce2.getResultList().isEmpty()) {
-            Paesi result = (Paesi) queryCodivce2.getResultList().get(0);
+    public Paesi findByCodice2(String codice2) {
+        Query queryCodice2 = manager.createNamedQuery("Paesi.ByCode2",Paesi.class) ;
+        queryCodice2.setParameter("codice2", codice2);
+        if (!queryCodice2.getResultList().isEmpty()) {
+            Paesi result = (Paesi) queryCodice2.getResultList().get(0);
             return manager.find(Paesi.class, result.getCodice2());
         }
-        return null  ; // primo elemento
+        return null;
     }
 
     @Override
     @Transactional
-    public Paesi findByCodice3(String Codice3) throws SQLException {
-        Query queryCodivce3 = manager.createNamedQuery("Paesi.ByCode3",Paesi.class) ;
-        queryCodivce3.setParameter("codice3", Codice3);
-        return (Paesi) queryCodivce3.getSingleResult() ;
+    public Paesi findByCodice3(String codice3){
+        Query queryCodice3 = manager.createNamedQuery("Paesi.ByCode3",Paesi.class) ;
+        queryCodice3.setParameter("codice3", codice3);
+        if (!queryCodice3.getResultList().isEmpty()) {
+            Paesi result = (Paesi) queryCodice3.getResultList().get(0);
+            return manager.find(Paesi.class, result.getCodice3());
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public Paesi findByNome(String nome){
+        Query query = manager.createNamedQuery("Paesi.ByNome",Paesi.class) ;
+        query.setParameter("nome", nome);
+        if (!query.getResultList().isEmpty()) {
+            Paesi result = (Paesi) query.getResultList().get(0);
+            return manager.find(Paesi.class, result.getNome());
+        }
+        return null;
     }
 }

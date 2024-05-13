@@ -3,7 +3,6 @@ package com.corso.service.impl;
 
 import com.corso.dao.PaesiDAO;
 import com.corso.model.Paesi;
-import com.corso.model.RankingAlgoritmi;
 import com.corso.service.PaesiService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,33 +25,34 @@ public class PaesiServiceImpl implements PaesiService {
     }
     @Transactional
     @Override
-    public Paesi findBySigla(String codice)  throws SQLException{
-        int lunghezza = codice.length() ;
-        Paesi p = null ;
-        switch (lunghezza) {
+    public Paesi findBySigla(String codice){
+        switch (codice.length()) {
             case 2 :
-                p = dao.findByCodice2(codice) ;
-                break;
+                return dao.findByCodice2(codice);
             case 3 :
-                p = dao.findByCodice3(codice) ;
-                break;
+                return dao.findByCodice3(codice);
         }
-        return p;
+        return null;
+    }
+    @Transactional
+    @Override
+    public Paesi findByNome(String nome){
+        return dao.findByNome(nome);
     }
 
     @Override
-    public boolean addPaese() throws SQLException {
-        List<Paesi> p = dao.initPaesi();
-        for (Paesi paesi : p) {
-            Paesi paeseFind = dao.findByCodice2(paesi.getCodice2());
+    public boolean addPaese(){
+        List<Paesi> paesi = dao.initPaesi();
+        for (Paesi paese : paesi) {
+            Paesi paeseFind = dao.findByCodice2(paese.getCodice2());
             if(paeseFind == null){
-                dao.addPaese(paeseFind);
+                dao.addPaese(paese);
                 return true;
             } else {
-                if(paesi.getCodice2().equalsIgnoreCase(paeseFind.getCodice2())) {
-                    paeseFind.setNome(paesi.getNome());
-                    paeseFind.setCodice2(paesi.getCodice2());
-                    paeseFind.setCodice3(paesi.getCodice3());
+                if(paese.getCodice2().equalsIgnoreCase(paeseFind.getCodice2())) {
+                    paeseFind.setNome(paese.getNome());
+                    paeseFind.setCodice2(paese.getCodice2());
+                    paeseFind.setCodice3(paese.getCodice3());
                     dao.update(paeseFind);
                     return true;
                 }

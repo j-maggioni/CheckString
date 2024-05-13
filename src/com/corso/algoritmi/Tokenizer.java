@@ -1,4 +1,5 @@
 package com.corso.algoritmi;
+
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -29,6 +30,7 @@ public class Tokenizer {
         }
         return false; // La parola non è esclusa
     }
+
 }
 
 

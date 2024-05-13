@@ -1,6 +1,6 @@
 package com.corso.algoritmi;
- 
-import com.corso.standard.*;
+
+import com.corso.standard.Client;
  
 public class Main {
     

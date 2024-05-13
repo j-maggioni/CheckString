@@ -1,6 +1,9 @@
-package com.corso.algoritmi;
+package com.corso.algoritmi.impl;
 
-public class Soundex extends CheckString {
+import com.corso.algoritmi.CheckString;
+import com.corso.algoritmi.CheckStringImpl;
+
+public class Soundex extends CheckStringImpl {
     
     public static String encode(String word) {
         if (word == null || word.isEmpty()) return "";

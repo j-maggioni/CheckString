@@ -1,6 +1,8 @@
-package com.corso.algoritmi;
+package com.corso.algoritmi.impl;
 
-public class Levenstein extends CheckString {
+import com.corso.algoritmi.CheckStringImpl;
+
+public class Levenstein extends CheckStringImpl {
 	
 	 private int soglia;
 	
@@ -13,7 +15,7 @@ public class Levenstein extends CheckString {
 	 }
 	 
     @Override
-    public boolean check (String input, String standard) {
+    public boolean check(String input, String standard) {
     	        int[][] dp = new int[input.length() + 1][standard.length() + 1];
 
     	        for (int i = 0; i <= input.length(); i++) {

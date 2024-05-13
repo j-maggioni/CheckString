@@ -1,12 +1,5 @@
 package com.corso.algoritmi;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.corso.config.Beans;
 import com.corso.model.RankingAlgoritmi;
 import com.corso.service.RankingAlgoritmiService;
@@ -16,13 +9,22 @@ import com.corso.standard.Standard;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Ranking {
 
+	private static final String ALGORITMI_IMPL_PACKAGE = "com.corso.algoritmi.impl";
 	private static boolean ranking;
 
-	private static ArrayList<String> paesiFromDB;
+	private static ArrayList<String> paesi;
 	private static String[] algoritmiUsati = {"Contained","Contains","Levenstein 1",
-											"Levenstein 2","Levenstein 3","Levenstein 4","Soundex"};
+											"Levenstein 2","Levenstein 3","Levenstein 4","Soundex",
+											"InserimentoManuale", "RicercaDB", "SigleSpecialiDB"};
+	private static String[] algoritmiNonAddestrati = {"InserimentoManuale", "RicercaDB", "SigleSpecialiDB"};
 	private static String[] algoritmiIgnorati = {"InserimentoManuale"};
 
 	private static BeanFactory factory;
@@ -33,62 +35,60 @@ public class Ranking {
 	}
 
 	public static void algorithmRanking() throws Exception {
-		paesiFromDB = new ArrayList<String>();
+		paesi = new ArrayList<String>();
 
-//		PaesiService daoPaesi = factory.getBean("paesiService", PaesiService.class);
-//
-//		for (Paesi p: daoPaesi.all()){
-//			paesiFromDB.add(p.getNome());
-//		}
-
+		//ParoleStandard s = new DBParoleStandard();
 		ParoleStandard s = new LocaleParoleStandard();
+
 		for (Standard p: s.getStandards()){
-			paesiFromDB.add(p.getValue());
+			paesi.add(p.getValue());
 		}
 
-		List<String> l;
-		if (serviceRanking.getAlgoritmiAttivi().isEmpty()){
-            l = new ArrayList<String>(Arrays.asList(algoritmiUsati));
-		} else {
-			l = serviceRanking.getAlgoritmiAttivi().stream().map(RankingAlgoritmi::getNome).collect(Collectors.toList());;
+		activateAll();
+
+		for (String algoritmo: algoritmiUsati()) {
+			insertRow(algoritmo);
 		}
 
-		for (String algoritmo: l) {
-			insertRow(createCheckStringInstance("com.corso.algoritmi."+algoritmo));
-		}
-		RankingAlgoritmi inserimentoManuale = new RankingAlgoritmi("InserimentoManuale",0,0);
-		inserimentoManuale.setAttivo(false);
-		serviceRanking.addAlgoritmo(inserimentoManuale);
 	}
 
-	private static void insertRow(CheckString checkString) throws Exception {
-		int esatti = 0;
-		for (String nomePaese : paesiFromDB) {
-			Esito esito = checkString.check(nomePaese);
-			if (esito.getEsito()) {
-				esatti++;
+	private static void insertRow(String nomeAlgoritmo) throws Exception {
+		RankingAlgoritmi algoritmo;
+		if (!Arrays.asList(algoritmiNonAddestrati).contains(nomeAlgoritmo)) {
+			CheckString checkString = createCheckStringInstance(ALGORITMI_IMPL_PACKAGE +"."+nomeAlgoritmo);
+			int esatti = 0;
+			for (String nomePaese : paesi) {
+				Esito esito = checkString.check(nomePaese);
+				if (esito.getEsito()) {
+					esatti++;
+				}
+			}
+			RankingAlgoritmi algoritmoFind = serviceRanking.findAlgoritmo(nomeAlgoritmo);
+			if(algoritmoFind != null) {
+				algoritmo = algoritmoFind;
+			} else {
+				algoritmo = new RankingAlgoritmi(nomeAlgoritmo, esatti, paesi.size());
+			}
+		} else {
+			RankingAlgoritmi algoritmoFind = serviceRanking.findAlgoritmo(nomeAlgoritmo);
+			if(algoritmoFind != null) {
+				algoritmo = algoritmoFind;
+			} else {
+				algoritmo = new RankingAlgoritmi(nomeAlgoritmo, 0, 0);
+			}
+			if (nomeAlgoritmo.equalsIgnoreCase("InserimentoManuale")){
+				algoritmo.setAttivo(false);
 			}
 		}
-
-		RankingAlgoritmi algoritmo = new RankingAlgoritmi(checkString.getName(),esatti,paesiFromDB.size());
 		serviceRanking.addAlgoritmo(algoritmo);
 	}
 
 	public static CheckString getFirstAlgorithm() throws Exception {
-
+		ranking = false;
 		ArrayList<CheckString> algoritmi = new ArrayList<CheckString>();
-		List<String> l;
-		if (serviceRanking.getAlgoritmiAttivi().isEmpty()){
-			l = new ArrayList<String>(Arrays.asList(algoritmiUsati));
-		} else {
-			l = serviceRanking.getAlgoritmiAttivi().stream().map(RankingAlgoritmi::getNome).collect(Collectors.toList());;
-		}
-
-		for (String algoritmo: l) {
-			if(!Arrays.asList(algoritmiIgnorati).contains(algoritmo)){
-				CheckString c = createCheckStringInstance("com.corso.algoritmi." + algoritmo);
-				algoritmi.add(c);
-			}
+		for (String algoritmo: algoritmiUsati()) {
+			CheckString c = createCheckStringInstance(ALGORITMI_IMPL_PACKAGE +"."+algoritmo);
+			algoritmi.add(c);
 		}
 		
 		for (int i=0; i<algoritmi.size()-1; i++) {
@@ -117,27 +117,21 @@ public class Ranking {
 		return (CheckString) object;
    }
 
-	public static void changeAllActivations() throws Exception {
-		List<String> algoritmi = new ArrayList<>();
-		for(RankingAlgoritmi r: serviceRanking.getAlgoritmi()){
-			algoritmi.add(r.getNome());
-		}
+	public static void activateAll() {
+		List<String> algoritmi = serviceRanking.getAlgoritmi().stream()
+				.map(RankingAlgoritmi::getNome)
+				.collect(Collectors.toList());
 
 		for (String algoritmo: algoritmi){
-			changeAlgorithmActivation(algoritmo);
+			changeAlgorithmActivation(algoritmo, true);
 		}
 	}
 
-	public static void changeAlgorithmActivation(String algoritmo) throws Exception {
-		boolean active = true;
-		if(!Arrays.asList(algoritmiIgnorati).contains(algoritmo)){
-			if(serviceRanking.findAlgoritmo(algoritmo).isAttivo()){// && !ranking){
-				active = false;
-			}
-		} else {
-			active = false;
+	public static void changeAlgorithmActivation(String algoritmo, boolean attivo) {
+		if(Arrays.asList(algoritmiIgnorati).contains(algoritmo)){
+			attivo = false;
 		}
-		serviceRanking.changeAlgorithmActivation(algoritmo, active);
+		serviceRanking.changeAlgorithmActivation(algoritmo, attivo);
 	}
 
 	public static boolean isRanking() {
@@ -146,5 +140,15 @@ public class Ranking {
 
 	public static void setRanking(boolean ranking) {
 		Ranking.ranking = ranking;
+	}
+
+	private static List<String> algoritmiUsati(){
+		if (serviceRanking.getAlgoritmiAttivi().isEmpty() || isRanking()){
+			return Arrays.asList(algoritmiUsati);
+		} else {
+			return serviceRanking.getAlgoritmiAttivi().stream()
+					.map(RankingAlgoritmi::getNome)
+					.collect(Collectors.toList());
+		}
 	}
 }

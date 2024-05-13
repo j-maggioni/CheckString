@@ -1,13 +1,12 @@
 package com.corso.dao.impl;
 
 import com.corso.dao.RicercheRecentiDAO;
-import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 public class RicercheRecentiDAOimpl extends BaseDAOimpl implements RicercheRecentiDAO {

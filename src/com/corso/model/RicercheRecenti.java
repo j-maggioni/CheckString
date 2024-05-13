@@ -1,10 +1,8 @@
 package com.corso.model;
 
-import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity(name = "ricerche_recenti")
 @NamedNativeQueries({
@@ -27,10 +25,9 @@ public class RicercheRecenti {
 	@Column(name="input")
 	private String input;
 
-	//@OneToOne
-	//@JoinColumn (name="standard", referencedColumnName = "nome")
-	@Column(name = "standard")
-	private String standard;
+	@OneToOne
+	@JoinColumn (name="standard", referencedColumnName = "codice2")
+	private Paesi standard;
 
 	@OneToOne
 	@JoinColumn(name="algoritmo", referencedColumnName = "nome")
@@ -42,7 +39,7 @@ public class RicercheRecenti {
 	public RicercheRecenti() {
 	}
 
-	public RicercheRecenti(String input, String standard, RankingAlgoritmi algortimo) {
+	public RicercheRecenti(String input, Paesi standard, RankingAlgoritmi algortimo) {
 		setDataInserimento();
 		this.input = input;
 		this.standard = standard;
@@ -69,11 +66,11 @@ public class RicercheRecenti {
 		return input;
 	}
 
-	public String getStandard() {
+	public Paesi getStandard() {
 		return standard;
 	}
 
-	public void setStandard(String standard) {
+	public void setStandard(Paesi standard) {
 		this.standard = standard;
 	}
 

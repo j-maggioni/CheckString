@@ -1,14 +1,8 @@
 package com.corso.service.impl;
 
-import com.corso.algoritmi.Esito;
 import com.corso.dao.RicercheRecentiDAO;
-import com.corso.dao.SigleSpecialiDAO;
 import com.corso.model.RicercheRecenti;
 import com.corso.service.RicercheRecentiService;
-import com.corso.service.SigleSpecialiService;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class RicercheRecentiServiceImpl implements RicercheRecentiService {
 
@@ -26,7 +20,7 @@ public class RicercheRecentiServiceImpl implements RicercheRecentiService {
         if (existingRicerca == null) { // Se non c'è un record con lo stesso input, aggiungi la nuova riga
             dao.add(ricerca);
         } else {
-            if(!ricerca.getStandard().equalsIgnoreCase(existingRicerca.getStandard())) {
+            if(!ricerca.getStandard().getNome().equalsIgnoreCase(existingRicerca.getStandard().getNome())) {
                 existingRicerca.setStandard(ricerca.getStandard());
                 dao.update(existingRicerca);
             }

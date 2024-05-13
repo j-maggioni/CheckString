@@ -8,7 +8,7 @@ import java.util.List;
 public interface RankingAlgoritmiDAO {
 
     @Transactional
-    public RankingAlgoritmi add(RankingAlgoritmi algoritmo);
+    public void add(RankingAlgoritmi algoritmo);
 
     @Transactional
     public void update(RankingAlgoritmi algoritmo);
@@ -21,10 +21,4 @@ public interface RankingAlgoritmiDAO {
 
     @Transactional
     public List<RankingAlgoritmi> algoritmiAttivi();
-
-    @Transactional
-    public void attivaAlgoritmo(String nome);
-
-    @Transactional
-    public void disattivaAlgoritmo(String nome);
 }

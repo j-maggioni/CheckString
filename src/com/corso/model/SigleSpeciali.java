@@ -1,19 +1,10 @@
 package com.corso.model;
 
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import javax.sql.DataSource;
-import java.util.List;
 
 
-
-// PER RICHIAMARE QUERY IN SigleSpecialiDAOimpl
-// Query query = manager.createNamedQuery("Categoria.CountDescrizione");
-//query.setParameter("nome", "%Nome%" );
-//List<Object[]> results = query.getResultList();
-//return results;
 @Entity
 @Table(name = "sigle_speciali")
 @NamedNativeQueries({
@@ -26,15 +17,13 @@ import java.util.List;
 		@NamedNativeQuery(name = "SigleSpeciali.All",
 				query = "SELECT * FROM sigle_speciali ;",
 				resultClass = SigleSpeciali.class)
-		// SELECT s FROM SigleSpeciali s
 })
 
 public class SigleSpeciali {
 
 
-	//
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "sigla", unique = true)
@@ -57,10 +46,6 @@ public class SigleSpeciali {
 	public Integer getId() {
 		return id;
 	}
-
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
 
 	public String getSigla() {
 		return sigla;

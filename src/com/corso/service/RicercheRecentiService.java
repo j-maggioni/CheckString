@@ -1,7 +1,6 @@
 package com.corso.service;
 
 import com.corso.dao.RicercheRecentiDAO;
-import com.corso.dao.SigleSpecialiDAO;
 import com.corso.model.RicercheRecenti;
 
 public interface RicercheRecentiService {

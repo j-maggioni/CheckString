@@ -16,9 +16,8 @@ public class RankingAlgoritmiDAOimpl extends BaseDAOimpl implements RankingAlgor
 
     @Override
     @Transactional
-    public RankingAlgoritmi add(RankingAlgoritmi algoritmo) {
+    public void add(RankingAlgoritmi algoritmo) {
         manager.persist(algoritmo);
-        return algoritmo;
     }
 
     @Override
@@ -47,22 +46,6 @@ public class RankingAlgoritmiDAOimpl extends BaseDAOimpl implements RankingAlgor
         Query q = manager.createNamedQuery("RankingAlgoritmi.ActiveAlgorithms");
         List<RankingAlgoritmi> algoritmi = q.getResultList();
         return algoritmi;
-    }
-
-    @Override
-    public void attivaAlgoritmo(String nome) {
-        Query q = manager.createNamedQuery("RankingAlgoritmi.ActivateAlgorithm");
-        q.setParameter("nome", nome);
-        List<RankingAlgoritmi> algoritmi = q.getResultList();
-        System.out.println(nome+" attivato");
-    }
-
-    @Override
-    public void disattivaAlgoritmo(String nome) {
-        Query q = manager.createNamedQuery("RankingAlgoritmi.DisableAlgorithm");
-        q.setParameter("nome", nome);
-        List<RankingAlgoritmi> algoritmi = q.getResultList();
-        System.out.println(nome+" disattivato");
     }
 
 }

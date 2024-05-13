@@ -63,13 +63,17 @@ public class RankingAlgoritmiServiceImpl implements RankingAlgoritmiService {
     }
 
     @Override
-    public void changeAlgorithmActivation (String algoritmo, boolean attivo) {
-        if(!algoritmo.isEmpty()){
-            RankingAlgoritmi alg = dao.find(algoritmo);
-            if(alg != null && attivo){
-                dao.attivaAlgoritmo(algoritmo);
-            } else {
-                dao.disattivaAlgoritmo(algoritmo);
+    public void changeAlgorithmActivation (String nomeAlgoritmo, boolean attivo) {
+        if(!nomeAlgoritmo.isEmpty()){
+            RankingAlgoritmi algoritmo = dao.find(nomeAlgoritmo);
+            if (algoritmo != null) {
+                if (attivo && !algoritmo.isAttivo()) {
+                    algoritmo.setAttivo(true);
+                    dao.update(algoritmo);
+                } else if (!attivo && algoritmo.isAttivo()) {
+                    algoritmo.setAttivo(false);
+                    dao.update(algoritmo);
+                }
             }
         }
     }
