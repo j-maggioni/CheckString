@@ -43,5 +43,13 @@ public class ControllerAccesso {
 		return "Accedi";
 	}
 
+	@GetMapping("profilo.html")
+	public String profilo() {
+
+		System.out.println("passaggio dal controller metodo profilo");
+
+		return "profilo";
+	}
+
 
 }
