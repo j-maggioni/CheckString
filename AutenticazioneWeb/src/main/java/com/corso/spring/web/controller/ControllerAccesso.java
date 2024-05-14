@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import javax.validation.Valid;
 
 @Controller
-//@RequestMapping("/zero")
 public class ControllerAccesso {
 	
 //	@RequestMapping(
@@ -34,20 +33,20 @@ public class ControllerAccesso {
 		return "login";
 	}
 
-	@GetMapping("registrati.html")
-	public String registrati() {
+	@GetMapping("registrazione.html")
+	public String registrazione() {
 
-		System.out.println("passaggio dal controller metodo registrati");
+		System.out.println("passaggio dal controller metodo registrazione");
 
-		return "registrati";
+		return "registrazione";
 	}
 
-	@GetMapping("Accedi.html")
+	@GetMapping("home.html")
 	public String accedi() {
 
 		System.out.println("passaggio dal controller metodo accedi");
 
-		return "Accedi";
+		return "home";
 	}
 
 	@GetMapping("profilo.html")
@@ -58,13 +57,13 @@ public class ControllerAccesso {
 		return "profilo";
 	}
 
-	@PostMapping("/profilo")
+	@PostMapping("/registrati")
 	public String add(@ModelAttribute("utente") @Valid FormRegistrazione registrazione, BindingResult bindingResult, Model model) {
 
 		// Verifica se ci sono errori di validazione
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Ci sono errori, ricompila!!");
-			return "profilo";
+			return "registrazione";
 		}
 
 		Utente dto = new Utente();
@@ -79,7 +78,7 @@ public class ControllerAccesso {
 //		System.out.println("creata:" + c);
 //		model.addAttribute("utente", c);
 
-		return "profilo";
+		return "accedi";
 	}
 
 
