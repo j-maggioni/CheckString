@@ -1,4 +1,4 @@
-package com.corso.spring.web;
+package com.corso.spring.web.config;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
