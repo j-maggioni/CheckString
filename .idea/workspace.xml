@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a0d9a9a-0109-4f4b-81e7-d0428bdaa444" name="Changes" comment="Fix caricamento paesi in DB con merge">
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CheckString.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Nazioni.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Nazioni2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/AlgorithmRanking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/CheckString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/ContainedCheckString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/ContainsCheckString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/Esito.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/Levenstein.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/algoritmi/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/DBConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/DBParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/FileParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/ParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/corso/standard/Standard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Nazioni.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Nazioni2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/AlgorithmSigleSpeciali.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/CheckString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/CheckStringImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/Esito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/Ranking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/Tokenizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/Contained.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/Contains.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/InserimentoManuale.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/Levenstein.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/RicercaDB.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/SigleSpecialiDB.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/algoritmi/impl/Soundex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/config/Beans.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/BaseDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/PaesiDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/RankingAlgoritmiDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/RicercheRecentiDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/SigleSpecialiDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/impl/BaseDAOimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/impl/PaesiDAOimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/impl/RankingAlgoritmiDAOimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/impl/RicercheRecentiDAOimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/dao/impl/SigleSpecialiDAOimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/model/Paesi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/model/RankingAlgoritmi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/model/RicercheRecenti.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/model/SigleSpeciali.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/paesiSpecialiAlgo/ManagerRicerca.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/paesiSpecialiAlgo/RicercaFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/paesiSpecialiAlgo/RicercaLocale.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/paesiSpecialiAlgo/RicercaQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/paesiSpecialiAlgo/RichercaPaesiSpeciali.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/PaesiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/RankingAlgoritmiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/RicercheRecentiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/SigleSpecialiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/impl/PaesiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/impl/RankingAlgoritmiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/impl/RicercheRecentiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/service/impl/SigleSpecialiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/DBParoleStandard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/FileParoleStandard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/LocaleParoleStandard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/ParoleStandard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/corso/standard/Standard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/AlgorithmSigleSpeciali.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/CheckString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/CheckStringImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/Esito.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/Ranking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/Tokenizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/Contained.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/Contains.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/InserimentoManuale.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/Levenstein.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/RicercaDB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/SigleSpecialiDB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/algoritmi/impl/Soundex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/config/Beans.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/BaseDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/PaesiDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/RankingAlgoritmiDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/RicercheRecentiDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/SigleSpecialiDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/impl/BaseDAOimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/impl/PaesiDAOimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/impl/RankingAlgoritmiDAOimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/impl/RicercheRecentiDAOimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/dao/impl/SigleSpecialiDAOimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/model/Paesi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/model/RankingAlgoritmi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/model/RicercheRecenti.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/model/SigleSpeciali.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/paesiSpecialiAlgo/RicercaFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/paesiSpecialiAlgo/RicercaLocale.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/paesiSpecialiAlgo/RichercaPaesiSpeciali.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/PaesiService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/RankingAlgoritmiService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/RicercheRecentiService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/SigleSpecialiService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/impl/PaesiServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/impl/RankingAlgoritmiServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/impl/RicercheRecentiServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/service/impl/SigleSpecialiServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/DBParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/FileParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/LocaleParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/ParoleStandard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/corso/standard/Standard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/corso/algoritmi/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/com/corso/algoritmi/Main.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="AlgoritmoEseguito" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;state&quot;: &quot;OPEN&quot;
+    }
+  ],
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/j-maggioni/CheckString.git&quot;,
+    &quot;accountId&quot;: &quot;061f7403-50fe-4f1b-814d-4d91a49cae71&quot;
+  }
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2fuD0ReVpZCVipJUYx94EvbdNDW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Smart Tomcat.Unnamed.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/MAGGIONIJ/eclipse-workspace/CheckString/src/com/corso",
+    "last_opened_file_path": "C:/Users/MAGGIONIJ/eclipse-workspace/CheckString",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.general"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.corso.algoritmi" />
+      <recent name="com.corso.dao.impl" />
+      <recent name="com.corso.dao" />
+      <recent name="com.corso.standard" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.corso.algoritmi.impl" />
+      <recent name="com.corso.algoritmi" />
+      <recent name="com.corso.service.impl" />
+      <recent name="com.corso.service" />
+      <recent name="com.corso.dao" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Smart Tomcat.Unnamed">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.corso.algoritmi.Main" />
+      <module name="CheckString" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.corso.algoritmi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="com.poratu.idea.plugins.tomcat" nameIsGenerated="true">
+      <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
+      <predefined_log_file enabled="true" id="Tomcat Access Log" />
+      <predefined_log_file id="Tomcat Catalina Log" />
+      <predefined_log_file id="Tomcat Manager Log" />
+      <predefined_log_file id="Tomcat Host Manager Log" />
+      <option name="catalinaBase" value="C:\Users\MAGGIONIJ\.SmartTomcat\CheckString\Web01" />
+      <option name="contextPath" value="/Web01" />
+      <option name="docBase" value="$USER_HOME$/Downloads/SpringMVC_Copia/AutenticazioneWeb/src/main/webapp" />
+      <option name="envOptions">
+        <map />
+      </option>
+      <option name="extraClassPath" value="" />
+      <option name="port" value="8081" />
+      <option name="tomcatInfo">
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat/9.0.89" />
+          <option name="path" value="$USER_HOME$/Downloads/apache-tomcat-9.0.89" />
+          <option name="version" value="9.0.89.0" />
+        </TomcatInfo>
+      </option>
+      <option name="vmOptions" value="" />
+      <module name="Web01" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Smart Tomcat.Unnamed" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a0d9a9a-0109-4f4b-81e7-d0428bdaa444" name="Changes" comment="" />
+      <created>1714641845679</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714641845679</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Project refactoring for JPA">
+      <option name="closed" value="true" />
+      <created>1714731586494</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714731586494</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Project refactoring for JPA, new classes">
+      <option name="closed" value="true" />
+      <created>1714731721174</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714731721174</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Password removed from Beans.java">
+      <option name="closed" value="true" />
+      <created>1714732249086</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714732249086</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fix Checkstring, RicercheRecenti, AlgoritmiRanking classes">
+      <option name="closed" value="true" />
+      <created>1715074393655</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715074393656</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix AlgoritmiRanking.java">
+      <option name="closed" value="true" />
+      <created>1715075816378</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715075816378</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix findRicercaRecente">
+      <option name="closed" value="true" />
+      <created>1715083621367</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715083621367</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fix caricamento paesi in DB con merge">
+      <option name="closed" value="true" />
+      <created>1715167040335</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715167040335</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project refactoring for JPA" />
+    <MESSAGE value="Project refactoring for JPA, new classes" />
+    <MESSAGE value="Password removed from Beans.java" />
+    <MESSAGE value="Fix Checkstring, RicercheRecenti, AlgoritmiRanking classes" />
+    <MESSAGE value="Fix AlgoritmiRanking.java" />
+    <MESSAGE value="Fix findRicercaRecente" />
+    <MESSAGE value="Fix caricamento paesi in DB con merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix caricamento paesi in DB con merge" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.hibernate.hql.internal.ast.QuerySyntaxException" package="org.hibernate.hql.internal.ast" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassCastException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/corso/algoritmi/CheckStringImpl.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,30 @@
+
+	body {
+      height: 100%;
+	  width: 100%;
+      margin: 0;
+    }
+
+    .margini {
+	margin-left: 30px;
+	margin-right: 10px;
+	margin-top: 50px;
+	}
+
+	@media (max-width: 800px) {
+	.margini {
+	margin-left: 30px;
+	margin-right: 10px;
+	}
+	}
+
+	.errorMessage {
+		color: red;
+		display: none;
+	}
+
+	h2 {
+		text-align: center;
+		color: #20c997;
+		margin-top: 22% !important;
+	}

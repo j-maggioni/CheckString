@@ -7,11 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Web01" />
-        <module name="CorsoTD" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CheckString" target="9" />
+      <module name="CorsoTD" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
