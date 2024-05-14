@@ -65,7 +65,7 @@ function controlloEmail() {
 function controlloPassword() {
 	psw = document.getElementById('password');
 	pswErrore = document.getElementById('pswErrore');
-	regexPsw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //min 8 caratteri, una lettera e un numero
+	regexPsw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 	Cpsw = document.getElementById('Cpassword');
 	CError = document.getElementById('CpswErrore');
 
