@@ -27,7 +27,7 @@
 	<div class="col-md-8">
 		<label class="form-label">Password</label>
 		<input type="password" class="form-control" id="password" placeholder="Password">
-		<span class="errorMessage" id = "pswErrore">Inserisci una password valida</span>
+		<span class="errorMessage" id = "pswErrore">La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, minuscola, numero e carattere speciale</span>
 	</div>
 	<div class="col-md-8">
 		<label class="form-label">Conferma password</label>
