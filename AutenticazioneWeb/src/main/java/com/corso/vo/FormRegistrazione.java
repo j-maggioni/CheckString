@@ -3,10 +3,10 @@ package com.corso.vo;
 import javax.validation.constraints.*;
 
 public class FormRegistrazione {
-    //@NotBlank(message = "inserisci un nome")
+    @NotNull(message = "inserisci un nome")
     private String nome;
 
-    //@NotBlank(message = "inserisci un cognome")
+    @NotNull(message = "inserisci un cognome")
     private String cognome;
 
     @NotNull
@@ -18,7 +18,7 @@ public class FormRegistrazione {
             message = "Inserisci una password valida")
     private String password;
 
-    //@NotBlank
+    @NotNull
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -26,7 +26,7 @@ public class FormRegistrazione {
         return password.equals(confermaPassword);
     }
 
-    //@NotBlank(message = "inserisci una nazione")
+    @NotNull(message = "inserisci una nazione")
     private String nazione;
 
     @NotNull
