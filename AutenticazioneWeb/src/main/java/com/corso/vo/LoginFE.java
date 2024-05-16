@@ -1,4 +1,4 @@
-package com.corso.spring.web.vo;
+package com.corso.vo;
 
 public class LoginFE {
 

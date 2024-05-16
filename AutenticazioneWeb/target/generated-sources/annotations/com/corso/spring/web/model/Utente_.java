@@ -1,5 +1,7 @@
 package com.corso.spring.web.model;
 
+import com.corso.model.Utente;
+
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;

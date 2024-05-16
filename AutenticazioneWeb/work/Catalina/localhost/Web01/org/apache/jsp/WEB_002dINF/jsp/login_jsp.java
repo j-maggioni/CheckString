@@ -135,7 +135,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("                <div class=\"col-8\">\r\n");
       out.write("                    <button type=\"button\" class=\"btn btn-primary\" onclick=\"location.href = 'home.html'\">Accedi</button>\r\n");
-      out.write("                    <button class=\"btn btn-link\" type=\"button\" id = \"registrati\" onclick=\"location.href = 'registrazione.html'\">Registrati</button>\r\n");
+      out.write("                    <button class=\"btn btn-link\" type=\"button\" id = \"registrati\" onclick=\"location.href = 'formRegistrazione.html'\">Registrati</button>\r\n");
       out.write("                </div>\r\n");
       out.write("            </form>\r\n");
       out.write("        </div>\r\n");

@@ -66,7 +66,7 @@ function controlloPassword() {
 	psw = document.getElementById('password');
 	pswErrore = document.getElementById('pswErrore');
 	regexPsw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-	Cpsw = document.getElementById('Cpassword');
+	Cpsw = document.getElementById('confermaPassword');
 	CError = document.getElementById('CpswErrore');
 
 	psw.addEventListener('input', function() {
@@ -85,9 +85,9 @@ function controlloPassword() {
 	}
 }
 
-function controlloCPassword() {
+function controlloconfermaPassword() {
 	psw = document.getElementById('password');
-	Cpsw = document.getElementById('Cpassword');
+	Cpsw = document.getElementById('confermaPassword');
 	CError = document.getElementById('CpswErrore');
 
 	Cpsw.addEventListener('input', function() {
@@ -107,23 +107,23 @@ function controlloCPassword() {
 
 }
 
-function controlloCity() {
-	city = document.getElementById('city');
-	cityErrore = document.getElementById('cityErrore');
+function controllonazione() {
+	nazione = document.getElementById('nazione');
+	nazioneErrore = document.getElementById('nazioneErrore');
 
-	city.addEventListener('input', function() {
-	  if (city.value !== "") {
-		city.style.borderColor = "";
-		cityErrore.style.display = "none";
+	nazione.addEventListener('input', function() {
+	  if (nazione.value !== "") {
+		nazione.style.borderColor = "";
+		nazioneErrore.style.display = "none";
 	  }
 	});
 
-	if (city.value == "") {
-		city.style.borderColor = "red";
-		cityErrore.style.display = "inline";
+	if (nazione.value == "") {
+		nazione.style.borderColor = "red";
+		nazioneErrore.style.display = "inline";
 		return false;
 	} else {
-		cityErrore.style.display = "none";
+		nazioneErrore.style.display = "none";
 	}
 	return true;
 }
@@ -186,19 +186,24 @@ document.getElementById('registrati').addEventListener('click', function(event) 
 	const nomeValido = controlloNome();
 	const cognomeValido = controlloCognome();
 	const emailValido = controlloEmail();
-	const cityValido = controlloCity();
+	const nazioneValido = controllonazione();
 	const telValido = controlloTelefono();
 	const terminiValido = controlloTermini();
 	const pswValido = controlloPassword();
-	const ripeti = controlloCPassword();
+	const ripeti = controlloconfermaPassword();
 
-	if (nomeValido && cognomeValido && emailValido && cityValido && telValido && terminiValido && pswValido && ripeti) {
-	  document.getElementById('alert').style.display = "inline";
-	  // Nascondi l'alert dopo 3 secondi
-	  setTimeout(function() {
-		document.getElementById('alert').style.display = "none";
-		window.location.href = 'login.html';
-	  }, 1800);
-	}
+	if (nomeValido && cognomeValido && emailValido && nazioneValido && telValido && terminiValido && pswValido && ripeti) {
+        document.getElementById('alert').style.display = "inline";
+
+
+
+        // Nascondi l'alert dopo 3 secondi
+        setTimeout(function() {
+            document.getElementById('alert').style.display = "none";
+            //window.location.href = 'login.html';
+            var form = document.getElementById("formRegistrazione");
+                    form.submit();
+        }, 1800);
+    }
 
 });

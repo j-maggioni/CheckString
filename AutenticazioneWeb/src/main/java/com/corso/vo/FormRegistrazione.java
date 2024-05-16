@@ -1,13 +1,12 @@
-package com.corso.spring.web.vo;
+package com.corso.vo;
 
 import javax.validation.constraints.*;
 
 public class FormRegistrazione {
-
-    @NotBlank(message = "inserisci un nome")
+    //@NotBlank(message = "inserisci un nome")
     private String nome;
 
-    @NotBlank(message = "inserisci un cognome")
+    //@NotBlank(message = "inserisci un cognome")
     private String cognome;
 
     @NotNull
@@ -15,10 +14,11 @@ public class FormRegistrazione {
     private String email;
 
     @NotNull
-    @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/", message = "Inserisci una password valida")
+    @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/",
+            message = "Inserisci una password valida")
     private String password;
 
-    @NotBlank
+    //@NotBlank
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -26,7 +26,7 @@ public class FormRegistrazione {
         return password.equals(confermaPassword);
     }
 
-    @NotBlank(message = "inserisci una nazione")
+    //@NotBlank(message = "inserisci una nazione")
     private String nazione;
 
     @NotNull
@@ -92,7 +92,7 @@ public class FormRegistrazione {
 
     @Override
     public String toString() {
-        return "FormRegistrazione{" +
+        return "FormRegistrazioneFE{" +
                 "nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", email='" + email + '\'' +

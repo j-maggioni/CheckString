@@ -1,14 +1,35 @@
-package com.corso.spring.web.vo;
+package com.corso.model;
 
-public class RegistrazioneFE {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class Utente {
+
+    @Id
+    @Column(unique = true)
     private String email;
+
+    @Column
     private String password;
+
+    @Column
     private String nome;
+
+    @Column
     private String cognome;
+
+    @Column
     private String nazione;
+
+    @Column
     private String telefono;
 
-    public RegistrazioneFE(String email, String password, String nome, String cognome, String nazione, String telefono) {
+    public Utente() {
+
+    }
+
+    public Utente(String email, String password, String nome, String cognome, String nazione, String telefono) {
         this.email = email;
         this.password = password;
         this.nome = nome;
@@ -65,3 +86,4 @@ public class RegistrazioneFE {
         this.telefono = telefono;
     }
 }
+

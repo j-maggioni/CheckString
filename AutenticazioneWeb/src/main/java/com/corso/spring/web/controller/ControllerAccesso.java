@@ -1,31 +1,37 @@
 package com.corso.spring.web.controller;
 
-import com.corso.spring.web.model.Utente;
-import com.corso.spring.web.vo.FormRegistrazione;
+import com.corso.config.Beans1;
+import com.corso.model.Utente;
+import com.corso.service.UtenteService;
+import com.corso.vo.FormRegistrazione;
+import com.corso.vo.RegistrazioneBE;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import javax.jws.WebParam;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ControllerAccesso {
-	
-//	@RequestMapping(
-//			path={"/get.do", "/post.html"},
-//			method= {RequestMethod.GET, RequestMethod.POST}
-//	)
-	@GetMapping(path={"/", "/index.html"})
-	public String home() {
-		
-		System.out.println("passaggio dal controller metodo home"); 
+
+	@Autowired
+	UtenteService utenteService;
+
+	@GetMapping(path={"/", "/index"})
+	public String index() {
+		System.out.println("passaggio dal controller metodo index");
 		
 		return "index";
 	}
 
-	@GetMapping("login.html")
+	@GetMapping(path={"/login", "/login.html"})
 	public String login() {
 
 		System.out.println("passaggio dal controller metodo login");
@@ -33,52 +39,56 @@ public class ControllerAccesso {
 		return "login";
 	}
 
-	@GetMapping("registrazione.html")
-	public String registrazione() {
+	@GetMapping("/home")
+	public String home() {
 
-		System.out.println("passaggio dal controller metodo registrazione");
-
-		return "registrazione";
-	}
-
-	@GetMapping("home.html")
-	public String accedi() {
-
-		System.out.println("passaggio dal controller metodo accedi");
+		System.out.println("passaggio dal controller metodo home");
 
 		return "home";
 	}
 
-	@GetMapping("profilo.html")
-	public String profilo() {
-
+	@GetMapping("/profilo")
+	public String profilo(@RequestParam("email")  @WebParam(name="email")  String email, Model model ) {
 		System.out.println("passaggio dal controller metodo profilo");
+		System.out.println("parametro passato: " + email);
+
+		Utente utente = utenteService.getUtenteByEmail(email);
+
+		model.addAttribute("utente",utente);
 
 		return "profilo";
 	}
 
-	@PostMapping("/registrati")
-	public String add(@ModelAttribute("utente") @Valid FormRegistrazione registrazione, BindingResult bindingResult, Model model) {
+	@GetMapping(path = {"/formRegistrazione"})
+	public String formRegistrazione(Model model) {
 
+		System.out.println("passaggio dal controller metodo registrazione");
+		model.addAttribute("utente", new FormRegistrazione());
+
+		return "formRegistrazione";
+	}
+
+	@PostMapping("/add")
+	public String add(@ModelAttribute("utente") @Valid FormRegistrazione registrazione,
+					  BindingResult bindingResult, Model model) {
 		// Verifica se ci sono errori di validazione
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Ci sono errori, ricompila!!");
-			return "registrazione";
+			return "formRegistrazione";
 		}
 
-		Utente dto = new Utente();
+		RegistrazioneBE rBE = new RegistrazioneBE();
+		BeanUtils.copyProperties(registrazione, rBE);
 
-		org.springframework.beans
-				.BeanUtils.copyProperties(registrazione, dto);
+		System.out.println("dto: " + rBE);
 
-		System.out.println("form:" + registrazione);
-		System.out.println("dto: " + dto);
+		Utente utente = new Utente(rBE.getEmail(), rBE.getPassword(), rBE.getNome(), rBE.getCognome(),
+				rBE.getNazione(), rBE.getTelefono());
 
-//		Utente c = service.creaCategoria(dto);
-//		System.out.println("creata:" + c);
-//		model.addAttribute("utente", c);
+		utenteService.addUtente(utente);
+		model.addAttribute("utente", utente);
 
-		return "accedi";
+		return "login";
 	}
 
 

@@ -132,7 +132,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<div class=\"position-absolute top-50 start-50 translate-middle\">\r\n");
       out.write("	<div class=\"d-grid gap-2\">\r\n");
       out.write("		<button class=\"btn btn-lg custom-btn\" type=\"button\" onclick=\"location.href = 'login.html'\">Accedi</button>\r\n");
-      out.write("		<button class=\"btn btn-lg custom-btn\" type=\"button\" onclick=\"location.href = 'registrazione.html'\">Registrati</button>\r\n");
+      out.write("		<button class=\"btn btn-lg custom-btn\" type=\"button\" onclick=\"location.href = 'formRegistrazione.html'\">Registrati</button>\r\n");
       out.write("	</div>\r\n");
       out.write("</div>\r\n");
       out.write("</body>\r\n");
