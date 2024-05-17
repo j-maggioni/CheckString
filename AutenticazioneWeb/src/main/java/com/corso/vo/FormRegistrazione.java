@@ -30,8 +30,12 @@ public class FormRegistrazione {
     private String nazione;
 
     @NotNull
-    @Pattern(regexp = "^\\+\\d{1,3}\\s?\\d{3,4}\\s?\\d{3,4}$", message = "Inserisci un numero di telefono valido")
+    @Pattern(regexp = "^(\\d{3,4}\\s?){2,3}\\d{3,4}$", message = "Inserisci un numero di telefono valido")
     private String telefono;
+
+    @NotNull
+    @Pattern(regexp = "^(\\+\\d{1,3}\\s?)$", message = "Inserisci un numero di telefono valido")
+    private String prefisso;
 
 
     public String getNome() {
@@ -90,6 +94,14 @@ public class FormRegistrazione {
         this.telefono = telefono;
     }
 
+    public String getPrefisso() {
+        return prefisso;
+    }
+
+    public void setPrefisso(String prefisso) {
+        this.prefisso = prefisso;
+    }
+
     @Override
     public String toString() {
         return "FormRegistrazioneFE{" +
@@ -99,6 +111,7 @@ public class FormRegistrazione {
                 ", password='" + password + '\'' +
                 ", confermaPassword='" + confermaPassword + '\'' +
                 ", nazione='" + nazione + '\'' +
+                ", prefisso='" + prefisso + '\'' +
                 ", telefono='" + telefono + '\'' +
                 '}';
     }
