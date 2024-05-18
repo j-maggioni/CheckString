@@ -27,7 +27,6 @@ public class ControllerAccesso {
 	UtenteService utenteService;
 
 	@GetMapping(path={"/", "/index"})
-	public String index() {
 	public String index(HttpServletRequest httpreq) {
 		System.out.println("passaggio dal controller metodo index");
 		return "index";
@@ -37,6 +36,7 @@ public class ControllerAccesso {
 	public String faiLogout(HttpServletRequest httpreq) {
 		HttpSession session = httpreq.getSession();
 		session.removeAttribute("email");
+		return "index";
 	}
 
 
@@ -78,7 +78,12 @@ public class ControllerAccesso {
 		return "home";
 	}
 
-		Utente utente = utenteService.getUtenteByEmail(email);
+	@GetMapping(value = "/profilo" )
+	public String profilo(HttpServletRequest httpreq ) {
+		HttpSession session = httpreq.getSession();
+		String emailsession = (String) session.getAttribute("email") ;
+		Utente utente = utenteService.getUtenteByEmail(emailsession);
+		httpreq.setAttribute("utente",utente);
 		return "profilo";
 	}
 
