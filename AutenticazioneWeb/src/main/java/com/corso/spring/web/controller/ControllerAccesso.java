@@ -113,7 +113,7 @@ public class ControllerAccesso {
 		System.out.println("dto: " + rBE);
 
 		Utente utente = new Utente(rBE.getEmail(), rBE.getPassword(), rBE.getNome(), rBE.getCognome(),
-				rBE.getNazione(), rBE.getTelefono());
+				rBE.getNazione(), rBE.getPrefisso(), rBE.getTelefono());
 
 		utenteService.addUtente(utente);
 		model.addAttribute("utente", utente);

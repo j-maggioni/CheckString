@@ -81,7 +81,7 @@ function controlloPassword() {
 	} else {
 		psw.style.borderColor = "";
 		pswErrore.style.display = "none";
-		return true;
+    return true;
 	}
 }
 
@@ -202,6 +202,7 @@ document.getElementById('registrati').addEventListener('click', function(event) 
             document.getElementById('alert').style.display = "none";
             //window.location.href = 'login.html';
             var form = document.getElementById("formRegistrazione");
+            document.getElementById("password").value = md5(document.getElementById("password").value);
                     form.submit();
         }, 1800);
     }

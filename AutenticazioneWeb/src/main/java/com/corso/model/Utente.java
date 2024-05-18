@@ -25,17 +25,22 @@ public class Utente {
     @Column
     private String telefono;
 
+    @Column
+    private String prefisso;
+
     public Utente() {
 
     }
 
-    public Utente(String email, String password, String nome, String cognome, String nazione, String telefono) {
+    public Utente(String email, String password, String nome, String cognome, String nazione,
+                  String prefisso, String telefono) {
         this.email = email;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
         this.nazione = nazione;
         this.telefono = telefono;
+        this.prefisso = prefisso;
     }
     public Utente(String email, String password) {
         this.email = email;
@@ -88,6 +93,14 @@ public class Utente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getPrefisso() {
+        return prefisso;
+    }
+
+    public void setPrefisso(String prefisso) {
+        this.prefisso = prefisso;
     }
 }
 

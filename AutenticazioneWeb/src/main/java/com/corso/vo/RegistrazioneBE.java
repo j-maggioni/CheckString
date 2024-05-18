@@ -17,6 +17,8 @@ public class RegistrazioneBE {
 
     private String nazione;
 
+    private String prefisso;
+
     private String telefono;
 
 
@@ -76,6 +78,14 @@ public class RegistrazioneBE {
         this.telefono = telefono;
     }
 
+    public String getPrefisso() {
+        return prefisso;
+    }
+
+    public void setPrefisso(String prefisso) {
+        this.prefisso = prefisso;
+    }
+
     @Override
     public String toString() {
         return "FormRegistrazioneBE{" +
@@ -85,6 +95,7 @@ public class RegistrazioneBE {
                 ", password='" + password + '\'' +
                 ", confermaPassword='" + confermaPassword + '\'' +
                 ", nazione='" + nazione + '\'' +
+                ", prefisso='" + prefisso + '\'' +
                 ", telefono='" + telefono + '\'' +
                 '}';
     }

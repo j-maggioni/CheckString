@@ -14,8 +14,9 @@
         <%@ include file="html/formRegistrazione.html" %>
     </form:form>
 </div>
-<script 
-  src="./resources/js/ControlliLogin.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js">
+</script>
+<script src="./resources/js/ControlliLogin.js">
 </script>
 </body>
 </html>
