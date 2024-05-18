@@ -7,17 +7,18 @@
     </head>
     <body>
         <div class="margini">
-           <form class="row g-3 col-md-10">
+           <form method="POST" action="loginUser" class="row g-3 col-md-10">
                 <div class="col-md-8">
                     <label class="form-label">E-mail</label>
-                    <input type="text" class="form-control" id="email" placeholder="E-mail">
+                    <input type="text" name="email" class="form-control" id="email" placeholder="E-mail">
                 </div>
                 <div class="col-md-8">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="psw" placeholder="Password">
+                    <input type="password" name="password" class="form-control" id="psw" placeholder="Password">
                 </div>
                 <div class="col-8">
-                    <button type="button" class="btn btn-primary" onclick="location.href = 'home'">Accedi</button>
+                    <button type="submit" class="btn btn-primary" >Accedi</button>
+<!--                    <button type="button" class="btn btn-primary" onclick="location.href = 'home'">Accedi</button>-->
                     <button class="btn btn-link" type="button" id = "registrati"
                             onclick="location.href = 'formRegistrazione'">Registrati</button>
                 </div>

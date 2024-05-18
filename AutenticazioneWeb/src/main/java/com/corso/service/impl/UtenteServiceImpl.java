@@ -29,6 +29,19 @@ public class UtenteServiceImpl implements UtenteService {
     }
 
     @Override
+    public boolean Login(String email, String password) {
+        Utente utenteInDB = dao.getByEmail(email) ;
+        if (utenteInDB.getPassword().equals(password)) {
+            System.out.println("Utente trovato in DB : " +utenteInDB.toString());
+            return true ;
+        }
+        else {
+            System.out.println("Utente non trovato in DB : " +utenteInDB.toString());
+            return false ;
+        }
+    }
+
+    @Override
     @Transactional
     public void updateUtente(Utente utente) {
         dao.update(utente);

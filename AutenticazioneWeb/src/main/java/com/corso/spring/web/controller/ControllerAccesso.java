@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,17 +28,46 @@ public class ControllerAccesso {
 
 	@GetMapping(path={"/", "/index"})
 	public String index() {
+	public String index(HttpServletRequest httpreq) {
 		System.out.println("passaggio dal controller metodo index");
-		
 		return "index";
 	}
 
-	@GetMapping(path={"/login", "/login.html"})
-	public String login() {
+	@GetMapping("/Logout")
+	public String faiLogout(HttpServletRequest httpreq) {
+		HttpSession session = httpreq.getSession();
+		session.removeAttribute("email");
+	}
 
-		System.out.println("passaggio dal controller metodo login");
 
+	@PostMapping("/loginUser")
+	public String logingUser(HttpServletRequest httpreq) {
+		// session attributes
+		HttpSession session = httpreq.getSession();
+		//String emailSession = (String) session.getAttribute("email");
+		String emailParam = httpreq.getParameter("email");
+		String passParam = httpreq.getParameter("password");
+		System.out.println("Controller arguments email and password : "+ emailParam + passParam);
+		boolean trovatoInDb =  utenteService.Login(emailParam,passParam) ;
+		if (trovatoInDb) {
+			session.setAttribute("email",emailParam);
+			session.setAttribute("password",passParam);
+			System.out.println("trovato nel db");
+			return "home" ;
+		}
 		return "login";
+	}
+
+	// solo la pagina login
+	@GetMapping(path={"/login", "/login.html"})
+	public String login(HttpServletRequest httpreq) {
+        HttpSession session = httpreq.getSession();
+		String emailsession = (String) session.getAttribute("email");
+		// se è stato gia settato nella session l'attributo email , passa al home subito
+		if (emailsession != null) {
+			return "home" ;
+		}
+		return "login" ;
 	}
 
 	@GetMapping("/home")
@@ -47,30 +78,25 @@ public class ControllerAccesso {
 		return "home";
 	}
 
-	@GetMapping("/profilo")
-	public String profilo(@RequestParam("email")  @WebParam(name="email")  String email, Model model ) {
-		System.out.println("passaggio dal controller metodo profilo");
-		System.out.println("parametro passato: " + email);
-
 		Utente utente = utenteService.getUtenteByEmail(email);
-
-		model.addAttribute("utente",utente);
-
 		return "profilo";
 	}
+
 
 	@GetMapping(path = {"/formRegistrazione"})
 	public String formRegistrazione(Model model) {
 
-		System.out.println("passaggio dal controller metodo registrazione");
 		model.addAttribute("utente", new FormRegistrazione());
 
 		return "formRegistrazione";
+		//return "redirect:/"
 	}
 
 	@PostMapping("/add")
-	public String add(@ModelAttribute("utente") @Valid FormRegistrazione registrazione,
+	public String add(HttpServletRequest httpreq ,@ModelAttribute("utente") @Valid FormRegistrazione registrazione,
 					  BindingResult bindingResult, Model model) {
+		HttpSession session = httpreq.getSession();
+
 		// Verifica se ci sono errori di validazione
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Ci sono errori, ricompila!!");
@@ -79,7 +105,6 @@ public class ControllerAccesso {
 
 		RegistrazioneBE rBE = new RegistrazioneBE();
 		BeanUtils.copyProperties(registrazione, rBE);
-
 		System.out.println("dto: " + rBE);
 
 		Utente utente = new Utente(rBE.getEmail(), rBE.getPassword(), rBE.getNome(), rBE.getCognome(),
@@ -87,7 +112,7 @@ public class ControllerAccesso {
 
 		utenteService.addUtente(utente);
 		model.addAttribute("utente", utente);
-
+		//session.setAttribute("email",utente.getEmail());
 		return "login";
 	}
 

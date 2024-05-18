@@ -37,6 +37,10 @@ public class Utente {
         this.nazione = nazione;
         this.telefono = telefono;
     }
+    public Utente(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;

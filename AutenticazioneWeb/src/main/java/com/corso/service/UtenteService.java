@@ -17,5 +17,8 @@ public interface UtenteService {
     public void addUtente(Utente utente);
 
     @Transactional
+    public boolean Login(String mail , String password) ;
+
+    @Transactional
     public void updateUtente(Utente utente);
 }
