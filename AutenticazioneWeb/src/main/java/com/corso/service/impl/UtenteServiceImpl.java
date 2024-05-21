@@ -43,7 +43,32 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void updateUtente(Utente utente) {
-        dao.update(utente);
+    public boolean updateUtente(Utente utente) {
+        if (!(utente == null)) {
+            Utente utenteVecchio = dao.getByEmail(utente.getEmail());
+            dao.update(utente);
+            boolean utenteAggiornato = utenteVecchio.equals((Utente) dao.getByEmail(utente.getEmail()));
+            if (utenteAggiornato) {
+                return true;
+            } else {
+                System.out.println("Utente con email : " + utente.getEmail() + " non è stato aggiornato correttamente ");
+            }
+        }
+        return false;
     }
+    @Override
+    public boolean delete(Utente utente) {
+        Utente utenteVecchio = dao.getByEmail(utente.getEmail()) ;
+        dao.delete(utente) ;
+        boolean nonEsiste = dao.getByEmail(utente.getEmail()) == null;
+        if (nonEsiste) {
+            System.out.println("utente cancellato");
+            return true ;
+        }
+        else {
+            System.out.println("utente non cancellato , prova di nuovo");
+            return false ;
+        }
+    }
+
 }

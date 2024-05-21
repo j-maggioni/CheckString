@@ -1,6 +1,7 @@
 package com.corso.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -12,6 +13,19 @@ public class Utente {
 
     @Column
     private String password;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Utente utente = (Utente) o;
+        return Objects.equals(email, utente.email) && Objects.equals(password, utente.password) && Objects.equals(nome, utente.nome) && Objects.equals(cognome, utente.cognome) && Objects.equals(nazione, utente.nazione) && Objects.equals(telefono, utente.telefono) && Objects.equals(prefisso, utente.prefisso);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password, nome, cognome, nazione, telefono, prefisso);
+    }
 
     @Column
     private String nome;

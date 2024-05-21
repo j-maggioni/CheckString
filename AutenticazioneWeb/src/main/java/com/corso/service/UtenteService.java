@@ -20,5 +20,8 @@ public interface UtenteService {
     public boolean Login(String mail , String password) ;
 
     @Transactional
-    public void updateUtente(Utente utente);
+    public boolean updateUtente(Utente utente);
+
+    @Transactional
+    public boolean delete(Utente utente) ;
 }
