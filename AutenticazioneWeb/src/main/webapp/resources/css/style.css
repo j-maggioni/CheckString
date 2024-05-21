@@ -82,3 +82,12 @@ h5 {
     box-shadow: 0 0 0 0.2rem #acfcd9 !important;
 }
 
+/*PROGRESS BAR*/
+
+.progress2 {
+    background-color: #acfcd9 !important ;
+}
+
+.p2 {
+    background-color: transparent !important;
+}
