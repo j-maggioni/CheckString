@@ -1,6 +1,6 @@
 <div class="margini">
-    <form class="row g-3 col-md-10">
-        <div class="col-md-8">
+    <div class="row g-3 col-md-12">
+        <div class="col-md-6">
             <h3>Profilo utente</h3>
             <table class="table">
                 <tbody>
@@ -31,12 +31,71 @@
                 </tbody>
             </table>
         </div>
-    </form>
+
+
+
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="w-100 d-flex justify-content-end" style = "margin-right: 300px;">
+                <div>
+                    <h4 style = "margin-left: 15px;">Riepilogo risultati giochi</h4>
+                    <div class="row justify-content-center" style="margin-top: 30px;">
+                        <div class="col-auto btn-spacing">
+                            <button class="btn gioco" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                                Gioco 1
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn gioco" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                                Gioco 2
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn gioco" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                                Gioco 3
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="collapse" id="collapseExample1">
+    <div class="card card-body">
+        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    </div>
+</div>
+<div class="collapse" id="collapseExample2">
+    <div class="card card-body">
+        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    </div>
+</div>
+<div class="collapse" id="collapseExample3">
+    <div class="card card-body">
+        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    </div>
+
+</div>
+
+</div>
+
+<div class="btn-group" style = "margin-left: 70px; margin-top: 30px;">
+    <button type="button" class="btn bottone" id="b" data-toggle="modal" data-target="#myModal" style = "margin-right: 20px">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+        </svg>
+        Modifica</button>
+
     <form method="GET" action="Logout">
-        <button type="submit" class="btn btn-danger"> logout
+        <button type="submit" class="btn esci">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
                 <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
             </svg>
+            Logout
         </button>
+
     </form>
+
 </div>
+
