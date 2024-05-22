@@ -1,35 +1,119 @@
+/* BODY GENERALE */
 
-	body {
-      height: 100%;
-	  width: 100%;
-      margin: 0;
-    }
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
 
+.margini {
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 50px;
+}
+
+@media (max-width: 800px) {
     .margini {
-	margin-left: 30px;
-	margin-right: 10px;
-	margin-top: 50px;
-	}
-
-	@media (max-width: 800px) {
-	.margini {
-	margin-left: 30px;
-	margin-right: 10px;
-	}
-	}
-
-	.errorMessage {
-		color: red;
-		display: none;
-	}
-
-	h2 {
-		text-align: center;
-		color: #20c997;
-		margin-top: 22% !important;
-	}
-	
-	h3 {
-    	margin-bottom: 22px !important;
+        margin-left: 30px;
+        margin-right: 10px;
     }
+}
 
+/*MESSAGGIO DEI CONTROLLI*/
+
+.errorMessage {
+    color: red;
+    display: none;
+}
+
+/*TITOLI*/
+
+h2 {
+    text-align: center;
+    color: #20c997;
+    margin-top: 22% !important;
+}
+
+h3 {
+    margin-left: 30px;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    color: #b084cc !important;
+}
+
+h4 {
+    color: #b084cc !important;
+}
+
+h5 {
+	color: #b084cc !important;
+	font-family: cursive;
+}
+
+/*BOTTONI*/
+
+.esci {
+    background-color: #5dd9c1 !important;
+    color: #fff !important;
+}
+
+.bottone {
+    background-color: #665687 !important;
+    color: #fff !important;
+}
+
+.gioco {
+    background-color: #acfcd9 !important ;
+    color: #190933 !important;
+}
+
+.gioco:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem #665687 !important;
+}
+
+.bottone:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem #b084cc !important;
+}
+
+.esci:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem #acfcd9 !important;
+}
+
+/*CAROUSEL SFONDO*/
+
+.carousel-container {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+}
+
+.carousel-inner img {
+    object-fit: fill;
+    opacity: 0.5;
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/*PROGRESS BAR*/
+
+.progress2 {
+    background-color: #acfcd9 !important ;
+}
+
+.p2 {
+    background-color: transparent !important;
+}

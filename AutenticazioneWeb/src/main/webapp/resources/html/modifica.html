@@ -1,0 +1,71 @@
+
+
+<!-- Modale -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modifica dati utente</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div>
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nomeM" name="nome" placeholder="Nome">
+                    <span class="errorMessage" id = "nomeErroreM">Inserisci un nome</span>
+                </div>
+                <div>
+                    <label class="form-label">Cognome</label>
+                    <input type="text" class="form-control" id="cognomeM" name="cognome" placeholder="Cognome">
+                    <span class="errorMessage" id = "cognomeErroreM">Inserisci un cognome</span>
+                </div>
+                <div>
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordM" name="password" placeholder="Password">
+                    <div class="progress p2">
+                        <div id = "progressM" class="progress-bar progress-bar-striped progress2" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="errorMessage" id = "pswErroreM">La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, minuscola, numero e carattere speciale</span>
+                </div>
+                <div>
+                    <label class="form-label">Conferma password</label>
+                    <input type="password" class="form-control" id="confermaPasswordM" name="confermaPassword" placeholder="Password">
+                    <span class="errorMessage" id = "CpswErroreM">Le password sono diverse</span>
+                </div>
+                <div>
+                    <label class="form-label">Nazione</label>
+                    <input type="text" class="form-control" id="nazioneM" name="nazione" placeholder="Nazione">
+                    <span class="errorMessage" id = "nazioneErroreM">Inserisci una nazione</span>
+                </div>
+                <div>
+                    <label class="form-label">Numero di Telefono</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="prefissoM" name="prefisso" placeholder="Prefisso" value = "+39">
+                        <input type="text" class="form-control" id="telefonoM" name="telefono" placeholder="Numero di telefono">
+                    </div>
+                    <span class="errorMessage" id="telefonoErroreM">Inserisci un numero di telefono valido</span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bottone" id = "salva">Salva</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myModal').on('shown.bs.modal', function () {
+                $(this).trigger('focus');
+            });
+        });
+    </script>
+</div>
