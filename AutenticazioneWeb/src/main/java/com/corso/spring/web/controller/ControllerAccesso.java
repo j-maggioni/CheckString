@@ -26,10 +26,10 @@ public class ControllerAccesso {
 	@Autowired
 	UtenteService utenteService;
 
-	@GetMapping(path={"/", "/index"})
+	@GetMapping(path={"/", "/index", "home.html", "home"})
 	public String index(HttpServletRequest httpreq) {
 		System.out.println("passaggio dal controller metodo index");
-		return "index";
+		return "home";
 	}
 
 	@GetMapping("/Logout")
@@ -59,26 +59,26 @@ public class ControllerAccesso {
 	}
 
 	// solo la pagina login
-	@GetMapping(path={"/login", "/login.html"})
+	/*@GetMapping(path={"/login", "/login.html"})
 	public String login(HttpServletRequest httpreq) {
         HttpSession session = httpreq.getSession();
 		String emailsession = (String) session.getAttribute("email");
 		// se è stato gia settato nella session l'attributo email , passa al home subito
 		if (emailsession != null) {
-			return "home" ;
+			return "home2" ;
 		}
 		return "login" ;
 	}
-
-	@GetMapping("/home")
+*/
+	/*@GetMapping("/home")
 	public String home() {
 
 		System.out.println("passaggio dal controller metodo home");
 
 		return "home";
-	}
+	}*/
 
-	@GetMapping(value = "/profilo" )
+	@GetMapping(path = {"/profilo", "/profilo.html"})
 	public String profilo(HttpServletRequest httpreq ) {
 		HttpSession session = httpreq.getSession();
 		String emailsession = (String) session.getAttribute("email") ;
@@ -88,7 +88,7 @@ public class ControllerAccesso {
 	}
 
 
-	@GetMapping(path = {"/formRegistrazione"})
+	@GetMapping(path = {"/formRegistrazione", "/formRegistrazione.html"})
 	public String formRegistrazione(Model model) {
 
 		model.addAttribute("utente", new FormRegistrazione());

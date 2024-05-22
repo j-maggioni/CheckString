@@ -82,6 +82,32 @@ h5 {
     box-shadow: 0 0 0 0.2rem #acfcd9 !important;
 }
 
+/*CAROUSEL SFONDO*/
+
+.carousel-container {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+}
+
+.carousel-inner img {
+    object-fit: fill;
+    opacity: 0.5;
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 /*PROGRESS BAR*/
 
 .progress2 {
