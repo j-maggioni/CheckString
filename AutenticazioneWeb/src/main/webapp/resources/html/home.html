@@ -1,32 +1,82 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="./resources/css/style.css">
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Includi Leaflet.js tramite una CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
-            data-pause="false" data-interval="4000">
-            <div class="carousel-inner"></div>
-        </div>
+    <style>
+        #map {
+        height: 500px;
+        width: 500px;
+        position: absolute;
+        top: 15%;
+        left: 33%;
+        border-radius: 100% 100% 100% 100%;
+        border: 2px solid #20c997;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+        }
+    </style>
 
-        <div class="overlay text-center">
-            <p class="fs-5">
-                 Benvenuto!<br>
-                 Su questo sito potrai giocare con le bandiere del mondo!<br>
-                 Effettua il login o registrati per poter giocare.
-            </p>
-         </div>
+</head>
+<body>
+<div id="navbar-container"></div>
+<div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
+     data-pause="false" data-interval="4000">
+    <div class="carousel-inner"></div>
+</div>
+
+<div id="map">
+    <p> Benvenuti su PippoAdventures! <br>
+        Il sito più divertente in grado di mettervi alla prova sulla geografia!
+        Vi auguro una buona avventura!
+    </p>
+
+</div>
 
 
-    <script src="${pageContext.request.contextPath}/resources/js/ControlliSfondoHome.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/ControlliNavBar.js"></script>
-         
+<script>
+    var map = L.map('map').setView([14.5995, 120.9842], 4);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Impostazioni per lo zoom
+    var zoomLevel = 4;
+    var zoomIncrement = 2;
+
+    // Aggiungi evento mouseover per ingrandire la mappa
+    map.on('mouseover', function (e) {
+        zoomLevel += zoomIncrement;
+        map.setZoom(zoomLevel);
+    });
+
+    // Aggiungi evento mouseout per ripristinare lo zoom normale
+    map.on('mouseout', function (e) {
+        zoomLevel = 4;
+        map.setZoom(zoomLevel);
+    });
+
+    L.marker([14.5995, 120.9842]).addTo(map)
+        .bindPopup('<b>Gioco 1</b><br>Nazioni');
+
+    L.marker([18.000000, 121.000000]).addTo(map)
+        .bindPopup('<b>Gioco 2</b><br> Bandiere');
+
+    L.marker([10.193000, 119.204560]).addTo(map)
+        .bindPopup('<b>Gioco 3</b><br>Capitali');
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/ControlliSfondoHome.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/ControlliNavBar.js"></script>
 </body>
 </html>
