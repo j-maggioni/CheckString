@@ -1,8 +1,12 @@
 package com.corso.config;
 
+import com.corso.dao.GiocoDAO;
 import com.corso.dao.UtenteDAO;
+import com.corso.dao.impl.GiocoDAOimpl;
 import com.corso.dao.impl.UtenteDAOimpl;
+import com.corso.service.GiocoService;
 import com.corso.service.UtenteService;
+import com.corso.service.impl.GiocoServiceImpl;
 import com.corso.service.impl.UtenteServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,7 +32,7 @@ public class Beans1 {
     private static String dbName = "utenti";
     private static String dburl = "jdbc:mysql://localhost:3306/"+dbName+"?useSSL=false";
     private static String dbuser = "root";
-    private static String dbpass = "Jessy1999";
+    private static String dbpass = "";
 
 	@Bean(name="dataSource")
     public DataSource getDataSource () {
@@ -87,12 +91,25 @@ public class Beans1 {
         return dao;
     }
 
+    @Bean(name="giocoDAO")
+    public GiocoDAO getGiocoDAO(){
+        GiocoDAO dao = new GiocoDAOimpl();
+        return dao;
+    }
+
     /**** sezione Service ****/
 
     @Bean(name="utenteService")
     public UtenteService getUtenteService(){
         UtenteService service = new UtenteServiceImpl();
         service.setDao(getUtenteDAO());
+        return service;
+    }
+
+    @Bean(name="giocoService")
+    public GiocoService getGiocoService(){
+        GiocoService service = new GiocoServiceImpl();
+        service.setDao(getGiocoDAO());
         return service;
     }
 

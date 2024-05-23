@@ -5,35 +5,49 @@ import com.corso.service.UtenteService;
 import com.corso.vo.FormLogin;
 import com.corso.vo.FormUtenteModificato;
 import com.corso.vo.FormRegistrazione;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-public class ControllerUtente {
+public class UtenteController {
 
 	@Autowired
 	UtenteService utenteService;
 
-	@GetMapping(path={"/", "/home.html"})
-	public String home(HttpSession session) {
+	@GetMapping(path={"/"})
+	public String home() {
 		System.out.println("passaggio dal controller metodo home");
 		return "home";
 	}
 
+	@GetMapping(path={"/home"})
+	public String homeLogged(HttpSession session) {
+		System.out.println("passaggio dal controller metodo home");
+
+		Utente utente = (Utente) session.getAttribute("utente");
+		System.out.println(utente);
+		if (utente != null) {
+			//model.addAttribute("utente", utente);
+			return "home";
+		} else {
+			System.out.println("Utente non trovato nella sessione.");
+			return "redirect:/";
+		}
+	}
+
+	// da sistemare
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		System.out.println("passaggio dal controller metodo logout");
 		session.removeAttribute("utente");
 		session.invalidate();
-		return "home";
+		return "login";
 	}
 
 	@GetMapping(path={"/formRegistrazione.html"})
@@ -89,19 +103,18 @@ public class ControllerUtente {
 			return "formLogin";
 		}
 
-		System.out.println("dto: " + login);
-
 		boolean trovatoInDb =  utenteService.login(login.getEmail(),login.getPassword()) ;
 		if (trovatoInDb) {
-			session.removeAttribute("loginUtente");
 
 			Utente utente = utenteService.getUtenteByEmail(login.getEmail());
 			session.setAttribute("utente",utente);
-			model.addAttribute(utente);
+			//model.addAttribute(utente);
 
-			return "home";
+			return "redirect:/home";
+		} else {
+			model.addAttribute("message", "Credenziali errate");
+			return "formLogin";
 		}
-		return "formLogin";
 	}
 
 	@GetMapping(path={"/profilo.html"})
@@ -151,26 +164,6 @@ public class ControllerUtente {
 		}
 	}
 
-	/*@PostMapping("/editProfilo")
-	public String editProfilo (HttpSession session ,@ModelAttribute("utenteModificato") @Valid FormUtenteModificato utenteModificato,
-							   BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("message", "Ci sono errori, ricompila!!");
-			return "profilo";
-		}
-
-		String email = ((Utente) session.getAttribute("utente")).getEmail() ;
-		Utente utente = new Utente(email, utenteModificato.getPassword(), utenteModificato.getNome(),
-				utenteModificato.getCognome(), utenteModificato.getNazione(), utenteModificato.getPrefisso(),
-				utenteModificato.getTelefono());
-
-		utenteService.updateUtente(utente) ;
-		session.setAttribute("utente", utente);
-
-
-
-	}*/
-
 	@PutMapping("/deleteProfilo")
 	public String deleteProfile (HttpSession session) {
 		boolean cancellato = utenteService.delete( (Utente) session.getAttribute("utente")) ;
@@ -181,11 +174,5 @@ public class ControllerUtente {
 			return "profilo" ;
 		}
 	}
-
-
-
-
-
-
 
 }
