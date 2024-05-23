@@ -7,7 +7,7 @@ body {
 }
 
 .margini {
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 10px;
     margin-top: 30px;
 }
@@ -17,6 +17,19 @@ body {
         margin-left: 30px;
         margin-right: 10px;
     }
+}
+
+/* NAVBAR */
+.nav-link {
+    color: #b084cc;
+}
+
+.nav-link: visited {
+    color: #b084cc;
+}
+
+.nav-link:hover {
+    color: #20c997;
 }
 
 /*MESSAGGIO DEI CONTROLLI*/
@@ -35,7 +48,7 @@ h2 {
 }
 
 h3 {
-    margin-left: 40px; !important;
+    margin-left: 35px; !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
     color: #b084cc !important;
@@ -111,6 +124,34 @@ h5 {
     text-align: right;
 }
 
+.btn.close-btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    background-color: #190933;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+.btn.close-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 8px 30px rgba(0, 0, 0, 0.19);
+}
+
+.btn.close-btn:focus {
+    outline: none;
+}
+
+.btn.close-btn svg {
+    fill: #ffffff;
+    width: 24px;
+    height: 24px;
+}
+
+
 
 /*CAROUSEL SFONDO*/
 
@@ -126,17 +167,34 @@ h5 {
     opacity: 0.3;
 }
 
+/*SFONDO BIANCO DELLE COSE*/
+
 .overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 5px;
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        top: 400px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 5px;
+        display: inline-block;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.overlayP {
+    position: absolute;
+        top: 400px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 5px;
+        display: inline-block;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        max-width: 90%; /* Sostituisci con la larghezza massima desiderata */
+        width: 90%; /* Usa una percentuale per rendere il contenitore responsive */
+}
+
 
 /*PROGRESS BAR*/
 
@@ -165,5 +223,31 @@ h5 {
    border-color: #b084cc !important;
 }
 
+/* BORDO VIOLINO DEGLI INPUT */
+input {
+   border: solid 1.5px #b084cc;
+}
+input[type=text]:hover,
+input[type=password]:hover {
+  box-shadow: 0 0 5pt 0.5pt #b084cc;
+}
 
-/*HOME PAGE*/
+input[type=text]:focus,
+input[type=password]:focus {
+  box-shadow: 0 0 5pt 0.5pt #b084cc;
+  border-color: #b084cc;
+  outline: none;
+}
+
+/* MAPPA */
+
+#map {
+        height: 500px;
+        width: 500px;
+        position: absolute;
+        top: 15%;
+        left: 33%;
+        border-radius: 100% 100% 100% 100%;
+        border: 2px solid #20c997;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+}

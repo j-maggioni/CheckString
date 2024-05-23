@@ -7,23 +7,25 @@ import com.corso.model.Utente;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-public interface UtenteService {
+public interface GiocoService {
 
-    public void setDao(UtenteDAO utenteDAO);
-
-    @Transactional
-    public Utente getUtenteByEmail(String email);
+    void setDao(GiocoDAO giocoDAO);
 
     @Transactional
-    public boolean addUtente(Utente utente);
+    void addGiocata(Gioco gioco);
 
     @Transactional
-    public boolean login(String email, String password);
+    List<Gioco> getAll();
 
     @Transactional
-    public boolean updateUtente(Utente utente);
+    List<Gioco> getAllBest();
 
     @Transactional
-    public boolean delete(Utente utente);
+    List<Gioco> getUserAll(String utente);
+
+    @Transactional
+    List<Gioco> getUserAllBest(String utente);
 }
