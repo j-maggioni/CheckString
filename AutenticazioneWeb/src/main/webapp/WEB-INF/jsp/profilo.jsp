@@ -8,10 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilo utente</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./resources/css/style.css">
-    <script src="${pageContext.request.contextPath}/resources/js/ControlliSfondoHome.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/ControlliNavBar.js"></script>
+    <%@ include file="includes.jsp" %>
 </head>
 <body>
     <div id="navbar-container"></div>
@@ -22,7 +19,6 @@
     <div class="overlay">
         <%@include  file="../../resources/html/profilo.html" %>
         <!--%@include  file="../../resources/html/formModificaProfilo.html" %-->
-
         <div class="btn-group" style="margin-left: 70px; margin-top: 30px;">
             <button type="button" class="btn bottone" id="btnModifica" onclick="location.href = 'formModificaProfilo.html'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -31,16 +27,8 @@
                 </svg>
                 Modifica
             </button>
-
-
         </div>
-
     </div>
     <script src="./resources/js/ControlliModificaProfilo.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
-
 </html>
