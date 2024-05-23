@@ -1,0 +1,25 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2, 0, 36, 0.241) 0%, rgba(9,9,121,0.5439425770308124) 13%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+     }
+
+h3 {
+    margin-left: 40px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    color: #000000 !important;
+}
+.bottone {
+    box-shadow:#000000 10px;
+    background-color: #665687 !important;
+    color: #fff !important;
+    cursor: crosshair;
+}
+.bottone:hover {
+    background-color:rgb(152, 134, 189) !important; ;
+    color : #665687 !important;
+}
