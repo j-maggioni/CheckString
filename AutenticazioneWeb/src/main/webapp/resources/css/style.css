@@ -124,6 +124,34 @@ h5 {
     text-align: right;
 }
 
+.btn.close-btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    background-color: #190933;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+.btn.close-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 8px 30px rgba(0, 0, 0, 0.19);
+}
+
+.btn.close-btn:focus {
+    outline: none;
+}
+
+.btn.close-btn svg {
+    fill: #ffffff;
+    width: 24px;
+    height: 24px;
+}
+
+
 
 /*CAROUSEL SFONDO*/
 
@@ -143,15 +171,30 @@ h5 {
 
 .overlay {
     position: absolute;
-    top: 400px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 5px;
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        top: 400px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 5px;
+        display: inline-block;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.overlayP {
+    position: absolute;
+        top: 400px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 5px;
+        display: inline-block;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        max-width: 90%; /* Sostituisci con la larghezza massima desiderata */
+        width: 90%; /* Usa una percentuale per rendere il contenitore responsive */
+}
+
 
 /*PROGRESS BAR*/
 

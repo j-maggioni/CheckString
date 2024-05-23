@@ -2,22 +2,28 @@ function controlloNome() {
 	nome = document.getElementById('nomeM');
 	nomeErrore = document.getElementById('nomeErroreM');
 
-	nome.addEventListener('input', function() {
+/*	nome.addEventListener('input', function() {
 	  if (nome.value !== "") {
 		nome.style.borderColor = "";
 		nomeErrore.style.display = "none";
 	  }
-	});
+	}); */
 
 	if (nome.value == "") {
-	console.log("nome vuoto")
+	//-----------LASCIARE IL NOME DEL DB--------------
+
+	/*console.log("nome vuoto")
 		nome.style.borderColor = "red";
 		nomeErrore.style.display = "inline";
-		return false;
-	} else {
+		return false; */
+
+	}
+
+	/*else {
 	console.log(nome.value)
 		nomeErrore.style.display = "none";
-	}
+	} */
+
 	return true;
 }
 
@@ -25,20 +31,24 @@ function controlloCognome() {
 	cognome = document.getElementById('cognomeM');
 	cognomeErrore = document.getElementById('cognomeErroreM');
 
-	cognome.addEventListener('input', function() {
+/*	cognome.addEventListener('input', function() {
 	  if (cognome.value !== "") {
 		cognome.style.borderColor = "";
 		cognomeErrore.style.display = "none";
 	  }
-	});
+	}); */
 
 	if (cognome.value == "") {
-		cognome.style.borderColor = "red";
+	//-----------LASCIARE IL NOME DEL DB--------------
+
+		/*cognome.style.borderColor = "red";
 		cognomeErrore.style.display = "inline";
-		return false;
-	} else {
-		cognomeErrore.style.display = "none";
+		return false;*/
 	}
+
+	/*else {
+		cognomeErrore.style.display = "none";
+	} */
 	return true;
 }
 
@@ -54,6 +64,7 @@ function controlloPassword() {
 			pswErrore.style.display = "none";
 	});
 
+if (psw.value != "") {
 	if (!regexPsw.test(psw.value)) {
 		psw.style.borderColor = "red";
 		pswErrore.style.display = "inline";
@@ -63,6 +74,9 @@ function controlloPassword() {
 		pswErrore.style.display = "none";
     return true;
 	}
+} else {
+    return true
+}
 }
 
 function controlloconfermaPassword() {
@@ -86,6 +100,7 @@ function controlloconfermaPassword() {
 	}
 }
 
+/*
 function controllonazione() {
 	nazione = document.getElementById('nazioneM');
 	nazioneErrore = document.getElementById('nazioneErroreM');
@@ -105,7 +120,7 @@ function controllonazione() {
 		nazioneErrore.style.display = "none";
 	}
 	return true;
-}
+}*/
 
 function controlloTelefono() {
 	b = true;
@@ -125,6 +140,7 @@ function controlloTelefono() {
 		telErrore.style.display = "none";
 	});
 
+if (tel.value != "") {
   if (!regexTel.test(tel.value)) {
     tel.style.borderColor = "red";
     b = false;
@@ -143,6 +159,7 @@ function controlloTelefono() {
 	telErrore.style.display = "none";
   } else {
 	telErrore.style.display = "inline";
+  }
   }
   return b;
 }
@@ -185,14 +202,14 @@ document.getElementById('passwordM').addEventListener('input', updateProgressBar
 
 document.getElementById('salva').addEventListener('click', function(event) {
 	event.preventDefault();
-	const nomeValido = controlloNome();
-	const cognomeValido = controlloCognome();
-	const nazioneValido = controllonazione();
-	const telValido = controlloTelefono();
-	const pswValido = controlloPassword();
-	const ripeti = controlloconfermaPassword();
+	//const nomeValido = controlloNome();
+	//const cognomeValido = controlloCognome();
+	//const nazioneValido = controllonazione();
+	const telValido = controlloTelefono(); //se non è vuoto controlla
+	const pswValido = controlloPassword(); //se non è vuoto controlla
+	const ripeti = controlloconfermaPassword(); //uguale a prima
 
-	if (nomeValido && cognomeValido && nazioneValido && telValido && pswValido && ripeti) {
+	if (telValido && pswValido && ripeti) {
         document.getElementById('alertModificaDati').style.display = "inline";
         // Nascondi l'alert dopo 3 secondi
         setTimeout(function() {
@@ -201,7 +218,6 @@ document.getElementById('salva').addEventListener('click', function(event) {
             document.getElementById("passwordM").value = md5(document.getElementById("passwordM").value);
             form.submit();
         }, 1800);
-
     }
 
  });

@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <title>Home</title>
         <%@ include file="includes.jsp" %>
+        <%@ include file="navBar.jsp" %>
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         </head>
