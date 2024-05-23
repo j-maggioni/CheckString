@@ -82,6 +82,11 @@ h5 {
     box-shadow: 0 0 0 0.2rem #acfcd9 !important;
 }
 
+.btnContainer {
+    text-align: right;
+}
+
+
 /*CAROUSEL SFONDO*/
 
 .carousel-container {

@@ -14,10 +14,10 @@ public interface UtenteService {
     public Utente getUtenteByEmail(String email);
 
     @Transactional
-    public void addUtente(Utente utente);
+    public boolean addUtente(Utente utente);
 
     @Transactional
-    public boolean Login(String mail , String password) ;
+    public boolean login(String mail , String password) ;
 
     @Transactional
     public boolean updateUtente(Utente utente);

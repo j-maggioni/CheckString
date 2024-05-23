@@ -8,7 +8,7 @@ import java.util.List;
 public interface UtenteDAO {
     public Utente getByEmail(String email);
 
-    public boolean add(Utente utente);
+    public void add(Utente utente);
 
     public void update(Utente utente);
 

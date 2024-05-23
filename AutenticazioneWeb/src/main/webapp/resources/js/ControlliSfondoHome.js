@@ -1,10 +1,9 @@
 // Funzione per ottenere e inserire le immagini dall'API
-function getImagesFromAPI() {
+function getImagesFromLocalJSON() {
     // Effettua la chiamata all'API per ottenere i dati sui paesi
-    fetch('https://restcountries.com/v3.1/all')
+    fetch("./resources/json/all.json")
     .then(response => response.json())
     .then(data => {
-
         data.sort(() => Math.random() - 0.5);
         // Ottieni la div del carousel-inner
         const carouselInner = document.querySelector('.carousel-inner');
@@ -35,8 +34,8 @@ function getImagesFromAPI() {
             }
         });
 })
-.catch(error => console.error('Errore durante il recupero dei dati dei paesi dall\'API:', error));
+.catch(error => console.error('Errore durante il recupero dei dati dal file JSON locale:', error));
 }
 
 // Chiama la funzione per ottenere e inserire le immagini dall'API
-getImagesFromAPI();
+getImagesFromLocalJSON();

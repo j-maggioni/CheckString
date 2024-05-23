@@ -1,6 +1,6 @@
 function controlloNome() {
-	nome = document.getElementById('nomeM');
-	nomeErrore = document.getElementById('nomeErroreM');
+	nome = document.getElementById('nome');
+	nomeErrore = document.getElementById('nomeErrore');
 
 	nome.addEventListener('input', function() {
 	  if (nome.value !== "") {
@@ -10,20 +10,18 @@ function controlloNome() {
 	});
 
 	if (nome.value == "") {
-	console.log("nome vuoto")
 		nome.style.borderColor = "red";
 		nomeErrore.style.display = "inline";
 		return false;
 	} else {
-	console.log(nome.value)
 		nomeErrore.style.display = "none";
 	}
 	return true;
 }
 
 function controlloCognome() {
-	cognome = document.getElementById('cognomeM');
-	cognomeErrore = document.getElementById('cognomeErroreM');
+	cognome = document.getElementById('cognome');
+	cognomeErrore = document.getElementById('cognomeErrore');
 
 	cognome.addEventListener('input', function() {
 	  if (cognome.value !== "") {
@@ -42,12 +40,33 @@ function controlloCognome() {
 	return true;
 }
 
+function controlloEmail() {
+	email = document.getElementById('email');
+	emailErrore = document.getElementById('emailErrore');
+	regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+	email.addEventListener('input', function() {
+			email.style.borderColor = "";
+			emailErrore.style.display = "none";
+	});
+
+	if (!regexEmail.test(email.value)) {
+		email.style.borderColor = "red";
+		emailErrore.style.display = "inline";
+		return false;
+	} else {
+		email.style.borderColor = "";
+		emailErrore.style.display = "none";
+		return true;
+	}
+}
+
 function controlloPassword() {
-	psw = document.getElementById('passwordM');
-	pswErrore = document.getElementById('pswErroreM');
+	psw = document.getElementById('password');
+	pswErrore = document.getElementById('pswErrore');
 	regexPsw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-	Cpsw = document.getElementById('confermaPasswordM');
-	CError = document.getElementById('CpswErroreM');
+	Cpsw = document.getElementById('confermaPassword');
+	CError = document.getElementById('CpswErrore');
 
 	psw.addEventListener('input', function() {
 			psw.style.borderColor = "";
@@ -66,9 +85,9 @@ function controlloPassword() {
 }
 
 function controlloconfermaPassword() {
-	psw = document.getElementById('passwordM');
-	Cpsw = document.getElementById('confermaPasswordM');
-	CError = document.getElementById('CpswErroreM');
+	psw = document.getElementById('password');
+	Cpsw = document.getElementById('confermaPassword');
+	CError = document.getElementById('CpswErrore');
 
 	Cpsw.addEventListener('input', function() {
 			Cpsw.style.borderColor = "";
@@ -87,8 +106,8 @@ function controlloconfermaPassword() {
 }
 
 function controllonazione() {
-	nazione = document.getElementById('nazioneM');
-	nazioneErrore = document.getElementById('nazioneErroreM');
+	nazione = document.getElementById('nazione');
+	nazioneErrore = document.getElementById('nazioneErrore');
 
 	nazione.addEventListener('input', function() {
 	  if (nazione.value !== "") {
@@ -109,9 +128,9 @@ function controllonazione() {
 
 function controlloTelefono() {
 	b = true;
-	pref = document.getElementById('prefissoM')
-	tel = document.getElementById('telefonoM');
-	telErrore = document.getElementById('telefonoErroreM');
+	pref = document.getElementById('prefisso')
+	tel = document.getElementById('telefono');
+	telErrore = document.getElementById('telefonoErrore');
 	regexTel = /^(\d{3,4}\s?){2,3}\d{3,4}$/;
 	regexPref = /^(\+\d{1,3}\s?)/;
 
@@ -147,8 +166,21 @@ function controlloTelefono() {
   return b;
 }
 
+function controlloTermini() {
+	const checkbox = document.getElementById('termini');
+	const c = document.getElementById('terminiErrore');
+
+  	if (checkbox.checked) {
+	  	c.style.display = "none";
+    	return true;
+  	} else {
+	  	c.style.display = "inline";
+    	return false;
+  	}
+}
+
 function updateProgressBar() {
-    const password = document.getElementById('passwordM').value;
+    const password = document.getElementById('password').value;
     let strength = 0;
 
     // Check for uppercase letter
@@ -177,23 +209,35 @@ function updateProgressBar() {
     }
 
     // Update progress bar width
-    const progressBar = document.getElementById('progressM');
+    const progressBar = document.getElementById('progress');
     progressBar.style.width = strength + '%';
 }
 
-document.getElementById('passwordM').addEventListener('input', updateProgressBar);
+document.getElementById('password').addEventListener('input', updateProgressBar);
 
-document.getElementById('salva').addEventListener('click', function(event) {
+document.getElementById('registrati').addEventListener('click', function(event) {
 	event.preventDefault();
 	const nomeValido = controlloNome();
 	const cognomeValido = controlloCognome();
+	const emailValido = controlloEmail();
 	const nazioneValido = controllonazione();
 	const telValido = controlloTelefono();
+	const terminiValido = controlloTermini();
 	const pswValido = controlloPassword();
 	const ripeti = controlloconfermaPassword();
 
-	if (nomeValido && cognomeValido && nazioneValido && telValido && pswValido && ripeti) {
-        console.log("salva");
+	if (nomeValido && cognomeValido && emailValido && nazioneValido && telValido && terminiValido && pswValido && ripeti) {
+        document.getElementById('alert').style.display = "inline";
+
+        // AGGIUNGERE AI CONTROLLI CHE UTENTE NON SIA IN DB
+
+        // Nascondi l'alert dopo 3 secondi
+        setTimeout(function() {
+            document.getElementById('alert').style.display = "none";
+            var form = document.getElementById("formRegistrazione");
+            document.getElementById("password").value = md5(document.getElementById("password").value);
+            form.submit();
+        }, 1800);
     }
 
- });
+});

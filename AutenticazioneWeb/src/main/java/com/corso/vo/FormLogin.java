@@ -1,11 +1,13 @@
 package com.corso.vo;
 
-public class LoginFE {
+public class FormLogin {
 
     private String email;
     private String password;
 
-    public LoginFE(String email, String password) {
+    public FormLogin() {}
+
+    public FormLogin(String email, String password) {
         this.email = email;
         this.password = password;
     }

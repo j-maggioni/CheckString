@@ -11,20 +11,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="home.html">Gioco 1</a>
+                    <a class="nav-link" href="home.html" id="gioco1Btn">Gioco 1</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="home.html">Gioco 2</a>
+                    <a class="nav-link" href="home.html" id="gioco2Btn">Gioco 2</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="home.html">Gioco 3</a>
+                    <a class="nav-link" href="home.html" id="gioco3Btn">Gioco 3</a>
                 </li>
             </ul>
         </div>
         <div class="col">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a id="loginBtn" class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">
+                    <a class="nav-link" href="formLogin.html" id="loginBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
                             <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
@@ -50,38 +50,18 @@
                       Profilo
                   </a>
               </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html" id="logoutBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
+                            <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                        </svg>
+                        Logout
+                    </a>
+                </li>
           </ul>
       </div>
   </div>
 </div>
 
-<!-- Login Modal -->
-<div id="loginModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Login</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="loginUser" class="row g-3 col-md-10">
-                    <div class="col-md-8">
-                        <label class="form-label">E-mail</label>
-                        <input type="text" name="email" class="form-control" id="email" placeholder="E-mail">
-                    </div>
-                    <div class="col-md-8">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="psw" placeholder="Password">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" id="login" onclick="location.href = 'home'">Accedi</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-

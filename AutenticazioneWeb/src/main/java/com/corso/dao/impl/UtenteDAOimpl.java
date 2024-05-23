@@ -14,7 +14,7 @@ public class UtenteDAOimpl implements UtenteDAO {
 
     @Override
     public Utente getByEmail(String email) {
-        System.out.println("Dao , Argument email :  " +email);
+        /*System.out.println("Dao , Argument email :  " +email);
         //Utente utente = (Utente) manager.find(Utente.class,email) ;
         try {
             TypedQuery<Utente> query = manager.createQuery("SELECT u FROM Utente u WHERE u.email = :email",Utente.class) ;
@@ -26,14 +26,16 @@ public class UtenteDAOimpl implements UtenteDAO {
           System.out.println("Error , msg : " +e);
             return new Utente(null,null) ;
 
-        }
+        }*/
+        Utente utente =  manager.find(Utente.class,email);
+        return utente;
     }
 
 
     @Override
-    public boolean add(Utente utente) {
+    public void add(Utente utente) {
         manager.persist(utente);
-        Utente cercaUtente = manager.find(Utente.class,utente.getEmail()) ;
+        /*Utente cercaUtente = manager.find(Utente.class,utente.getEmail()) ;
         if (!(cercaUtente == null)) {
             System.out.println("Utente con email : " +utente.getEmail() + " è stato inserito correttamente nel sistema");
             return  true ;
@@ -41,7 +43,7 @@ public class UtenteDAOimpl implements UtenteDAO {
         else  {
             System.out.println("Utente con email : " +utente.getEmail() + " non è stato inserito correttamente nel sistema");
             return false ;
-        }
+        }*/
     }
 
     @Override

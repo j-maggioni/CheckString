@@ -24,27 +24,43 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void addUtente(Utente utente) {
-        dao.add(utente);
+    public boolean addUtente(Utente utente) {
+        Utente utenteInDB = dao.getByEmail(utente.getEmail());
+        if (utenteInDB == null) {
+            dao.add(utente);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public boolean Login(String email, String password) {
-        Utente utenteInDB = dao.getByEmail(email) ;
+    public boolean login(String email, String password) {
+        Utente utenteInDB = dao.getByEmail(email);
         if (utenteInDB.getPassword().equals(password)) {
             System.out.println("Utente trovato in DB : " +utenteInDB.toString());
-            return true ;
+            return true;
         }
         else {
             System.out.println("Utente non trovato in DB : " +utenteInDB.toString());
-            return false ;
+            return false;
         }
     }
 
     @Override
     @Transactional
     public boolean updateUtente(Utente utente) {
-        if (!(utente == null)) {
+        Utente utenteInDB = dao.getByEmail(utente.getEmail());
+        if (utenteInDB != null && !utenteInDB.equals(utente)) {
+            dao.update(utente);
+            System.out.println(utente);
+            return true;
+        } else {
+            System.out.println("NO UPDATE");
+            return false;
+        }
+
+        /*if (!(utente == null)) {
             Utente utenteVecchio = dao.getByEmail(utente.getEmail());
             dao.update(utente);
             boolean utenteAggiornato = utenteVecchio.equals((Utente) dao.getByEmail(utente.getEmail()));
@@ -54,8 +70,9 @@ public class UtenteServiceImpl implements UtenteService {
                 System.out.println("Utente con email : " + utente.getEmail() + " non è stato aggiornato correttamente ");
             }
         }
-        return false;
+        return false;*/
     }
+
     @Override
     public boolean delete(Utente utente) {
         Utente utenteVecchio = dao.getByEmail(utente.getEmail()) ;

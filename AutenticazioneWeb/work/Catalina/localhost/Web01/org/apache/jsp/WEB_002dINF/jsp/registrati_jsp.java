@@ -171,7 +171,7 @@ public final class registrati_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("	</div>\r\n");
       out.write("	<div class=\"col-8\">\r\n");
       out.write("		<button class=\"btn btn-primary\" type=\"submit\" id = \"registrati\">Registrati</button>\r\n");
-      out.write("		<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href = 'login.html'\">Accedi</button>\r\n");
+      out.write("		<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href = 'formLogin.html'\">Accedi</button>\r\n");
       out.write("	</div>\r\n");
       out.write("\r\n");
       out.write("	<div class=\"alert alert-success d-flex align-items-center\" role=\"alert\" id = \"alert\" style = \"display: none !important\">\r\n");
@@ -182,7 +182,7 @@ public final class registrati_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("		</div>\r\n");
       out.write("</form>\r\n");
       out.write("</div>\r\n");
-      out.write("<script src=\"./resources/js/ControlliLogin.js\"></script>\r\n");
+      out.write("<script src=\"./resources/js/ControlliRegistrazione.js\"></script>\r\n");
       out.write("</body>\r\n");
       out.write("</html>\r\n");
     } catch (java.lang.Throwable t) {
