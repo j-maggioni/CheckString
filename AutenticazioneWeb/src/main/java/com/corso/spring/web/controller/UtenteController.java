@@ -20,25 +20,9 @@ public class UtenteController {
 	@Autowired
 	UtenteService utenteService;
 
-	/*@GetMapping(path={"/"})
-	public String index() {
-		System.out.println("passaggio dal controller metodo home");
-		return "home";
-	}*/
-
 	@GetMapping(path={"/","/home"})
 	public String home(HttpSession session) {
 		System.out.println("passaggio dal controller metodo home");
-
-		/*Utente utente = (Utente) session.getAttribute("utente");
-		System.out.println(utente);
-		if (utente != null) {
-			//model.addAttribute("utente", utente);
-			return "home";
-		} else {
-			System.out.println("Utente non trovato nella sessione.");
-			return "home";
-		}*/
 
 		return "home";
 	}
@@ -157,25 +141,24 @@ public class UtenteController {
 		}
 	}
 
-	// DA SISTEMARE
+
 	@GetMapping("/elimina_utente")
-	public String elimina_utente (HttpSession session) {
-		boolean cancellato = utenteService.delete( (Utente) session.getAttribute("utente")) ;
-		if (cancellato) {
-			return "home" ;
-		}
-		else {
-			return "profilo" ;
-		}
+	public String eliminaUtente(HttpSession session) {
+		Utente utente = (Utente) session.getAttribute("utente");
+		utenteService.delete(utente.getEmail());
+		session.removeAttribute("utente");
+		session.invalidate();
+		return "home";
+
 	}
 
-	// da sistemare
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		System.out.println("passaggio dal controller metodo logout");
 		session.removeAttribute("utente");
 		session.invalidate();
-		return "login";
+		return "home";
 	}
 
 }
