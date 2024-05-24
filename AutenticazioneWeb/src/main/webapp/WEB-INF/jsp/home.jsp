@@ -50,12 +50,17 @@
 
         // Caricamento della texture del mondo
         const textureLoader = new THREE.TextureLoader();
-        const texture = textureLoader.load('./resources/img/bandiera.png');
+        const texture1 = textureLoader.load('./resources/img/1.png');
+        const texture2 = textureLoader.load('./resources/img/2.png');
+        const texture3 = textureLoader.load('./resources/img/3.png');
 
         // Creazione dei segmenti della Terra
-        createSegment(texture, 0, 'indovina_bandiera', 0x5F9EA0, 0.9); // Blu
-        createSegment(texture, 2 * Math.PI / 3, 'indovina_capitale', 0xCD853F, 0.9); // Marrone
-        createSegment(texture, 4 * Math.PI / 3, 'indovina_nazione', 0x32CD32, 0.9); // Verde
+        // Blu (vecchio 0x5F9EA0) (alternativa 0x00BFFF)
+        createSegment(texture1, 0, 'indovina_bandiera', 0xFFFFFF, 0.9); // Bianco
+        // Arancione (vecchio 0xCD853F) (alternativa 0xFFA500)
+        createSegment(texture2, 2 * Math.PI / 3, 'indovina_capitale', 0xFFFFFF, 0.9); // Bianco
+        // Verde (vecchio 0x32CD32) (alternativa 0x00FF00)
+        createSegment(texture3, 4 * Math.PI / 3, 'indovina_nazione', 0xFFFFFF, 0.9); // Bianco
 
         // Creazione del raycaster e del mouse
         raycaster = new THREE.Raycaster();
