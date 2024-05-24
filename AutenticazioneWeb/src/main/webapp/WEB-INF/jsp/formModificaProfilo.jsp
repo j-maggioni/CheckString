@@ -7,9 +7,10 @@
 <html>
     <head>
         <title>Modifica dati utente</title>
+        <%@ include file="includes.jsp" %>
+
     </head>
     <body>
-        <%@ include file="navBar.jsp" %>
         <div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
             data-pause="false" data-interval="4000">
             <div class="carousel-inner"></div>
