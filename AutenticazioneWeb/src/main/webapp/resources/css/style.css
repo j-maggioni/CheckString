@@ -8,10 +8,7 @@ body {
 
 #bgGiochi {
 
-background: rgb(243,242,255);
-background: linear-gradient(90deg, rgba(243,242,255,1) 0%, rgba(79,77,79,0.8800770308123249) 0%, rgba(152,68,155,1) 100%);
-
-   background-repeat: no-repeat;
+background-image: url('../../resources/img/cloud.jpg');
 
 }
 
@@ -87,6 +84,40 @@ font-weight: 600;
     color: #acfcd9 !important;
     margin-top: 20px !important;
 }
+
+.title-container {
+            position: absolute;
+            top: 90px; /* Regola la posizione verticale secondo le necessità */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* Posizionamento sopra il renderer Three.js */
+            background-color: rgba(255, 255, 255, 0.8); /* Cambia l'opacità qui */
+            color: #665687;
+            font-family: cursive;
+            text-align: center;
+            padding: 10px 20px;
+            border: 2px solid #665687;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px #665687, 0 0 20px #665687, 0 0 30px #665687;
+            }
+            to {
+                box-shadow: 0 0 20px #665687, 0 0 30px #665687, 0 0 40px #665687;
+            }
+        }
+        h1 {
+            color:  #665687;
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
 
 /*BOTTONI*/
 
