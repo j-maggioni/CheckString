@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<jsp:include page="navBar.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,7 +9,6 @@
         <%@ include file="includes.jsp" %>
     </head>
     <body>
-        <%@ include file="navBar.jsp" %>
         <div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
             data-pause="false" data-interval="4000">
             <div class="carousel-inner"></div>

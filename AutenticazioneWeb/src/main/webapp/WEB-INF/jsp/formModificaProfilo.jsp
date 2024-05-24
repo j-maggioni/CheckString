@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<jsp:include page="navBar.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Modifica dati utente</title>
-        <%@ include file="includes.jsp" %>
     </head>
     <body>
         <%@ include file="navBar.jsp" %>
@@ -28,7 +30,7 @@
                 <div>Modifica avvenuta con successo</div>
             </div>
             <div class="margini">
-                <form:form method="POST" action="modificaProfilo"
+                <form:form method="POST" action="modifica"
                     modelAttribute="utenteModificato" class="row g-3 col-md-12" id="formModificaProfilo">
                     <%@ include file="../../resources/html/formModificaProfilo.html" %>
                 </form:form>

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import ="com.corso.model.*, java.util.*" %>
-<% Utente utente = (Utente) request.getAttribute("utente");%>
+<% Utente utente = (Utente) session.getAttribute("utente");%>
+<jsp:include page="navBar.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +13,12 @@
     <%@ include file="includes.jsp" %>
 </head>
 <body>
-    <%@ include file="navBar.jsp" %>
     <div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
         data-pause="false" data-interval="4000">
         <div class="carousel-inner"></div>
     </div>
     <div class="overlayP">
-        <%@include  file="../../resources/html/profilo.html" %>
-        <!--%@include  file="../../resources/html/formModificaProfilo.html" %-->
-
-    </div>
+        <%@include  file="../../resources/html/profilo.html" %>    </div>
     <script src="./resources/js/ControlliModificaProfilo.js"></script>
 </body>
 </html>
