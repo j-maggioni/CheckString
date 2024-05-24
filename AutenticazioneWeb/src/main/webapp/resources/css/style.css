@@ -6,6 +6,15 @@ body {
   margin: 0;
 }
 
+#bgGiochi {
+
+background: rgb(243,242,255);
+background: linear-gradient(90deg, rgba(243,242,255,1) 0%, rgba(79,77,79,0.8800770308123249) 0%, rgba(152,68,155,1) 100%);
+
+   background-repeat: no-repeat;
+
+}
+
 .margini {
     margin-left: 20px;
     margin-right: 10px;
@@ -21,7 +30,7 @@ body {
 
 /* NAVBAR */
 .nav-link {
-    color: #b084cc;
+    color: #665687;
 }
 
 .nav-link: visited {
@@ -33,7 +42,8 @@ body {
 }
 
 .container-xxl {
-    background-image: url('cloud.jpg');
+    background-image: url('../../resources/img/cloud.jpg');
+    padding: 10px;
 }
 
 /*MESSAGGIO DEI CONTROLLI*/
@@ -54,7 +64,7 @@ h2 {
 h3 {
     margin-left: 35px; !important;
     margin-top: 10px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 30px !important;
     color: #b084cc !important;
 }
 
@@ -70,7 +80,12 @@ h5 {
 .titoloGioco {
     text-align: center;
     font-family: cursive;
+}
 
+#h3Giochi {
+font-weight: 600;
+    color: #acfcd9 !important;
+    margin-top: 20px !important;
 }
 
 /*BOTTONI*/
@@ -155,6 +170,11 @@ h5 {
     height: 24px;
 }
 
+.bottoneG {
+
+    background-color: #20c997 !important;
+
+}
 
 
 /*CAROUSEL SFONDO*/

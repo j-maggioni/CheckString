@@ -103,41 +103,77 @@ public class UtenteController {
 
 
 	@GetMapping(path={"/modifica_profilo"})
-	public String modificaProfilo(Model model) {
+	public String modificaProfilo(HttpSession session, Model model) {
 		System.out.println("passaggio dal controller metodo formModificaProfilo");
-		model.addAttribute("modificaUtente", new FormUtenteModificato());
+		Utente u = (Utente)session.getAttribute("utente");
+		model.addAttribute("modificaUtente", u);
 
 		return "formModificaProfilo";
 	}
 
-	@PostMapping("/modifica")
-	public String modifica(HttpSession session,
-								  @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato,
-								  BindingResult bindingResult, Model model) {
+	@PostMapping({"/modifica"})
+	public String modificaProfilo(HttpSession session, @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato, BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
-
-		String email = ((Utente)session.getAttribute("utente")).getEmail();
+		Utente u = (Utente)session.getAttribute("utente");
+		String email = u.getEmail();
 		session.removeAttribute("utente");
+		String psw = "";
+		String nome = "";
+		String cognome = "";
+		String nazione = "";
+		String prefisso = "";
+		String tel = "";
+		System.out.println("nostra signora d'europa per Farouk: " + formUtenteModificato.getPassword());
+		if (formUtenteModificato.getPassword().equals("")) {
+			psw = u.getPassword();
+		} else {
+			psw = formUtenteModificato.getPassword();
+		}
 
-		// Verifica se ci sono errori di validazione
+		if (formUtenteModificato.getNome().equals("")) {
+			nome = u.getNome();
+		} else {
+			nome = formUtenteModificato.getNome();
+		}
+
+		if (formUtenteModificato.getCognome().equals("")) {
+			cognome = u.getCognome();
+		} else {
+			cognome = formUtenteModificato.getCognome();
+		}
+
+		if (formUtenteModificato.getNazione().equals("")) {
+			nazione = u.getNazione();
+		} else {
+			nazione = formUtenteModificato.getNazione();
+		}
+
+		if (formUtenteModificato.getPrefisso().equals("")) {
+			prefisso = u.getPrefisso();
+		} else {
+			prefisso = formUtenteModificato.getPrefisso();
+		}
+
+		if (formUtenteModificato.getTelefono().equals("")) {
+			tel = u.getTelefono();
+		} else {
+			tel = formUtenteModificato.getTelefono();
+		}
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Ci sono errori, ricompila!!");
 			return "formModificaProfilo";
-		}
-
-		System.out.println("dto: " + formUtenteModificato);
-
-		Utente utente = new Utente(email,formUtenteModificato.getPassword(), formUtenteModificato.getNome(),
-				formUtenteModificato.getCognome(), formUtenteModificato.getNazione(),
-				formUtenteModificato.getPrefisso(), formUtenteModificato.getTelefono());
-
-		if (utenteService.updateUtente(utente)){
-			session.removeAttribute("modificaUtente");
-			session.setAttribute("utente", utente);
-			model.addAttribute(utente);
-			return "profilo";
 		} else {
-			return "formModificaProfilo";
+			System.out.println("dto: " + formUtenteModificato);
+			Utente utente = new Utente(email, psw, nome, cognome, nazione, prefisso, tel);
+			if (this.utenteService.updateUtente(utente)) {
+				session.removeAttribute("modificaUtente");
+				session.setAttribute("utente", utente);
+				model.addAttribute(utente);
+				return "profilo";
+			} else {
+				return "formModificaProfilo";
+			}
 		}
 	}
 
