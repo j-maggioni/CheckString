@@ -32,6 +32,10 @@ body {
     color: #20c997;
 }
 
+.container-xxl {
+    background-image: url('cloud.jpg');
+}
+
 /*MESSAGGIO DEI CONTROLLI*/
 
 .errorMessage {
