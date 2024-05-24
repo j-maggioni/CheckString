@@ -20,37 +20,30 @@ public class UtenteController {
 	@Autowired
 	UtenteService utenteService;
 
-	@GetMapping(path={"/"})
-	public String home() {
+	/*@GetMapping(path={"/"})
+	public String index() {
 		System.out.println("passaggio dal controller metodo home");
 		return "home";
-	}
+	}*/
 
-	@GetMapping(path={"/home"})
-	public String homeLogged(HttpSession session) {
+	@GetMapping(path={"/","/home"})
+	public String home(HttpSession session) {
 		System.out.println("passaggio dal controller metodo home");
 
-		Utente utente = (Utente) session.getAttribute("utente");
+		/*Utente utente = (Utente) session.getAttribute("utente");
 		System.out.println(utente);
 		if (utente != null) {
 			//model.addAttribute("utente", utente);
 			return "home";
 		} else {
 			System.out.println("Utente non trovato nella sessione.");
-			return "redirect:/";
-		}
+			return "home";
+		}*/
+
+		return "home";
 	}
 
-	// da sistemare
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		System.out.println("passaggio dal controller metodo logout");
-		session.removeAttribute("utente");
-		session.invalidate();
-		return "login";
-	}
-
-	@GetMapping(path={"/formRegistrazione.html"})
+	@GetMapping(path={"/registrazione"})
 	public String formRegistrazione(Model model) {
 		System.out.println("passaggio dal controller metodo formRegistrazione");
 		model.addAttribute("registrazioneUtente", new FormRegistrazione());
@@ -84,16 +77,16 @@ public class UtenteController {
 		}
 	}
 
-	@GetMapping(path={"/formLogin.html"})
-	public String formLogin(Model model) {
+	@GetMapping(path={"/login"})
+	public String login(Model model) {
 		System.out.println("passaggio dal controller metodo formLogin");
 		model.addAttribute("loginUtente", new FormLogin());
 
 		return "formLogin";
 	}
 
-	@PostMapping("/login")
-	public String login(HttpSession session, @ModelAttribute("loginUtente") @Valid FormLogin login,
+	@PostMapping("/accedi")
+	public String accedi(HttpSession session, @ModelAttribute("loginUtente") @Valid FormLogin login,
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
 		session.setMaxInactiveInterval(1000*120) ; // durata timeout
@@ -117,7 +110,7 @@ public class UtenteController {
 		}
 	}
 
-	@GetMapping(path={"/profilo.html"})
+	@GetMapping(path={"/profilo"})
 	public String profilo(HttpSession session, Model model) {
 		Utente userSession = (Utente) session.getAttribute("utente");
 		model.addAttribute(userSession);
@@ -125,16 +118,16 @@ public class UtenteController {
 	}
 
 
-	@GetMapping(path={"/formModificaProfilo.html"})
-	public String formModificaProfilo(Model model) {
+	@GetMapping(path={"/modifica_profilo"})
+	public String modificaProfilo(Model model) {
 		System.out.println("passaggio dal controller metodo formModificaProfilo");
 		model.addAttribute("modificaUtente", new FormUtenteModificato());
 
 		return "formModificaProfilo";
 	}
 
-	@PostMapping("/modificaProfilo")
-	public String modificaProfilo(HttpSession session,
+	@PostMapping("/modifica")
+	public String modifica(HttpSession session,
 								  @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato,
 								  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
@@ -164,8 +157,9 @@ public class UtenteController {
 		}
 	}
 
-	@PutMapping("/deleteProfilo")
-	public String deleteProfile (HttpSession session) {
+	// DA SISTEMARE
+	@GetMapping("/elimina_utente")
+	public String elimina_utente (HttpSession session) {
 		boolean cancellato = utenteService.delete( (Utente) session.getAttribute("utente")) ;
 		if (cancellato) {
 			return "home" ;
@@ -173,6 +167,15 @@ public class UtenteController {
 		else {
 			return "profilo" ;
 		}
+	}
+
+	// da sistemare
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("passaggio dal controller metodo logout");
+		session.removeAttribute("utente");
+		session.invalidate();
+		return "login";
 	}
 
 }
