@@ -1,9 +1,8 @@
 package com.corso.service;
 
 import com.corso.dao.GiocoDAO;
-import com.corso.dao.UtenteDAO;
+import com.corso.enums.GiochiEnum;
 import com.corso.model.Gioco;
-import com.corso.model.Utente;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +17,14 @@ public interface GiocoService {
     void addGiocata(Gioco gioco);
 
     @Transactional
-    List<Gioco> getAll();
+    List<Gioco> getAll(GiochiEnum gioco);
 
     @Transactional
-    List<Gioco> getAllBest();
+    List<Gioco> getAllBest(GiochiEnum gioco);
 
     @Transactional
-    List<Gioco> getUserAll(String utente);
+    List<Gioco> getUserAll(String utente, GiochiEnum gioco);
 
     @Transactional
-    List<Gioco> getUserAllBest(String utente);
+    List<Gioco> getUserAllBest(String utente, GiochiEnum gioco);
 }

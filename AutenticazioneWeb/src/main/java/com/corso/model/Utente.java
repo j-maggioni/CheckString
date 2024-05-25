@@ -1,6 +1,7 @@
 package com.corso.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,9 @@ public class Utente {
 
     @Column
     private String prefisso;
+
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Gioco> giochi;
 
     public Utente() {
 
@@ -114,6 +118,20 @@ public class Utente {
     @Override
     public int hashCode() {
         return Objects.hash(email, password, nome, cognome, nazione, telefono, prefisso);
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", nazione='" + nazione + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", prefisso='" + prefisso + '\'' +
+                ", giochi=" + giochi +
+                '}';
     }
 }
 

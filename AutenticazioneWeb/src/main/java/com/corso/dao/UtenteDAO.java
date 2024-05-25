@@ -3,8 +3,6 @@ package com.corso.dao;
 import com.corso.model.Utente;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 public interface UtenteDAO {
     @Transactional

@@ -1,8 +1,8 @@
 package com.corso.service.impl;
 
 import com.corso.dao.UtenteDAO;
-import com.corso.service.UtenteService;
 import com.corso.model.Utente;
+import com.corso.service.UtenteService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,14 +37,14 @@ public class UtenteServiceImpl implements UtenteService {
     @Transactional
     public boolean login(String email, String password) {
         Utente utenteInDB = dao.getByEmail(email);
-        if (utenteInDB.getPassword().equals(password)) {
-            System.out.println("Utente trovato in DB : " +utenteInDB.toString());
-            return true;
+        if (utenteInDB != null){
+            if (utenteInDB.getPassword().equals(password)) {
+                System.out.println("Utente trovato in DB : " + utenteInDB.toString());
+                return true;
+            }
         }
-        else {
-            System.out.println("Utente non trovato in DB : " +utenteInDB.toString());
-            return false;
-        }
+        System.out.println("Utente non trovato in DB");
+        return false;
     }
 
     @Override

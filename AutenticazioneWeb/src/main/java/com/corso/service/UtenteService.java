@@ -1,8 +1,6 @@
 package com.corso.service;
 
-import com.corso.dao.GiocoDAO;
 import com.corso.dao.UtenteDAO;
-import com.corso.model.Gioco;
 import com.corso.model.Utente;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
