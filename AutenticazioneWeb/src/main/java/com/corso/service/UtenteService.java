@@ -25,5 +25,5 @@ public interface UtenteService {
     public boolean updateUtente(Utente utente);
 
     @Transactional
-    public boolean delete(Utente utente);
+    public void delete(String utente);
 }

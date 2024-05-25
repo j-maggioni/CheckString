@@ -6,6 +6,12 @@ body {
   margin: 0;
 }
 
+#bgGiochi {
+
+background-image: url('../../resources/img/cloud.jpg');
+
+}
+
 .margini {
     margin-left: 20px;
     margin-right: 10px;
@@ -21,7 +27,7 @@ body {
 
 /* NAVBAR */
 .nav-link {
-    color: #b084cc;
+    color: #665687;
 }
 
 .nav-link: visited {
@@ -30,6 +36,11 @@ body {
 
 .nav-link:hover {
     color: #20c997;
+}
+
+.container-xxl {
+    background-image: url('../../resources/img/cloud.jpg');
+    padding: 10px;
 }
 
 /*MESSAGGIO DEI CONTROLLI*/
@@ -50,7 +61,7 @@ h2 {
 h3 {
     margin-left: 35px; !important;
     margin-top: 10px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 30px !important;
     color: #b084cc !important;
 }
 
@@ -66,8 +77,47 @@ h5 {
 .titoloGioco {
     text-align: center;
     font-family: cursive;
-
 }
+
+#h3Giochi {
+font-weight: 600;
+    color: #acfcd9 !important;
+    margin-top: 20px !important;
+}
+
+.title-container {
+            position: absolute;
+            top: 90px; /* Regola la posizione verticale secondo le necessità */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* Posizionamento sopra il renderer Three.js */
+            background-color: rgba(255, 255, 255, 0.8); /* Cambia l'opacità qui */
+            color: #665687;
+            font-family: cursive;
+            text-align: center;
+            padding: 10px 20px;
+            border: 2px solid #665687;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px #665687, 0 0 20px #665687, 0 0 30px #665687;
+            }
+            to {
+                box-shadow: 0 0 20px #665687, 0 0 30px #665687, 0 0 40px #665687;
+            }
+        }
+        h1 {
+            color:  #665687;
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
 
 /*BOTTONI*/
 
@@ -151,6 +201,11 @@ h5 {
     height: 24px;
 }
 
+.bottoneG {
+
+    background-color: #20c997 !important;
+
+}
 
 
 /*CAROUSEL SFONDO*/

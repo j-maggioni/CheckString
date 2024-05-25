@@ -20,37 +20,14 @@ public class UtenteController {
 	@Autowired
 	UtenteService utenteService;
 
-	@GetMapping(path={"/"})
-	public String home() {
+	@GetMapping(path={"/","/home"})
+	public String home(HttpSession session) {
 		System.out.println("passaggio dal controller metodo home");
+
 		return "home";
 	}
 
-	@GetMapping(path={"/home"})
-	public String homeLogged(HttpSession session) {
-		System.out.println("passaggio dal controller metodo home");
-
-		Utente utente = (Utente) session.getAttribute("utente");
-		System.out.println(utente);
-		if (utente != null) {
-			//model.addAttribute("utente", utente);
-			return "home";
-		} else {
-			System.out.println("Utente non trovato nella sessione.");
-			return "redirect:/";
-		}
-	}
-
-	// da sistemare
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		System.out.println("passaggio dal controller metodo logout");
-		session.removeAttribute("utente");
-		session.invalidate();
-		return "login";
-	}
-
-	@GetMapping(path={"/formRegistrazione.html"})
+	@GetMapping(path={"/registrazione"})
 	public String formRegistrazione(Model model) {
 		System.out.println("passaggio dal controller metodo formRegistrazione");
 		model.addAttribute("registrazioneUtente", new FormRegistrazione());
@@ -84,16 +61,16 @@ public class UtenteController {
 		}
 	}
 
-	@GetMapping(path={"/formLogin.html"})
-	public String formLogin(Model model) {
+	@GetMapping(path={"/login"})
+	public String login(Model model) {
 		System.out.println("passaggio dal controller metodo formLogin");
 		model.addAttribute("loginUtente", new FormLogin());
 
 		return "formLogin";
 	}
 
-	@PostMapping("/login")
-	public String login(HttpSession session, @ModelAttribute("loginUtente") @Valid FormLogin login,
+	@PostMapping("/accedi")
+	public String accedi(HttpSession session, @ModelAttribute("loginUtente") @Valid FormLogin login,
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
 		session.setMaxInactiveInterval(1000*120) ; // durata timeout
@@ -117,7 +94,7 @@ public class UtenteController {
 		}
 	}
 
-	@GetMapping(path={"/profilo.html"})
+	@GetMapping(path={"/profilo"})
 	public String profilo(HttpSession session, Model model) {
 		Utente userSession = (Utente) session.getAttribute("utente");
 		model.addAttribute(userSession);
@@ -125,54 +102,99 @@ public class UtenteController {
 	}
 
 
-	@GetMapping(path={"/formModificaProfilo.html"})
-	public String formModificaProfilo(Model model) {
+	@GetMapping(path={"/modifica_profilo"})
+	public String modificaProfilo(HttpSession session, Model model) {
 		System.out.println("passaggio dal controller metodo formModificaProfilo");
-		model.addAttribute("modificaUtente", new FormUtenteModificato());
+		Utente u = (Utente)session.getAttribute("utente");
+		model.addAttribute("modificaUtente", u);
 
 		return "formModificaProfilo";
 	}
 
-	@PostMapping("/modificaProfilo")
-	public String modificaProfilo(HttpSession session,
-								  @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato,
-								  BindingResult bindingResult, Model model) {
+	@PostMapping({"/modifica"})
+	public String modificaProfilo(HttpSession session, @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato, BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
-
-		String email = ((Utente)session.getAttribute("utente")).getEmail();
+		Utente u = (Utente)session.getAttribute("utente");
+		String email = u.getEmail();
 		session.removeAttribute("utente");
+		String psw = "";
+		String nome = "";
+		String cognome = "";
+		String nazione = "";
+		String prefisso = "";
+		String tel = "";
+		System.out.println("nostra signora d'europa per Farouk: " + formUtenteModificato.getPassword());
+		if (formUtenteModificato.getPassword().equals("")) {
+			psw = u.getPassword();
+		} else {
+			psw = formUtenteModificato.getPassword();
+		}
 
-		// Verifica se ci sono errori di validazione
+		if (formUtenteModificato.getNome().equals("")) {
+			nome = u.getNome();
+		} else {
+			nome = formUtenteModificato.getNome();
+		}
+
+		if (formUtenteModificato.getCognome().equals("")) {
+			cognome = u.getCognome();
+		} else {
+			cognome = formUtenteModificato.getCognome();
+		}
+
+		if (formUtenteModificato.getNazione().equals("")) {
+			nazione = u.getNazione();
+		} else {
+			nazione = formUtenteModificato.getNazione();
+		}
+
+		if (formUtenteModificato.getPrefisso().equals("")) {
+			prefisso = u.getPrefisso();
+		} else {
+			prefisso = formUtenteModificato.getPrefisso();
+		}
+
+		if (formUtenteModificato.getTelefono().equals("")) {
+			tel = u.getTelefono();
+		} else {
+			tel = formUtenteModificato.getTelefono();
+		}
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Ci sono errori, ricompila!!");
 			return "formModificaProfilo";
-		}
-
-		System.out.println("dto: " + formUtenteModificato);
-
-		Utente utente = new Utente(email,formUtenteModificato.getPassword(), formUtenteModificato.getNome(),
-				formUtenteModificato.getCognome(), formUtenteModificato.getNazione(),
-				formUtenteModificato.getPrefisso(), formUtenteModificato.getTelefono());
-
-		if (utenteService.updateUtente(utente)){
-			session.removeAttribute("modificaUtente");
-			session.setAttribute("utente", utente);
-			model.addAttribute(utente);
-			return "profilo";
 		} else {
-			return "formModificaProfilo";
+			System.out.println("dto: " + formUtenteModificato);
+			Utente utente = new Utente(email, psw, nome, cognome, nazione, prefisso, tel);
+			if (this.utenteService.updateUtente(utente)) {
+				session.removeAttribute("modificaUtente");
+				session.setAttribute("utente", utente);
+				model.addAttribute(utente);
+				return "profilo";
+			} else {
+				return "formModificaProfilo";
+			}
 		}
 	}
 
-	@PutMapping("/deleteProfilo")
-	public String deleteProfile (HttpSession session) {
-		boolean cancellato = utenteService.delete( (Utente) session.getAttribute("utente")) ;
-		if (cancellato) {
-			return "home" ;
-		}
-		else {
-			return "profilo" ;
-		}
+
+	@GetMapping("/elimina_utente")
+	public String eliminaUtente(HttpSession session) {
+		Utente utente = (Utente) session.getAttribute("utente");
+		utenteService.delete(utente.getEmail());
+		session.removeAttribute("utente");
+		session.invalidate();
+		return "home";
+
+	}
+
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("passaggio dal controller metodo logout");
+		session.removeAttribute("utente");
+		session.invalidate();
+		return "home";
 	}
 
 }

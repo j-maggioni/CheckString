@@ -23,13 +23,25 @@ public class GiocoController {
 	@Autowired
 	GiocoService giocoService;
 
-	/*@GetMapping(path={"/"})
-	public String home() {
-		System.out.println("passaggio dal controller metodo home");
-		return "home";
+	@GetMapping(path={"/indovina_bandiera"})
+	public String gioco1() {
+		System.out.println("passaggio dal controller metodo gioco1");
+		return "gioco1";
 	}
 
-	@GetMapping(path={"/home"})
+	@GetMapping(path={"/indovina_capitale"})
+	public String gioco2() {
+		System.out.println("passaggio dal controller metodo gioco2");
+		return "gioco2";
+	}
+
+	@GetMapping(path={"/indovina_nazione"})
+	public String gioco3() {
+		System.out.println("passaggio dal controller metodo gioco3");
+		return "gioco3";
+	}
+
+	/*@GetMapping(path={"/home"})
 	public String homeLogged(HttpSession session) {
 		System.out.println("passaggio dal controller metodo home");
 
