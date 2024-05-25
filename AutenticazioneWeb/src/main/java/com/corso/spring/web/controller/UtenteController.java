@@ -1,24 +1,37 @@
 package com.corso.spring.web.controller;
 
+import com.corso.converters.ConverterFromGiocoVoToGioco;
+import com.corso.converters.ConverterFromUtenteToUtenteVO;
+import com.corso.enums.GiochiEnum;
+import com.corso.model.Gioco;
 import com.corso.model.Utente;
+import com.corso.service.GiocoService;
 import com.corso.service.UtenteService;
-import com.corso.vo.FormLogin;
-import com.corso.vo.FormUtenteModificato;
-import com.corso.vo.FormRegistrazione;
+import com.corso.vo.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class UtenteController {
 
 	@Autowired
 	UtenteService utenteService;
+
+	@Autowired
+	GiocoService giocoService;
 
 	@GetMapping(path={"/","/home"})
 	public String home(HttpSession session) {
@@ -36,61 +49,82 @@ public class UtenteController {
 	}
 
 	@PostMapping("/add")
-	public String add(HttpSession session, @ModelAttribute("registrazioneUtente") @Valid FormRegistrazione registrazione,
+	public String add(HttpSession session, @ModelAttribute("utente") @Valid FormRegistrazione registrazione,
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo add");
-		// Verifica se ci sono errori di validazione
+
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("message", "Ci sono errori, ricompila!!");
+			//model.addAttribute("message", "Ci sono errori, ricompila!!");
 			return "formRegistrazione";
-		}
-
-		System.out.println("dto: " + registrazione);
-
-		Utente utente = new Utente(registrazione.getEmail(), registrazione.getPassword(),
-				registrazione.getNome(), registrazione.getCognome(), registrazione.getNazione(),
-				registrazione.getPrefisso(), registrazione.getTelefono());
-
-		if (utenteService.addUtente(utente)){
-			session.removeAttribute("registrazioneUtente");
-			session.setAttribute("utente", utente);
-			return "formLogin";
 		} else {
-			// visualizzare che la mail è già presente nel db
-			return "formRegistrazione";
+			System.out.println("dto: " + registrazione);
+
+			Utente utente = new Utente();
+			BeanUtils.copyProperties(registrazione, utente);
+
+			if (utenteService.addUtente(utente)) {
+				//model.addAttribute("utente",utente);
+				return "formLogin";
+			} else {
+				// visualizzare che la mail è già presente nel db
+				//model.addAttribute("message", "errore");
+
+				//bindingResult.rejectValue("email", "error.registrazioneUtente", "Email già associata ad un account");
+
+				return "formRegistrazione";
+			}
 		}
 	}
 
 	@GetMapping(path={"/login"})
 	public String login(Model model) {
 		System.out.println("passaggio dal controller metodo formLogin");
-		model.addAttribute("loginUtente", new FormLogin());
+		model.addAttribute("hasErrors", "none");
+		model.addAttribute("utente", new FormLogin());
 
 		return "formLogin";
 	}
 
 	@PostMapping("/accedi")
-	public String accedi(HttpSession session, @ModelAttribute("loginUtente") @Valid FormLogin login,
+	public String accedi(HttpSession session, @ModelAttribute("utente") @Valid FormLogin login,
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
-		session.setMaxInactiveInterval(1000*120) ; // durata timeout
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("message", "Non è possibile effettuare il login");
+			model.addAttribute("hasErrors", "inline");
+			bindingResult.rejectValue("email", "error.utente",
+					"Accesso non eseguito! Email e/o password errate.");
 			return "formLogin";
-		}
-
-		boolean trovatoInDb =  utenteService.login(login.getEmail(),login.getPassword()) ;
-		if (trovatoInDb) {
-
-			Utente utente = utenteService.getUtenteByEmail(login.getEmail());
-			session.setAttribute("utente",utente);
-			//model.addAttribute(utente);
-
-			return "redirect:/home";
 		} else {
-			model.addAttribute("message", "Credenziali errate");
-			return "formLogin";
+			boolean trovatoInDb =  utenteService.login(login.getEmail(),login.getPassword()) ;
+			if (trovatoInDb) {
+				Utente utente = utenteService.getUtenteByEmail(login.getEmail());
+				/*UtenteVO utenteVO = new UtenteVO();
+
+				BeanUtils.copyProperties(utenteDTO, utenteVO);*/
+
+				UtenteVO utenteVO = ConverterFromUtenteToUtenteVO.convertUtenteToUtenteVO(utente);
+
+				session.setAttribute("utente",utenteVO);
+
+				Date currentDate = new Date();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+				List<GiocoVO> giochi = new ArrayList<GiocoVO>();
+				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaBandiera));
+				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaCapitale));
+				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaNazione));
+
+				session.setAttribute("giochi",giochi);
+
+				session.setMaxInactiveInterval(1000*120); // durata timeout
+				return "home";
+			} else {
+				model.addAttribute("hasErrors", "inline");
+				bindingResult.rejectValue("email", "error.utente",
+						"Accesso non eseguito! Email e/o password errate.");
+				return "formLogin";
+			}
 		}
 	}
 
