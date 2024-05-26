@@ -4,9 +4,9 @@ import com.corso.model.Utente;
 import com.corso.vo.UtenteVO;
 import org.springframework.beans.BeanUtils;
 
-public class ConverterFromUtenteToUtenteVO {
+public class ConverterUtenteToUtenteVO {
 
-    public static UtenteVO convertUtenteToUtenteVO(Utente utente){
+    public static UtenteVO convert(Utente utente){
         UtenteVO utenteVO = new UtenteVO();
         BeanUtils.copyProperties(utente, utenteVO);
         return utenteVO;

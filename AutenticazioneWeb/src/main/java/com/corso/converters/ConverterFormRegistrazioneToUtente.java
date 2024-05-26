@@ -7,7 +7,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class ConverterFormRegistrazioneToUtente {
 
-    public static Utente converterFormRegistrazioneToUtente(FormRegistrazione registrazione){
+    public static Utente convert(FormRegistrazione registrazione){
         Utente utente = new Utente();
         BeanUtils.copyProperties(registrazione, utente);
         utente.setPassword(DigestUtils.md5Hex(utente.getPassword()));

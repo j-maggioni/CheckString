@@ -5,9 +5,9 @@ import com.corso.model.Utente;
 import com.corso.vo.GiocoVO;
 import org.springframework.beans.BeanUtils;
 
-public class ConverterFromGiocoVoToGioco {
+public class ConverterGiocoVOToGioco {
 
-    public static Gioco convertGiocoVoToGioco(GiocoVO giocoVO, Utente utente){
+    public static Gioco convert(GiocoVO giocoVO, Utente utente){
         Gioco gioco = new Gioco();
 
         BeanUtils.copyProperties(giocoVO, gioco);
