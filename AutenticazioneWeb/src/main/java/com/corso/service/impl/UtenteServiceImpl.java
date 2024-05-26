@@ -51,9 +51,15 @@ public class UtenteServiceImpl implements UtenteService {
     @Transactional
     public boolean updateUtente(Utente utente) {
         Utente utenteInDB = dao.getByEmail(utente.getEmail());
-        if (utenteInDB != null && !utenteInDB.equals(utente)) {
-            dao.update(utente);
-            System.out.println(utente);
+        if (utenteInDB != null) {
+            utenteInDB.setNome(utente.getNome());
+            utenteInDB.setCognome(utente.getCognome());
+            utenteInDB.setEmail(utente.getEmail());
+            utenteInDB.setPassword(utente.getPassword());
+            utenteInDB.setNazione(utente.getNazione());
+            utenteInDB.setPrefisso(utente.getPrefisso());
+            utenteInDB.setTelefono(utente.getTelefono());
+            dao.update(utenteInDB);
             return true;
         } else {
             System.out.println("NO UPDATE");
@@ -64,9 +70,8 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void delete(String utente) {
-
-        dao.delete(utente) ;
+    public void delete(String email) {
+        dao.delete(email) ;
     }
 
 }
