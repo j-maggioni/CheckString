@@ -6,15 +6,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class FormUtenteModificato {
-    @NotEmpty(message = "inserisci un nome")
+    @NotEmpty(message = "Inserisci un nome")
     private String nome;
 
-    @NotEmpty(message = "inserisci un cognome")
+    @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
     @NotEmpty
-    @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/",
-            message = "Inserisci una password valida")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale")
     private String password;
 
     @NotEmpty
@@ -25,7 +25,7 @@ public class FormUtenteModificato {
         return password.equals(confermaPassword);
     }
 
-    @NotEmpty(message = "inserisci una nazione")
+    @NotEmpty(message = "Inserisci una nazione")
     private String nazione;
 
     @NotEmpty
@@ -33,7 +33,7 @@ public class FormUtenteModificato {
     private String telefono;
 
     @NotEmpty
-    @Pattern(regexp = "^(\\+\\d{1,3}\\s?)$", message = "Inserisci un numero di telefono valido")
+    @Pattern(regexp = "(\\+\\d{1,3}\\s?)", message = "Inserisci un numero di telefono valido")
     private String prefisso;
 
 
@@ -95,7 +95,7 @@ public class FormUtenteModificato {
 
     @Override
     public String toString() {
-        return "FormRegistrazioneFE{" +
+        return "FormUtenteModificato{" +
                 "nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", password='" + password + '\'' +

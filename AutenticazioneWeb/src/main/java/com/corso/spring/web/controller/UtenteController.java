@@ -1,21 +1,15 @@
 package com.corso.spring.web.controller;
 
-import com.corso.converters.ConverterFormRegistrazioneToUtente;
-import com.corso.converters.ConverterFromGiocoVoToGioco;
-import com.corso.converters.ConverterFromUtenteToUtenteVO;
+import com.corso.converters.*;
 import com.corso.enums.GiochiEnum;
-import com.corso.model.Gioco;
 import com.corso.model.Utente;
 import com.corso.service.GiocoService;
 import com.corso.service.UtenteService;
 import com.corso.vo.*;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class UtenteController {
@@ -72,7 +64,7 @@ public class UtenteController {
 		if (bindingResult.hasErrors()) {
 			return "formRegistrazione";
 		} else {
-			Utente utente = ConverterFormRegistrazioneToUtente.converterFormRegistrazioneToUtente(registrazione);
+			Utente utente = ConverterFormRegistrazioneToUtente.convert(registrazione);
 			System.out.println(utente);
 
 			if (utenteService.addUtente(utente)) {
@@ -115,19 +107,9 @@ public class UtenteController {
 			if (trovatoInDb) {
 				Utente utente = utenteService.getUtenteByEmail(login.getEmail());
 
-				UtenteVO utenteVO = ConverterFromUtenteToUtenteVO.convertUtenteToUtenteVO(utente);
+				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(utente);
 
 				session.setAttribute("utente",utenteVO);
-
-				/*Date currentDate = new Date();
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-				List<GiocoVO> giochi = new ArrayList<GiocoVO>();
-				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaBandiera));
-				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaCapitale));
-				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaNazione));
-
-				session.setAttribute("giochi",giochi);*/
 
 				session.setMaxInactiveInterval(1000*120); // durata timeout
 				return "home";
@@ -142,8 +124,41 @@ public class UtenteController {
 
 	@GetMapping(path={"/profilo"})
 	public String profilo(HttpSession session, Model model) {
-		Utente userSession = (Utente) session.getAttribute("utente");
-		model.addAttribute(userSession);
+		UtenteVO utenteVO = (UtenteVO) session.getAttribute("utente");
+		model.addAttribute("utente",utenteVO);
+
+		// PROVA DEL RIEMPIMENTO DELLA TABELLA DEI PUNTEGGI
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		Map<String,List<GiocoVO>> giochi = new HashMap<>();
+		List<GiocoVO> bandieraList = new ArrayList<>();
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
+//		bandieraList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+//				GiochiEnum.IndovinaBandiera));
+
+		List<GiocoVO> capitaleList = new ArrayList<>();
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
+//		capitaleList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+//				GiochiEnum.IndovinaCapitale));
+
+		List<GiocoVO> nazioneList = new ArrayList<>();
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
+//		nazioneList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+//				GiochiEnum.IndovinaNazione));
+
+		giochi.put(GiochiEnum.IndovinaBandiera.name(), bandieraList);
+		giochi.put(GiochiEnum.IndovinaCapitale.name(), capitaleList);
+		giochi.put(GiochiEnum.IndovinaNazione.name(), nazioneList);
+
+		model.addAttribute("giochi",giochi);
+
 		return "profilo";
 	}
 
@@ -151,13 +166,38 @@ public class UtenteController {
 	@GetMapping(path={"/modifica_profilo"})
 	public String modificaProfilo(HttpSession session, Model model) {
 		System.out.println("passaggio dal controller metodo formModificaProfilo");
-		Utente u = (Utente)session.getAttribute("utente");
-		model.addAttribute("modificaUtente", u);
+		model.addAttribute("editOK", "none");
+		model.addAttribute("utente",
+				ConverterUtenteVOToFormModificaProfilo.convert((UtenteVO) session.getAttribute("utente")));
 
 		return "formModificaProfilo";
 	}
 
 	@PostMapping({"/modifica"})
+	public String modificaProfilo(HttpSession session,
+								  @ModelAttribute("utente") @Valid FormUtenteModificato formUtenteModificato,
+								  BindingResult bindingResult, Model model) {
+		System.out.println("passaggio dal controller metodo modificaProfilo");
+		if (bindingResult.hasErrors()) {
+			//model.addAttribute("editOK", "none");
+			return "formModificaProfilo";
+		} else {
+			String email = ((UtenteVO) session.getAttribute("utente")).getEmail();
+			Utente utente = ConverterFormModificaProfiloToUtente.convert(formUtenteModificato,email);
+			if (utenteService.updateUtente(utente)) {
+				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(utente);
+				model.addAttribute(utenteVO);
+				session.setAttribute("utente", utenteVO);
+				model.addAttribute("editOK", "inline");
+				return "redirect:/profilo";
+			} else {
+				//model.addAttribute("editOK", "none");
+				return "formModificaProfilo";
+			}
+		}
+	}
+
+	/*@PostMapping({"/modifica"})
 	public String modificaProfilo(HttpSession session, @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato, BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
 		Utente u = (Utente)session.getAttribute("utente");
@@ -221,7 +261,7 @@ public class UtenteController {
 				return "formModificaProfilo";
 			}
 		}
-	}
+	}*/
 
 
 	@GetMapping("/elimina_utente")
