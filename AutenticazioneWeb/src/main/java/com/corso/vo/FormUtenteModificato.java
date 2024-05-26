@@ -1,22 +1,23 @@
 package com.corso.vo;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class FormUtenteModificato {
-    @NotNull(message = "inserisci un nome")
+    @NotEmpty(message = "inserisci un nome")
     private String nome;
 
-    @NotNull(message = "inserisci un cognome")
+    @NotEmpty(message = "inserisci un cognome")
     private String cognome;
 
-    @NotNull
+    @NotEmpty
     @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/",
             message = "Inserisci una password valida")
     private String password;
 
-    @NotNull
+    @NotEmpty
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -24,14 +25,14 @@ public class FormUtenteModificato {
         return password.equals(confermaPassword);
     }
 
-    @NotNull(message = "inserisci una nazione")
+    @NotEmpty(message = "inserisci una nazione")
     private String nazione;
 
-    @NotNull
+    @NotEmpty
     @Pattern(regexp = "^(\\d{3,4}\\s?){2,3}\\d{3,4}$", message = "Inserisci un numero di telefono valido")
     private String telefono;
 
-    @NotNull
+    @NotEmpty
     @Pattern(regexp = "^(\\+\\d{1,3}\\s?)$", message = "Inserisci un numero di telefono valido")
     private String prefisso;
 

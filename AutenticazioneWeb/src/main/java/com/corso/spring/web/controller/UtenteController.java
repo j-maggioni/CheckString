@@ -1,5 +1,6 @@
 package com.corso.spring.web.controller;
 
+import com.corso.converters.ConverterFormRegistrazioneToUtente;
 import com.corso.converters.ConverterFromGiocoVoToGioco;
 import com.corso.converters.ConverterFromUtenteToUtenteVO;
 import com.corso.enums.GiochiEnum;
@@ -12,7 +13,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +46,9 @@ public class UtenteController {
 	@GetMapping(path={"/registrazione"})
 	public String formRegistrazione(Model model) {
 		System.out.println("passaggio dal controller metodo formRegistrazione");
-		model.addAttribute("registrazioneUtente", new FormRegistrazione());
+		model.addAttribute("registerOK", "none");
+		model.addAttribute("existingEmail", "none");
+		model.addAttribute("utente", new FormRegistrazione());
 
 		return "formRegistrazione";
 	}
@@ -53,24 +58,28 @@ public class UtenteController {
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo add");
 
+		if (!registrazione.getEmail().isEmpty() && utenteService.getUtenteByEmail(registrazione.getEmail()) != null) {
+			model.addAttribute("registerOK", "none");
+			model.addAttribute("existingEmail", "inline");
+			bindingResult.rejectValue("existingEmailError", "error.utente",
+					"E-mail associata ad un account");
+		}
+		else {
+			model.addAttribute("registerOK", "none");
+			model.addAttribute("existingEmail", "none");
+		}
+
 		if (bindingResult.hasErrors()) {
-			//model.addAttribute("message", "Ci sono errori, ricompila!!");
 			return "formRegistrazione";
 		} else {
-			System.out.println("dto: " + registrazione);
-
-			Utente utente = new Utente();
-			BeanUtils.copyProperties(registrazione, utente);
+			Utente utente = ConverterFormRegistrazioneToUtente.converterFormRegistrazioneToUtente(registrazione);
+			System.out.println(utente);
 
 			if (utenteService.addUtente(utente)) {
-				//model.addAttribute("utente",utente);
-				return "formLogin";
+				model.addAttribute("registerOK", "inline");
+				model.addAttribute("existingEmail", "none");
+				return "redirect:/login";
 			} else {
-				// visualizzare che la mail è già presente nel db
-				//model.addAttribute("message", "errore");
-
-				//bindingResult.rejectValue("email", "error.registrazioneUtente", "Email già associata ad un account");
-
 				return "formRegistrazione";
 			}
 		}
@@ -90,24 +99,27 @@ public class UtenteController {
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
 
+		if (login.getEmail().isEmpty() && login.getPassword().isEmpty()) {
+			model.addAttribute("path", "globalError");
+			bindingResult.rejectValue("globalError", "error.utente",
+					"Accesso non eseguito! Inserisci delle credenziali valide.");
+		} else {
+			model.addAttribute("path", "*");
+		}
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("hasErrors", "inline");
-			bindingResult.rejectValue("email", "error.utente",
-					"Accesso non eseguito! Email e/o password errate.");
 			return "formLogin";
 		} else {
 			boolean trovatoInDb =  utenteService.login(login.getEmail(),login.getPassword()) ;
 			if (trovatoInDb) {
 				Utente utente = utenteService.getUtenteByEmail(login.getEmail());
-				/*UtenteVO utenteVO = new UtenteVO();
-
-				BeanUtils.copyProperties(utenteDTO, utenteVO);*/
 
 				UtenteVO utenteVO = ConverterFromUtenteToUtenteVO.convertUtenteToUtenteVO(utente);
 
 				session.setAttribute("utente",utenteVO);
 
-				Date currentDate = new Date();
+				/*Date currentDate = new Date();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 				List<GiocoVO> giochi = new ArrayList<GiocoVO>();
@@ -115,13 +127,13 @@ public class UtenteController {
 				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaCapitale));
 				giochi.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.IndovinaNazione));
 
-				session.setAttribute("giochi",giochi);
+				session.setAttribute("giochi",giochi);*/
 
 				session.setMaxInactiveInterval(1000*120); // durata timeout
 				return "home";
 			} else {
 				model.addAttribute("hasErrors", "inline");
-				bindingResult.rejectValue("email", "error.utente",
+				bindingResult.reject("globalError",
 						"Accesso non eseguito! Email e/o password errate.");
 				return "formLogin";
 			}

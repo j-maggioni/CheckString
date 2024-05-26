@@ -9,5 +9,3 @@
         <%@include  file="../../resources/html/navBarNotLogged.html" %>
     <%}
 %>
-${utente}
-${giochi}

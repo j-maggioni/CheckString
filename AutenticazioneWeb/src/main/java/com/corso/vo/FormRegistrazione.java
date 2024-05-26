@@ -1,24 +1,27 @@
 package com.corso.vo;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class FormRegistrazione {
-    @NotNull(message = "inserisci un nome")
+    @NotEmpty(message = "Inserisci un nome")
     private String nome;
 
-    @NotNull(message = "inserisci un cognome")
+    @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
-    @NotNull
-    @Pattern(regexp = "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/", message = "Inserisci una e-mail valida")
+    @NotEmpty
+    @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", message = "Inserisci una e-mail valida")
     private String email;
 
-    @NotNull
-    @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/",
-            message = "Inserisci una password valida")
+    @NotEmpty
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, "+
+                    "minuscola, numero e carattere speciale")
     private String password;
 
-    @NotNull
+    @NotEmpty
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -26,17 +29,21 @@ public class FormRegistrazione {
         return password.equals(confermaPassword);
     }
 
-    @NotNull(message = "inserisci una nazione")
+    @NotEmpty(message = "Inserisci una nazione")
     private String nazione;
 
-    @NotNull
+    @NotEmpty
     @Pattern(regexp = "^(\\d{3,4}\\s?){2,3}\\d{3,4}$", message = "Inserisci un numero di telefono valido")
     private String telefono;
 
-    @NotNull
-    @Pattern(regexp = "^(\\+\\d{1,3}\\s?)$", message = "Inserisci un numero di telefono valido")
+    @NotEmpty
+    @Pattern(regexp = "(\\+\\d{1,3}\\s?)", message = "Inserisci un numero di telefono valido")
     private String prefisso;
 
+    @AssertTrue(message = "Devi accettare i termini e le condizioni per proseguire")
+    private boolean accettaTermini;
+
+    private String existingEmailError;
 
     public String getNome() {
         return nome;
@@ -100,6 +107,22 @@ public class FormRegistrazione {
 
     public void setPrefisso(String prefisso) {
         this.prefisso = prefisso;
+    }
+
+    public boolean isAccettaTermini() {
+        return accettaTermini;
+    }
+
+    public void setAccettaTermini(boolean accettaTermini) {
+        this.accettaTermini = accettaTermini;
+    }
+
+    public String getExistingEmailError() {
+        return existingEmailError;
+    }
+
+    public void setExistingEmailError(String existingEmailError) {
+        this.existingEmailError = existingEmailError;
     }
 
     @Override
