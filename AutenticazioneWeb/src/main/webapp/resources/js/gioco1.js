@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let scelta4 = document.getElementById("scelta4");
     let nextQuestionBtn = document.getElementById("nextQuestion");
 
-    // vars
+    // variabili
     let arrayPaesi = [];
     let arraySoloNomi = [];
     let arrayDomande = [];
     let domandaAttuale = {};
     let score = 0;
 
-    // Function to handle answer check
+    // Controllo la risposta
     const checkAnswer = (htmlelement,sceltaText) => {
         let rispostaCorretta = domandaAttuale.rispostaCorretta;
         if (rispostaCorretta === sceltaText) {
@@ -29,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
         getNextQuestion()
     };
 
-    // Add event listeners to the answer buttons
+    // EventListeners da aggiungere
     scelta1.addEventListener('click', () => checkAnswer(scelta1.style,scelta1.textContent));
     scelta2.addEventListener('click', () => checkAnswer(scelta2,scelta2.textContent));
     scelta3.addEventListener('click', () => checkAnswer(scelta3,scelta3.textContent));
     scelta4.addEventListener('click', () => checkAnswer(scelta4,scelta4.textContent));
 
-    // Function to fetch country data
+    // Recupero dati dal API
     const recuperaPaesi = async () => {
         try {
             let response = await fetch('../json/all.json');
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Function to prepare questions
+    // Preparo arrayDomande
     const prepareQuestions = () => {
         let arrayDomandeToReturn = [];
         arrayPaesi.forEach((paese) => {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return arrayDomandeToReturn;
     };
 
-    // Function to get the next question
+    // Metodo per prendere la domanda successiva
     const getNextQuestion = async (imgurl) => {
         let img = "";
         if (imgurl) {
@@ -94,12 +94,10 @@ document.addEventListener("DOMContentLoaded", () => {
         scelta4.textContent = DomandaNonRipetuta.answers[3];
     };
 
-    // Function to initialize the game
+    // Prima pagina del gioco
     const initializeGame = async () => {
         arrayPaesi = await recuperaPaesi();
         arrayDomande = await prepareQuestions();
-
-        // Set the first question
         if (arrayDomande.length > 0) {
             let randomIndex = Math.floor(Math.random() * arrayDomande.length);
             let firstQuestion = arrayDomande[randomIndex];
@@ -112,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Initialize the game
     initializeGame();
 
     // Add event listener to the next question button
