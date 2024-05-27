@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,27 +50,24 @@ public class UtenteController {
 	public String add(HttpSession session, @ModelAttribute("utente") @Valid FormRegistrazione registrazione,
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo add");
+		model.addAttribute("registerOK", "none");
+		model.addAttribute("existingEmail", "none");
 
-		if (!registrazione.getEmail().isEmpty() && utenteService.getUtenteByEmail(registrazione.getEmail()) != null) {
-			model.addAttribute("registerOK", "none");
+		boolean emailHasErrors = bindingResult.hasFieldErrors("email");
+
+		if (!emailHasErrors && utenteService.getUtenteByEmail(registrazione.getEmail()) != null) {
 			model.addAttribute("existingEmail", "inline");
 			bindingResult.rejectValue("existingEmailError", "error.utente",
 					"E-mail associata ad un account");
-		}
-		else {
-			model.addAttribute("registerOK", "none");
-			model.addAttribute("existingEmail", "none");
 		}
 
 		if (bindingResult.hasErrors()) {
 			return "formRegistrazione";
 		} else {
 			Utente utente = ConverterFormRegistrazioneToUtente.convert(registrazione);
-			System.out.println(utente);
 
 			if (utenteService.addUtente(utente)) {
 				model.addAttribute("registerOK", "inline");
-				model.addAttribute("existingEmail", "none");
 				return "redirect:/login";
 			} else {
 				return "formRegistrazione";
@@ -91,13 +89,21 @@ public class UtenteController {
 					  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
 
-		if (login.getEmail().isEmpty() && login.getPassword().isEmpty()) {
+		boolean emailHasErrors = bindingResult.hasFieldErrors("email");
+		boolean passwordHasErrors = bindingResult.hasFieldErrors("password");
+
+        if (emailHasErrors) {
+			String error;
 			model.addAttribute("path", "globalError");
-			bindingResult.rejectValue("globalError", "error.utente",
-					"Accesso non eseguito! Inserisci delle credenziali valide.");
-		} else {
-			model.addAttribute("path", "*");
-		}
+            if (passwordHasErrors) {
+                error = "Accesso non eseguito! Inserisci delle credenziali valide.";
+            } else  {
+				error = "Accesso non eseguito! Inserire una e-mail valida";
+            }
+			bindingResult.rejectValue("globalError", "error.utente", error);
+        } else {
+            model.addAttribute("path", "*");
+        }
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("hasErrors", "inline");
@@ -175,94 +181,37 @@ public class UtenteController {
 
 	@PostMapping({"/modifica"})
 	public String modificaProfilo(HttpSession session,
-								  @ModelAttribute("utente") @Valid FormUtenteModificato formUtenteModificato,
+								  @ModelAttribute("utente")
+								  @Validated({EmptyPasswordValidator.class,
+										  MatchingPasswordValidator.class}) FormUtenteModificato formUtenteModificato,
 								  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
+		model.addAttribute("editOK", "none");
+
+		System.out.println(bindingResult.getFieldErrors());
+		/*if(!formUtenteModificato.getPassword().isEmpty() && formUtenteModificato.getConfermaPassword().isEmpty()){
+			bindingResult.reject("confermaPassword",
+					"Le password non corrispondono");
+		}*/
+
 		if (bindingResult.hasErrors()) {
-			//model.addAttribute("editOK", "none");
 			return "formModificaProfilo";
 		} else {
 			String email = ((UtenteVO) session.getAttribute("utente")).getEmail();
 			Utente utente = ConverterFormModificaProfiloToUtente.convert(formUtenteModificato,email);
+
 			if (utenteService.updateUtente(utente)) {
+				model.addAttribute("editOK", "inline");
+				System.out.println(model.getAttribute("editOK"));
 				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(utente);
 				model.addAttribute(utenteVO);
 				session.setAttribute("utente", utenteVO);
-				model.addAttribute("editOK", "inline");
 				return "redirect:/profilo";
 			} else {
-				//model.addAttribute("editOK", "none");
 				return "formModificaProfilo";
 			}
 		}
 	}
-
-	/*@PostMapping({"/modifica"})
-	public String modificaProfilo(HttpSession session, @ModelAttribute("utenteModificato") @Valid FormUtenteModificato formUtenteModificato, BindingResult bindingResult, Model model) {
-		System.out.println("passaggio dal controller metodo modificaProfilo");
-		Utente u = (Utente)session.getAttribute("utente");
-		String email = u.getEmail();
-		session.removeAttribute("utente");
-		String psw = "";
-		String nome = "";
-		String cognome = "";
-		String nazione = "";
-		String prefisso = "";
-		String tel = "";
-		System.out.println("nostra signora d'europa per Farouk: " + formUtenteModificato.getPassword());
-		if (formUtenteModificato.getPassword().equals("")) {
-			psw = u.getPassword();
-		} else {
-			psw = formUtenteModificato.getPassword();
-		}
-
-		if (formUtenteModificato.getNome().equals("")) {
-			nome = u.getNome();
-		} else {
-			nome = formUtenteModificato.getNome();
-		}
-
-		if (formUtenteModificato.getCognome().equals("")) {
-			cognome = u.getCognome();
-		} else {
-			cognome = formUtenteModificato.getCognome();
-		}
-
-		if (formUtenteModificato.getNazione().equals("")) {
-			nazione = u.getNazione();
-		} else {
-			nazione = formUtenteModificato.getNazione();
-		}
-
-		if (formUtenteModificato.getPrefisso().equals("")) {
-			prefisso = u.getPrefisso();
-		} else {
-			prefisso = formUtenteModificato.getPrefisso();
-		}
-
-		if (formUtenteModificato.getTelefono().equals("")) {
-			tel = u.getTelefono();
-		} else {
-			tel = formUtenteModificato.getTelefono();
-		}
-
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("message", "Ci sono errori, ricompila!!");
-			return "formModificaProfilo";
-		} else {
-			System.out.println("dto: " + formUtenteModificato);
-			Utente utente = new Utente(email, psw, nome, cognome, nazione, prefisso, tel);
-			if (this.utenteService.updateUtente(utente)) {
-				session.removeAttribute("modificaUtente");
-				session.setAttribute("utente", utente);
-				model.addAttribute(utente);
-				return "profilo";
-			} else {
-				return "formModificaProfilo";
-			}
-		}
-	}*/
-
 
 	@GetMapping("/elimina_utente")
 	public String eliminaUtente(HttpSession session) {

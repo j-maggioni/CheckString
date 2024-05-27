@@ -3,4 +3,49 @@
 
 <jsp:include page="navBar.jsp"></jsp:include>
 
-<%@include  file="../../resources/html/gioco2.html" %>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina Capitale</title>
+      <%@ include file="includes.jsp" %>
+    <style>
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+        .btn {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body id="bgGiochi">
+    <div class="container">
+        <h3 class="mt-2" id="score"> Score : <span class="score" style="color: red;">0</span> punti</h3>
+        <div class="img-container col-12">
+            <h1 id="nazione" style="font-size: 2em;">Italia</h1>
+        </div>
+        <!--   Buttons    -->
+        <div class="row mt-5 gap-2 d-flex align-items-center justify-content-center">
+            <div class="col-6 col-md-3">
+                <button type="button" class="btn gioco btn-outline-secondary btn-lg w-100" id="capitale1"></button>
+                <button type="button" class="btn gioco btn-outline-secondary btn-lg w-100" id="capitale2"></button>
+            </div>
+            <div class="col-6 col-md-3">
+                <button type="button" class="btn gioco btn-outline-secondary btn-lg w-100" id="capitale3"></button>
+                <button type="button" class="btn gioco btn-outline-secondary btn-lg w-100" id="capitale4"></button>
+            </div>
+        </div>
+    </div>
+    <form id="nextQuestion" class="mt-4" style="text-align: center; margin-bottom: 80px !important; margin-top: 50px !important;">
+        <button class="btn close-btn btn-lg" type="button" onclick="getNextQuestion()" style="background-color: rgb(183, 79, 79); color: white; font-family: cursive">Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            </svg>
+        </button>
+    </form>
+
+    <script src="./resources/js/gioco2.js"></script>
+</body>
+</html>

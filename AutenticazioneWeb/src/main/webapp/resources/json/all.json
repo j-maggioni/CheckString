@@ -22577,6 +22577,208 @@
     },
     {
         "name": {
+            "common": "Saint Martin",
+            "official": "Saint Martin",
+            "nativeName": {
+                "fra": {
+                    "official": "Saint-Martin",
+                    "common": "Saint-Martin"
+                }
+            }
+        },
+        "tld": [
+            ".fr",
+            ".gp"
+        ],
+        "cca2": "MF",
+        "ccn3": "663",
+        "cca3": "MAF",
+        "independent": false,
+        "status": "officially-assigned",
+        "unMember": false,
+        "currencies": {
+            "EUR": {
+                "name": "Euro",
+                "symbol": "€"
+            }
+        },
+        "idd": {
+            "root": "+5",
+            "suffixes": [
+                "90"
+            ]
+        },
+        "capital": [
+            "Marigot"
+        ],
+        "altSpellings": [
+            "MF",
+            "Collectivity of Saint Martin",
+            "Collectivité de Saint-Martin",
+            "Saint Martin (French part)"
+        ],
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "languages": {
+            "fra": "French"
+        },
+        "translations": {
+            "ara": {
+                "official": "سانت مارتن",
+                "common": "سانت مارتن"
+            },
+            "bre": {
+                "official": "Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "ces": {
+                "official": "Svatý Martin",
+                "common": "Svatý Martin (Francie)"
+            },
+            "cym": {
+                "official": "Saint Martin",
+                "common": "Saint Martin"
+            },
+            "deu": {
+                "official": "Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "est": {
+                "official": "Saint-Martini ühendus",
+                "common": "Saint-Martin"
+            },
+            "fin": {
+                "official": "Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "fra": {
+                "official": "Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "hrv": {
+                "official": "Saint Martin",
+                "common": "Sveti Martin"
+            },
+            "hun": {
+                "official": "Saint-Martin Közösség",
+                "common": "Saint-Martin"
+            },
+            "ita": {
+                "official": "saint Martin",
+                "common": "Saint Martin"
+            },
+            "jpn": {
+                "official": "サンマルタン島",
+                "common": "サン・マルタン（フランス領）"
+            },
+            "kor": {
+                "official": "생마르탱",
+                "common": "생마르탱"
+            },
+            "nld": {
+                "official": "Saint Martin",
+                "common": "Saint-Martin"
+            },
+            "per": {
+                "official": "سن مارتن",
+                "common": "سن مارتن"
+            },
+            "pol": {
+                "official": "Wspólnota Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "por": {
+                "official": "saint Martin",
+                "common": "São Martinho"
+            },
+            "rus": {
+                "official": "Сен-Мартен",
+                "common": "Сен-Мартен"
+            },
+            "slk": {
+                "official": "Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "spa": {
+                "official": "Saint Martin",
+                "common": "Saint Martin"
+            },
+            "srp": {
+                "official": "Свети Мартин",
+                "common": "Свети Мартин"
+            },
+            "swe": {
+                "official": "Förvaltningsområdet Saint-Martin",
+                "common": "Saint-Martin"
+            },
+            "tur": {
+                "official": "Saint Martin",
+                "common": "Saint Martin"
+            },
+            "urd": {
+                "official": "سینٹ مارٹن",
+                "common": "سینٹ مارٹن"
+            },
+            "zho": {
+                "official": "圣马丁",
+                "common": "圣马丁"
+            }
+        },
+        "latlng": [
+            18.0708,
+            63.0501
+        ],
+        "landlocked": false,
+        "borders": [
+            "SXM"
+        ],
+        "area": 53.0,
+        "demonyms": {
+            "eng": {
+                "f": "Saint Martin Islander",
+                "m": "Saint Martin Islander"
+            },
+            "fra": {
+                "f": "Saint-Martinoise",
+                "m": "Saint-Martinois"
+            }
+        },
+        "flag": "\uD83C\uDDF2\uD83C\uDDEB",
+        "maps": {
+            "googleMaps": "https://goo.gl/maps/P9ho9QuJ9EAR28JEA",
+            "openStreetMaps": "https://www.openstreetmap.org/relation/63064"
+        },
+        "population": 38659,
+        "car": {
+            "signs": [
+                "F"
+            ],
+            "side": "right"
+        },
+        "timezones": [
+            "UTC-04:00"
+        ],
+        "continents": [
+            "North America"
+        ],
+        "flags": {
+            "png": "https://flagcdn.com/w320/mf.png",
+            "svg": "https://flagcdn.com/mf.svg"
+        },
+        "coatOfArms": {},
+        "startOfWeek": "monday",
+        "capitalInfo": {
+            "latlng": [
+                18.07,
+                -63.08
+            ]
+        },
+        "postalCode": {
+            "format": "### ###"
+        }
+    },
+    {
+        "name": {
             "common": "Pitcairn Islands",
             "official": "Pitcairn Group of Islands",
             "nativeName": {
@@ -51253,6 +51455,195 @@
         "postalCode": {
             "format": "#####",
             "regex": "^(\\d{5})$"
+        }
+    },
+    {
+        "name": {
+            "common": "Svalbard and Jan Mayen",
+            "official": "Svalbard og Jan Mayen",
+            "nativeName": {
+                "nor": {
+                    "official": "Svalbard og Jan Mayen",
+                    "common": "Svalbard og Jan Mayen"
+                }
+            }
+        },
+        "tld": [
+            ".sj"
+        ],
+        "cca2": "SJ",
+        "ccn3": "744",
+        "cca3": "SJM",
+        "independent": false,
+        "status": "officially-assigned",
+        "unMember": false,
+        "currencies": {
+            "NOK": {
+                "name": "krone",
+                "symbol": "kr"
+            }
+        },
+        "idd": {
+            "root": "+4",
+            "suffixes": [
+                "779"
+            ]
+        },
+        "capital": [
+            "Longyearbyen"
+        ],
+        "altSpellings": [
+            "SJ",
+            "Svalbard and Jan Mayen Islands"
+        ],
+        "region": "Europe",
+        "subregion": "Northern Europe",
+        "languages": {
+            "nor": "Norwegian"
+        },
+        "translations": {
+            "ara": {
+                "official": "سفالبارد ويان ماين",
+                "common": "سفالبارد ويان ماين"
+            },
+            "bre": {
+                "official": "Svalbard ha Jan Mayen",
+                "common": "Svalbard ha Jan Mayen"
+            },
+            "ces": {
+                "official": "Špicberky a Jan Mayen",
+                "common": "Špicberky a Jan Mayen"
+            },
+            "cym": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Svalbard and Jan Mayen"
+            },
+            "deu": {
+                "official": "Spitzbergen und Jan Mayen",
+                "common": "Spitzbergen und Jan Mayen"
+            },
+            "est": {
+                "official": "Svalbard",
+                "common": "Svalbard"
+            },
+            "fin": {
+                "official": "Huippuvuoret",
+                "common": "Huippuvuoret"
+            },
+            "fra": {
+                "official": "Jan Mayen Svalbard",
+                "common": "Svalbard et Jan Mayen"
+            },
+            "hrv": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Svalbard i Jan Mayen"
+            },
+            "hun": {
+                "official": "Svalbard és Jan Mayen",
+                "common": "Svalbard és Jan Mayen"
+            },
+            "ita": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Svalbard e Jan Mayen"
+            },
+            "jpn": {
+                "official": "スバールバル諸島OGヤンマイエン",
+                "common": "スヴァールバル諸島およびヤンマイエン島"
+            },
+            "kor": {
+                "official": "스발바르 얀마옌 제도",
+                "common": "스발바르 얀마옌 제도"
+            },
+            "nld": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Svalbard en Jan Mayen"
+            },
+            "per": {
+                "official": "سوالبارد و یان ماین",
+                "common": "سوالبارد و یان ماین"
+            },
+            "pol": {
+                "official": "Svalbard i Jan Mayen",
+                "common": "Svalbard i Jan Mayen"
+            },
+            "por": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Ilhas Svalbard e Jan Mayen"
+            },
+            "rus": {
+                "official": "Свальбарда ог Ян-Майен",
+                "common": "Шпицберген и Ян-Майен"
+            },
+            "slk": {
+                "official": "Svalbard a Jan Mayen",
+                "common": "Svalbard a Jan Mayen"
+            },
+            "spa": {
+                "official": "Svalbard og Jan Mayen",
+                "common": "Islas Svalbard y Jan Mayen"
+            },
+            "srp": {
+                "official": "Свалбард и Јан Мајен",
+                "common": "Свалбард и Јан Мајен"
+            },
+            "swe": {
+                "official": "Svalbard och Jan Mayen",
+                "common": "Svalbard och Jan Mayen"
+            },
+            "tur": {
+                "official": "Svalbard ve Jan Mayen",
+                "common": "Svalbard ve Jan Mayen"
+            },
+            "urd": {
+                "official": "سوالبارڈ اور جان میئن",
+                "common": "سوالبارڈ اور جان میئن"
+            },
+            "zho": {
+                "official": "斯瓦尔巴特",
+                "common": "斯瓦尔巴特"
+            }
+        },
+        "latlng": [
+            78.0,
+            20.0
+        ],
+        "landlocked": false,
+        "area": 61399.0,
+        "demonyms": {
+            "eng": {
+                "f": "Norwegian",
+                "m": "Norwegian"
+            }
+        },
+        "flag": "\uD83C\uDDF8\uD83C\uDDEF",
+        "maps": {
+            "googleMaps": "https://goo.gl/maps/L2wyyn3cQ16PzQ5J8",
+            "openStreetMaps": "https://www.openstreetmap.org/relation/1337397"
+        },
+        "population": 2562,
+        "car": {
+            "signs": [
+                "N"
+            ],
+            "side": "right"
+        },
+        "timezones": [
+            "UTC+01:00"
+        ],
+        "continents": [
+            "Europe"
+        ],
+        "flags": {
+            "png": "https://flagcdn.com/w320/sj.png",
+            "svg": "https://flagcdn.com/sj.svg"
+        },
+        "coatOfArms": {},
+        "startOfWeek": "monday",
+        "capitalInfo": {
+            "latlng": [
+                78.22,
+                15.63
+            ]
         }
     },
     {
