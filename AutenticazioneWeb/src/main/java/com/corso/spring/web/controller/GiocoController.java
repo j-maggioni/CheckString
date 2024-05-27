@@ -3,7 +3,12 @@ package com.corso.spring.web.controller;
 import com.corso.service.GiocoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class GiocoController {
@@ -15,6 +20,13 @@ public class GiocoController {
 	public String gioco1() {
 		System.out.println("passaggio dal controller metodo gioco1");
 		return "gioco1";
+	}
+	@PostMapping("/indovina_bandiera/salvaScore")
+	public String salvaPunteggio (HttpSession session, Model model, @PathVariable int score ){
+        // chiamare il metodo dal service per salvare lo score
+        model.addAttribute("score" , score) ;
+		return "visualizzaScore" ;
+
 	}
 
 	@GetMapping(path={"/indovina_capitale"})
@@ -28,6 +40,7 @@ public class GiocoController {
 		System.out.println("passaggio dal controller metodo gioco3");
 		return "gioco3";
 	}
+
 
 	/*@GetMapping(path={"/home"})
 	public String homeLogged(HttpSession session) {
