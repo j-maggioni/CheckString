@@ -21,7 +21,6 @@ public class FormRegistrazione {
                     "minuscola, numero e carattere speciale")
     private String password;
 
-    @NotEmpty
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -32,11 +31,9 @@ public class FormRegistrazione {
     @NotEmpty(message = "Inserisci una nazione")
     private String nazione;
 
-    @NotEmpty
     @Pattern(regexp = "^(\\d{3,4}\\s?){2,3}\\d{3,4}$", message = "Inserisci un numero di telefono valido")
     private String telefono;
 
-    @NotEmpty
     @Pattern(regexp = "(\\+\\d{1,3}\\s?)", message = "Inserisci un numero di telefono valido")
     private String prefisso;
 
