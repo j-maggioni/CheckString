@@ -1,6 +1,11 @@
 package com.corso.spring.web.controller;
 
+import com.corso.converters.ConverterUtenteVOToUtente;
+import com.corso.enums.GiochiEnum;
+import com.corso.model.Gioco;
+import com.corso.model.Utente;
 import com.corso.service.GiocoService;
+import com.corso.vo.UtenteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class GiocoController {
@@ -22,9 +29,16 @@ public class GiocoController {
 		return "gioco1";
 	}
 	@PostMapping("/indovina_bandiera/salvaScore")
-	public String salvaPunteggio (HttpSession session, Model model, @PathVariable int score ){
-        // chiamare il metodo dal service per salvare lo score
-        model.addAttribute("score" , score) ;
+	public String salvaPunteggio (HttpSession session, Model model, @PathVariable int score){
+
+		// chiamare il metodo dal service per salvare lo score
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		UtenteVO utenteVO = (UtenteVO) session.getAttribute("utente");
+		Utente utente = ConverterUtenteVOToUtente.convert(utenteVO);
+		giocoService.addGiocata(new Gioco(dateFormat.format(currentDate), score, utente, GiochiEnum.IndovinaBandiera));
+
+//		model.addAttribute("score" , score) ;
 		return "visualizzaScore" ;
 
 	}

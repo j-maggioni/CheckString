@@ -1,10 +1,14 @@
 package com.corso.vo;
 
+import javax.validation.GroupSequence;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+interface EmptyPasswordValidator {}
+interface MatchingPasswordValidator {}
+
+@GroupSequence({FormUtenteModificato.class, EmptyPasswordValidator.class, MatchingPasswordValidator.class})
 public class FormUtenteModificato {
     @NotEmpty(message = "Inserisci un nome")
     private String nome;
@@ -12,15 +16,16 @@ public class FormUtenteModificato {
     @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
-    @NotEmpty
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale")
+            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale",
+            groups = {EmptyPasswordValidator.class})
     private String password;
 
-    @NotEmpty
+    @NotEmpty(groups = {MatchingPasswordValidator.class})
     private String confermaPassword;
 
-    @AssertTrue(message = "Le password non corrispondono")
+    @AssertTrue(message = "Le password non corrispondono",
+            groups = {MatchingPasswordValidator.class})
     private boolean isValidPassword() {
         return password.equals(confermaPassword);
     }

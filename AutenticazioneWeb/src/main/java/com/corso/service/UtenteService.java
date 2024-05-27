@@ -20,7 +20,7 @@ public interface UtenteService {
     public boolean login(String email, String password);
 
     @Transactional
-    public boolean updateUtente(Utente utente);
+    public Utente updateUtente(Utente utente);
 
     @Transactional
     public void delete(String email);

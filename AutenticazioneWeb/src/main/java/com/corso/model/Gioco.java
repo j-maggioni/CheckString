@@ -51,8 +51,7 @@ public class Gioco {
 
     }
 
-    public Gioco(Integer id, String data, int punti, Utente utente, GiochiEnum gioco) {
-        this.id = id;
+    public Gioco(String data, int punti, Utente utente, GiochiEnum gioco) {
         this.data = data;
         this.punti = punti;
         this.utente = utente;

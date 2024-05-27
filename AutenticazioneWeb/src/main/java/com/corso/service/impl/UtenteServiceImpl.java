@@ -49,21 +49,27 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public boolean updateUtente(Utente utente) {
+    public Utente updateUtente(Utente utente) {
         Utente utenteInDB = dao.getByEmail(utente.getEmail());
         if (utenteInDB != null) {
             utenteInDB.setNome(utente.getNome());
             utenteInDB.setCognome(utente.getCognome());
             utenteInDB.setEmail(utente.getEmail());
-            utenteInDB.setPassword(utente.getPassword());
+            String password;
+            if (!utente.getPassword().isEmpty()) {
+                password = utente.getPassword();
+            } else {
+                password = utenteInDB.getPassword();
+            }
+            utenteInDB.setPassword(password);
             utenteInDB.setNazione(utente.getNazione());
             utenteInDB.setPrefisso(utente.getPrefisso());
             utenteInDB.setTelefono(utente.getTelefono());
             dao.update(utenteInDB);
-            return true;
+            return utenteInDB;
         } else {
             System.out.println("NO UPDATE");
-            return false;
+            return null;
         }
 
     }

@@ -11,11 +11,9 @@ public class FormRegistrazione {
     @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
-    @NotEmpty
     @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", message = "Inserisci una e-mail valida")
     private String email;
 
-    @NotEmpty
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
             message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, "+
                     "minuscola, numero e carattere speciale")

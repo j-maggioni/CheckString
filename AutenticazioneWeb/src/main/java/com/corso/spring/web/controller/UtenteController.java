@@ -2,6 +2,7 @@ package com.corso.spring.web.controller;
 
 import com.corso.converters.*;
 import com.corso.enums.GiochiEnum;
+import com.corso.model.Gioco;
 import com.corso.model.Utente;
 import com.corso.service.GiocoService;
 import com.corso.service.UtenteService;
@@ -68,7 +69,9 @@ public class UtenteController {
 
 			if (utenteService.addUtente(utente)) {
 				model.addAttribute("registerOK", "inline");
-				return "redirect:/login";
+
+				model.addAttribute("loginHasErrors", "none");
+				return "formLogin";
 			} else {
 				return "formRegistrazione";
 			}
@@ -78,7 +81,7 @@ public class UtenteController {
 	@GetMapping(path={"/login"})
 	public String login(Model model) {
 		System.out.println("passaggio dal controller metodo formLogin");
-		model.addAttribute("hasErrors", "none");
+		model.addAttribute("loginHasErrors", "none");
 		model.addAttribute("utente", new FormLogin());
 
 		return "formLogin";
@@ -106,7 +109,7 @@ public class UtenteController {
         }
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("hasErrors", "inline");
+			model.addAttribute("loginHasErrors", "inline");
 			return "formLogin";
 		} else {
 			boolean trovatoInDb =  utenteService.login(login.getEmail(),login.getPassword()) ;
@@ -120,7 +123,7 @@ public class UtenteController {
 				session.setMaxInactiveInterval(1000*120); // durata timeout
 				return "home";
 			} else {
-				model.addAttribute("hasErrors", "inline");
+				model.addAttribute("loginHasErrors", "inline");
 				bindingResult.reject("globalError",
 						"Accesso non eseguito! Email e/o password errate.");
 				return "formLogin";
@@ -181,32 +184,31 @@ public class UtenteController {
 
 	@PostMapping({"/modifica"})
 	public String modificaProfilo(HttpSession session,
-								  @ModelAttribute("utente")
-								  @Validated({EmptyPasswordValidator.class,
-										  MatchingPasswordValidator.class}) FormUtenteModificato formUtenteModificato,
+								  @Valid @ModelAttribute("utente") FormUtenteModificato formUtenteModificato,
 								  BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
 		model.addAttribute("editOK", "none");
 
-		System.out.println(bindingResult.getFieldErrors());
-		/*if(!formUtenteModificato.getPassword().isEmpty() && formUtenteModificato.getConfermaPassword().isEmpty()){
-			bindingResult.reject("confermaPassword",
-					"Le password non corrispondono");
-		}*/
+		boolean skip = false;
+		if(formUtenteModificato.getPassword().isEmpty() && formUtenteModificato.getConfermaPassword().isEmpty()){
+			bindingResult.reject("password", null);
+			skip = true;
+		}
 
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() && !skip) {
 			return "formModificaProfilo";
 		} else {
 			String email = ((UtenteVO) session.getAttribute("utente")).getEmail();
 			Utente utente = ConverterFormModificaProfiloToUtente.convert(formUtenteModificato,email);
 
-			if (utenteService.updateUtente(utente)) {
+			Utente updatedUtente = utenteService.updateUtente(utente);
+			if (updatedUtente != null) {
 				model.addAttribute("editOK", "inline");
-				System.out.println(model.getAttribute("editOK"));
-				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(utente);
-				model.addAttribute(utenteVO);
+				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(updatedUtente);
+
+				model.addAttribute("utente", utenteVO);
 				session.setAttribute("utente", utenteVO);
-				return "redirect:/profilo";
+				return "profilo";
 			} else {
 				return "formModificaProfilo";
 			}

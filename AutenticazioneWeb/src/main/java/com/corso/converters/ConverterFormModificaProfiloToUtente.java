@@ -12,7 +12,14 @@ public class ConverterFormModificaProfiloToUtente {
         Utente utente = new Utente();
         BeanUtils.copyProperties(utenteModificato, utente);
         utente.setEmail(email);
-        utente.setPassword(DigestUtils.md5Hex(utente.getPassword()));
+
+        String password;
+        if(utenteModificato.getPassword().isEmpty() && utenteModificato.getConfermaPassword().isEmpty()) {
+            password = utente.getPassword();
+        } else {
+            password = DigestUtils.md5Hex(utente.getPassword());
+        }
+        utente.setPassword(password);
         return utente;
     }
 }
