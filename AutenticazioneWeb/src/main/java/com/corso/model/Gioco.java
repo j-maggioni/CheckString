@@ -1,29 +1,30 @@
 package com.corso.model;
 
+import com.corso.enums.GiochiEnum;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "giochi")
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Gioco.findAll",
-                query = "SELECT * FROM giochi WHERE",
+                query = "SELECT * FROM giochi WHERE gioco=:gioco ",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllBest",
-                query = "SELECT * FROM utenti.giochi ORDER BY punti DESC LIMIT 3; ;",
+                query = "SELECT * FROM utenti.giochi WHERE gioco=:gioco ORDER BY punti DESC LIMIT 3 ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllPerUser",
-                query = "SELECT * FROM giochi WHERE utente=:utente ;",
+                query = "SELECT * FROM giochi WHERE utente=:utente AND gioco=:gioco ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findBestPerUser",
-                query = "SELECT * FROM utenti.giochi WHERE utente=:utente ORDER BY punti DESC LIMIT 3; ;",
+                query = "SELECT * FROM utenti.giochi WHERE utente=:utente AND gioco=:gioco4 ORDER BY punti DESC LIMIT 3; ;",
                 resultClass = Gioco.class
         )
 })
@@ -39,19 +40,23 @@ public class Gioco {
     @Column(name="punti")
     private int punti;
 
-    @OneToOne
-    @JoinColumn(name="utente", referencedColumnName = "email")
+    @ManyToOne
+    @JoinColumn(name = "utente", referencedColumnName = "email", nullable = false)
     private Utente utente;
+
+    @Column(name="gioco")
+    private GiochiEnum gioco;
 
     public Gioco() {
 
     }
 
-    public Gioco(Integer id, String data, int punti, Utente utente) {
+    public Gioco(Integer id, String data, int punti, Utente utente, GiochiEnum gioco) {
         this.id = id;
         this.data = data;
         this.punti = punti;
         this.utente = utente;
+        this.gioco = gioco;
     }
 
     public Integer getId() {
@@ -84,6 +89,14 @@ public class Gioco {
 
     public void setUtente(Utente utente) {
         this.utente = utente;
+    }
+
+    public GiochiEnum getGioco() {
+        return gioco;
+    }
+
+    public void setGioco(GiochiEnum gioco) {
+        this.gioco = gioco;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.corso.dao.impl;
 
 import com.corso.dao.GiocoDAO;
+import com.corso.enums.GiochiEnum;
 import com.corso.model.Gioco;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +22,9 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAll() {
+    public List<Gioco> findAll(GiochiEnum gioco) {
         Query query = manager.createNamedQuery("Gioco.findAll");
+        query.setParameter("gioco", gioco);
 
         List<Gioco> giocate = query.getResultList();
         return giocate;
@@ -30,8 +32,9 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAllBest() {
+    public List<Gioco> findAllBest(GiochiEnum gioco) {
         Query query = manager.createNamedQuery("Gioco.findAllBest");
+        query.setParameter("gioco", gioco);
 
         List<Gioco> giocate = query.getResultList();
         return giocate;
@@ -39,9 +42,10 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAllPerUser(String utente) {
+    public List<Gioco> findAllPerUser(String utente, GiochiEnum gioco) {
         Query query = manager.createNamedQuery("Gioco.findAllPerUser");
         query.setParameter("utente", utente);
+        query.setParameter("gioco", gioco);
 
         List<Gioco> giocate = query.getResultList();
         return giocate;
@@ -49,9 +53,10 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findBestPerUser(String utente) {
+    public List<Gioco> findBestPerUser(String utente, GiochiEnum gioco) {
         Query query = manager.createNamedQuery("Gioco.findBestPerUser");
         query.setParameter("utente", utente);
+        query.setParameter("gioco", gioco);
 
         List<Gioco> giocate = query.getResultList();
         return giocate;

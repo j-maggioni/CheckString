@@ -1,22 +1,23 @@
 package com.corso.vo;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class FormUtenteModificato {
-    @NotNull(message = "inserisci un nome")
+    @NotEmpty(message = "Inserisci un nome")
     private String nome;
 
-    @NotNull(message = "inserisci un cognome")
+    @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
-    @NotNull
-    @Pattern(regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/",
-            message = "Inserisci una password valida")
+    @NotEmpty
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale")
     private String password;
 
-    @NotNull
+    @NotEmpty
     private String confermaPassword;
 
     @AssertTrue(message = "Le password non corrispondono")
@@ -24,15 +25,15 @@ public class FormUtenteModificato {
         return password.equals(confermaPassword);
     }
 
-    @NotNull(message = "inserisci una nazione")
+    @NotEmpty(message = "Inserisci una nazione")
     private String nazione;
 
-    @NotNull
+    @NotEmpty
     @Pattern(regexp = "^(\\d{3,4}\\s?){2,3}\\d{3,4}$", message = "Inserisci un numero di telefono valido")
     private String telefono;
 
-    @NotNull
-    @Pattern(regexp = "^(\\+\\d{1,3}\\s?)$", message = "Inserisci un numero di telefono valido")
+    @NotEmpty
+    @Pattern(regexp = "(\\+\\d{1,3}\\s?)", message = "Inserisci un numero di telefono valido")
     private String prefisso;
 
 
@@ -94,7 +95,7 @@ public class FormUtenteModificato {
 
     @Override
     public String toString() {
-        return "FormRegistrazioneFE{" +
+        return "FormUtenteModificato{" +
                 "nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", password='" + password + '\'' +

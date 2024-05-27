@@ -4,7 +4,8 @@ import com.corso.dao.UtenteDAO;
 import com.corso.model.Utente;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 public class UtenteDAOimpl implements UtenteDAO {
 

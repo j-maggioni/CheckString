@@ -1,8 +1,8 @@
 package com.corso.service.impl;
 
 import com.corso.dao.UtenteDAO;
-import com.corso.service.UtenteService;
 import com.corso.model.Utente;
+import com.corso.service.UtenteService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,23 +37,29 @@ public class UtenteServiceImpl implements UtenteService {
     @Transactional
     public boolean login(String email, String password) {
         Utente utenteInDB = dao.getByEmail(email);
-        if (utenteInDB.getPassword().equals(password)) {
-            System.out.println("Utente trovato in DB : " +utenteInDB.toString());
-            return true;
+        if (utenteInDB != null){
+            if (utenteInDB.getPassword().equals(password)) {
+                System.out.println("Utente trovato in DB : " + utenteInDB.toString());
+                return true;
+            }
         }
-        else {
-            System.out.println("Utente non trovato in DB : " +utenteInDB.toString());
-            return false;
-        }
+        System.out.println("Utente non trovato in DB");
+        return false;
     }
 
     @Override
     @Transactional
     public boolean updateUtente(Utente utente) {
         Utente utenteInDB = dao.getByEmail(utente.getEmail());
-        if (utenteInDB != null && !utenteInDB.equals(utente)) {
-            dao.update(utente);
-            System.out.println(utente);
+        if (utenteInDB != null) {
+            utenteInDB.setNome(utente.getNome());
+            utenteInDB.setCognome(utente.getCognome());
+            utenteInDB.setEmail(utente.getEmail());
+            utenteInDB.setPassword(utente.getPassword());
+            utenteInDB.setNazione(utente.getNazione());
+            utenteInDB.setPrefisso(utente.getPrefisso());
+            utenteInDB.setTelefono(utente.getTelefono());
+            dao.update(utenteInDB);
             return true;
         } else {
             System.out.println("NO UPDATE");
@@ -64,9 +70,8 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void delete(String utente) {
-
-        dao.delete(utente) ;
+    public void delete(String email) {
+        dao.delete(email) ;
     }
 
 }
