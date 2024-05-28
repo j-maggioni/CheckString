@@ -30,13 +30,19 @@ function updateProgressBar() {
     // Update progress bar width
     const progressBar = document.getElementById('progress');
     progressBar.style.width = strength + '%';
+
 }
 
-
-document.getElementById('password').addEventListener('input', updateProgressBar);
+//document.getElementById('password').addEventListener('input', updateProgressBar);
 
 document.getElementById('salva').addEventListener('click', function(event) {
 	event.preventDefault();
+
+	const passwordValue = document.getElementById('password').value;
+    if (passwordValue === null || passwordValue === '') {
+        const passwordElement = document.getElementById('password');
+        passwordElement.removeEventListener('input', updateProgressBar);
+    }
 
 	setTimeout(function() {
         var form = document.getElementById("formModificaProfilo");

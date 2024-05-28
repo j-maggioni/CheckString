@@ -189,13 +189,11 @@ public class UtenteController {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
 		model.addAttribute("editOK", "none");
 
-		boolean skip = false;
 		if(formUtenteModificato.getPassword().isEmpty() && formUtenteModificato.getConfermaPassword().isEmpty()){
 			bindingResult.reject("password", null);
-			skip = true;
 		}
 
-		if (bindingResult.hasErrors() && !skip) {
+		if (bindingResult.hasErrors()){
 			return "formModificaProfilo";
 		} else {
 			String email = ((UtenteVO) session.getAttribute("utente")).getEmail();
