@@ -1,5 +1,9 @@
 /* BODY GENERALE */
 
+.hidden {
+    display: none !important;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -251,3 +255,92 @@ input[type=password]:focus {
         border: 2px solid #20c997;
         box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
 }
+
+/* ---------------------- css per la mappa --------------------- */
+/* #UA {
+    fill: #0f0;
+  }
+  #UA:hover {
+    fill: #008000;
+  }
+  #ID {
+    fill: #F00;
+  }
+  #ID:hover {
+    fill: #800000;
+  }
+  #GL {
+    fill: #FFF;
+  }
+  #GL:hover {
+    fill: #BBB;
+  }
+  #BR {
+    fill: #00F;
+  }
+  #BR:hover {
+    fill: #000080;
+  }
+   */
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    background: #21252b;
+  
+    color: #d3ddef;
+  }
+  
+  .ag-canvas {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  
+    position: relative;
+    visibility: visible;
+  
+    width: 100%;
+    height: 100%;
+    padding: 3rem 1rem;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  .ag-canvas_svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    margin-left: 1rem;
+  }
+  .ag-canvas_svg path {
+    fill: #383d46; /* #800000  */
+    fill-opacity: 1;
+    stroke: #21252b;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+    transition: 0.5s;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .ag-canvas {
+      -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      height: auto;
+      padding: 4rem 1rem 1rem;
+    }
+    .ag-canvas_svg {
+      max-height: calc(100% - 6rem);
+      margin-left: 0;
+    }
+  }
+  
