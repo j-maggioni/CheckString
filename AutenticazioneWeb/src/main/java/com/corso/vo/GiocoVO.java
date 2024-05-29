@@ -1,7 +1,5 @@
 package com.corso.vo;
 
-import com.corso.enums.GiochiEnum;
-
 import javax.validation.constraints.NotNull;
 
 public class GiocoVO {
@@ -13,7 +11,7 @@ public class GiocoVO {
     private int punti;
 
     @NotNull
-    private GiochiEnum gioco;
+    private String gioco;
 
     @NotNull
     private String utente;
@@ -22,7 +20,7 @@ public class GiocoVO {
 
     }
 
-    public GiocoVO(String data, int punti, GiochiEnum gioco, String utente) {
+    public GiocoVO(String data, int punti, String gioco, String utente) {
         this.data = data;
         this.punti = punti;
         this.gioco = gioco;
@@ -33,7 +31,7 @@ public class GiocoVO {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(java.lang.String data) {
         this.data = data;
     }
 
@@ -45,11 +43,11 @@ public class GiocoVO {
         this.punti = punti;
     }
 
-    public GiochiEnum getGioco() {
+    public String getGioco() {
         return gioco;
     }
 
-    public void setGioco(GiochiEnum gioco) {
+    public void setGioco(String gioco) {
         this.gioco = gioco;
     }
 

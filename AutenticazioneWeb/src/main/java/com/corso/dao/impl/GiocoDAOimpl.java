@@ -22,7 +22,7 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAll(GiochiEnum gioco) {
+    public List<Gioco> findAll(String gioco) {
         Query query = manager.createNamedQuery("Gioco.findAll");
         query.setParameter("gioco", gioco);
 
@@ -32,7 +32,7 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAllBest(GiochiEnum gioco) {
+    public List<Gioco> findAllBest(String gioco) {
         Query query = manager.createNamedQuery("Gioco.findAllBest");
         query.setParameter("gioco", gioco);
 
@@ -42,7 +42,7 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findAllPerUser(String utente, GiochiEnum gioco) {
+    public List<Gioco> findAllPerUser(String utente, String gioco) {
         Query query = manager.createNamedQuery("Gioco.findAllPerUser");
         query.setParameter("utente", utente);
         query.setParameter("gioco", gioco);
@@ -53,7 +53,7 @@ public class GiocoDAOimpl implements GiocoDAO {
 
     @Override
     @Transactional
-    public List<Gioco> findBestPerUser(String utente, GiochiEnum gioco) {
+    public List<Gioco> findBestPerUser(String utente, String gioco) {
         Query query = manager.createNamedQuery("Gioco.findBestPerUser");
         query.setParameter("utente", utente);
         query.setParameter("gioco", gioco);
