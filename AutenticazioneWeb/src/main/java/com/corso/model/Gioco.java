@@ -14,17 +14,17 @@ import javax.persistence.*;
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllBest",
-                query = "SELECT * FROM utenti.giochi WHERE gioco=:gioco ORDER BY punti DESC LIMIT 3 ;",
+                query = "SELECT * FROM utenti.giochi WHERE gioco=:gioco ORDER BY punti DESC LIMIT 5 ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllPerUser",
-                query = "SELECT * FROM giochi WHERE utente=:utente AND gioco=:gioco ;",
+                query = "SELECT * FROM giochi WHERE utente=:utente AND gioco=:gioco ORDER BY data ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findBestPerUser",
-                query = "SELECT * FROM utenti.giochi WHERE utente=:utente AND gioco=:gioco4 ORDER BY punti DESC LIMIT 3; ;",
+                query = "SELECT * FROM utenti.giochi WHERE utente=:utente AND gioco=:gioco ORDER BY punti DESC LIMIT 3; ;",
                 resultClass = Gioco.class
         )
 })

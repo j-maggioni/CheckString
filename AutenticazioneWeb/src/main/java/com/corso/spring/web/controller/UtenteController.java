@@ -142,23 +142,23 @@ public class UtenteController {
 
 		Map<String,List<GiocoVO>> giochi = new HashMap<>();
 		List<GiocoVO> bandieraList = new ArrayList<>();
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera, utenteVO.getEmail()));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera, utenteVO.getEmail()));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera, utenteVO.getEmail()));
 //		bandieraList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaBandiera));
 
 		List<GiocoVO> capitaleList = new ArrayList<>();
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale, utenteVO.getEmail()));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale, utenteVO.getEmail()));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale, utenteVO.getEmail()));
 //		capitaleList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaCapitale));
 
 		List<GiocoVO> nazioneList = new ArrayList<>();
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione, utenteVO.getEmail()));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione, utenteVO.getEmail()));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione, utenteVO.getEmail()));
 //		nazioneList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaNazione));
 

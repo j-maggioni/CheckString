@@ -15,14 +15,18 @@ public class GiocoVO {
     @NotNull
     private GiochiEnum gioco;
 
+    @NotNull
+    private String utente;
+
     public GiocoVO() {
 
     }
 
-    public GiocoVO(String data, int punti, GiochiEnum gioco) {
+    public GiocoVO(String data, int punti, GiochiEnum gioco, String utente) {
         this.data = data;
         this.punti = punti;
         this.gioco = gioco;
+        this.utente = utente;
     }
 
     public String getData() {
@@ -47,6 +51,24 @@ public class GiocoVO {
 
     public void setGioco(GiochiEnum gioco) {
         this.gioco = gioco;
+    }
+
+    public @NotNull String getUtente() {
+        return utente;
+    }
+
+    public void setUtente(@NotNull String utente) {
+        this.utente = utente;
+    }
+
+    @Override
+    public String toString() {
+        return "GiocoVO{" +
+                "data='" + data + '\'' +
+                ", punti=" + punti +
+                ", gioco=" + gioco +
+                ", utente='" + utente + '\'' +
+                '}';
     }
 }
 
