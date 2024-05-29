@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-${storicoPersonale}
+<jsp:include page="navBar.jsp"></jsp:include>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -26,33 +25,37 @@ ${storicoPersonale}
     </style>
 </head>
 <body>
-    <div class="container">
-    <h1>Risultati</h1>
+<div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
+        data-pause="false" data-interval="6000">
+        <div class="carousel-inner"></div>
+    </div>
 
-    <p>Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></p>
+    <div class="overlay">
+<h2 style = "margin-left: 10px" class = "permanent-marker-regular">Risultati</h2>
+    <p style = "margin-top: 40px; text-align: center">Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></p>
 
         <div class="row justify-content-center" style="margin-top: 30px;">
                    <div class="col-auto btn-spacing">
-                       <button class="btn btn-primary" type="button"
+                       <button class="btn gioco" type="button"
                         data-toggle="collapse" data-target="#collapseGenerale"
-                         aria-expanded="false" aria-controls="collapseGenerale">
+                         aria-expanded="true" aria-controls="collapseGenerale">
                            Classifica Generale
                        </button>
                    </div>
                    <div class="col-auto btn-spacing">
-                       <button class="btn btn-secondary" type="button"
+                       <button class="btn gioco" type="button"
                        data-toggle="collapse" data-target="#collapsePersonale"
                         aria-expanded="false" aria-controls="collapsePersonale">
                            Classifica Personale
                        </button>
                    </div>
                </div>
-
-                <div class="collapse" id="collapseGenerale">
+            <div id="accordion">
+                <div class="collapse show" id="collapseGenerale" data-parent="#accordion">
                     <div class="card card-body">
-                    <div id="classificaGenerale">
+                        <div id="classificaGenerale">
                                 <p>Classifica Generale</p>
-                                <table id="game-scores">
+                                <table class="table" id = "game-scores">
                                     <tr>
                                         <th>Posizione</th>
                                         <th>Punteggio</th>
@@ -67,14 +70,14 @@ ${storicoPersonale}
                                     </c:forEach>
                                 </table>
                             </div>
-
+                        </div>
                     </div>
                 </div>
-                <div class="collapse" id="collapsePersonale">
+                <div class="collapse" id="collapsePersonale" data-parent="#accordion">
                     <div class="card card-body">
                     <div id="classificaPersonale">
                                 <p>Classifica Personale</p>
-                                <table id="personal-scores">
+                                <table class = "table" id="personal-scores">
                                     <tr>
                                         <th>Posizione</th>
                                         <th>Punteggio</th>
@@ -83,18 +86,23 @@ ${storicoPersonale}
                                     <c:forEach var="personalScoreData" items="${storicoPersonale}">
                                         <tr>
                                             <td>1</td>
-                                            <td>${personalscoreData.getPunti()}</td>
-                                            <td>${personalscoreData.getData()}</td>
+                                            <td>${personalScoreData.getPunti()}</td>
+                                            <td>${personalScoreData.getData()}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
-                            </div>
+                        </div>
 
                     </div>
                 </div>
 
 
     </div>
+
+
+        <button class="btn btn-primary" type="button" id="tryAgain"
+        onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
+        </div>
 
     <script>
         function showGenerale() {
@@ -114,20 +122,11 @@ ${storicoPersonale}
         if (cell.getAttribute('data-score') == currentScore) {
             cell.parentElement.classList.add('highlight');
         }
-    });
-};
 
 displayCurrentScore('current-score');
 });
 </script>
 </body>
 </html>
-
-
-        <button class="btn btn-primary" type="button" id="tryAgain"
-        onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
-        </div>
-
-
 
 

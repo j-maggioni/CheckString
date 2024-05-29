@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 
-@GroupSequence({FormUtenteModificato.class, EmptyPasswordValidator.class, MatchingPasswordValidator.class})
 public class FormUtenteModificato {
     @NotEmpty(message = "Inserisci un nome")
     private String nome;

@@ -7,6 +7,7 @@ import com.corso.model.Utente;
 import com.corso.service.GiocoService;
 import com.corso.service.UtenteService;
 import com.corso.vo.*;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -208,15 +209,16 @@ public class UtenteController {
 
 	@GetMapping("/modifica_password")
 	public String modificaPasswordForm(HttpSession session, Model model) {
+		FormPasswordModificata psw = new FormPasswordModificata();
+		UtenteVO utente = (UtenteVO) session.getAttribute("utente");
 		System.out.println("passaggio dal controller metodo modificaPasswordForm");
-		model.addAttribute("utente",
-				ConverterUtenteVOToFormModificaPassword.convert((UtenteVO) session.getAttribute("utente")));
+		model.addAttribute("formPasswordModificata", psw);
 		return "modificaPassword";
 	}
 
 	@PostMapping({"/modifica_password"})
 	public String modificaPassword(HttpSession session,
-								   @Valid @ModelAttribute("formPassword") FormPasswordModificata formPasswordModificata,
+								   @Valid @ModelAttribute("formPasswordModificata") FormPasswordModificata formPasswordModificata,
 								   BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo modificaPassword");
 
@@ -229,20 +231,19 @@ public class UtenteController {
 		}
 
 		if (bindingResult.hasErrors()){
-			return "formModificaProfilo";
+			return "modificaPassword";
 		} else {
-			Utente utente = (Utente) session.getAttribute("utente");
-			Utente updatedUtente = ConverterFormModificaPasswordToUtente.convert(formPasswordModificata, utente);
+			UtenteVO utenteVO = (UtenteVO) session.getAttribute("utente");
+			Utente utente = ConverterUtenteVOToUtente.convert(utenteVO);
+			utente.setPassword(DigestUtils.md5Hex(formPasswordModificata.getPassword()));
 
-			updatedUtente = utenteService.updateUtente(updatedUtente);
-			if (updatedUtente != null) {
+			utente = utenteService.updateUtente(utente);
+			if (utente != null) {
 				model.addAttribute("editOK", "inline");
-				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(updatedUtente);
-				model.addAttribute("utente", utenteVO);
 				session.setAttribute("utente", utenteVO);
 				return "profilo";
 			} else {
-				return "formModificaProfilo";
+				return "modificaPassword";
 			}
 		}
 	}

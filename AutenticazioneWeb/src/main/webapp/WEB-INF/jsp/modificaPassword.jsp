@@ -19,11 +19,9 @@
                     <path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 010 1L9 8l2.354 2.354a.5.5 0 11-1 1L8 9.707l-2.354 2.647a.5.5 0 01-1-1L7 8 4.646 5.646a.5.5 0 010-1z"/>
                 </svg>
             </button>
-
-             <h3 class = "permanent-marker-regular">Modifica password utente</h3>
+             <h3 class = "permanent-marker-regular">Modifica password</h3>
                <div class="margini">
-                   <form:form method="POST" action="modifica_password" modelAttribute="formPassword" class="row g-3 col-md-12" id="formModificaPassword">
-                       <h3 class="permanent-marker-regular">Modifica Password</h3>
+                   <form:form method="POST" action="modifica_password" modelAttribute="formPasswordModificata" class="row g-3 col-md-12" id="formModificaPassword">
                        <div class="col-md-12">
                            <form:label for="password" path="password" class="form-label">Password</form:label>
                            <form:password path="password" id="password" class="form-control" placeholder="Password"/>

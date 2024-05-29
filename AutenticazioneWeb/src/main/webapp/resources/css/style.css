@@ -140,8 +140,7 @@ h1 {
 
 h2 {
     text-align: center;
-    color: #20c997;
-    margin-top: 22% !important;
+    color: #b084cc;
 }
 
 h3 {
@@ -238,8 +237,6 @@ font-weight: 600;
 .gioco:focus {
     outline: none;
     box-shadow: 0 0 0 0 !important;
-    background-color:  #665687 !important;
-    color: #f0ffff !important;
 }
 
 .gioco:active {
@@ -290,6 +287,12 @@ font-weight: 600;
 
 .bottoneG {
     background-color: #20c997 !important;
+}
+
+.modificaPsw {
+    background-color: #b084cc !important;
+    color: white !important;
+    margin-left: 10px;
 }
 
 
@@ -422,4 +425,19 @@ input[type=password]:focus {
 #titoloGiochi {
      font-weight: 600;
      color: #665687 !important;
+}
+
+#rispostaSbagliata {
+    position: absolute;
+    top: 17%;
+    left: 19%;
+    text-align: center;
+    z-index: 5;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #665687;
+    padding: 10px 20px;
+    border: 2px solid #665687;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }

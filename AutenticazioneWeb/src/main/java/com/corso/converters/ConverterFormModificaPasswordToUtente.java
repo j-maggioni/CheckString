@@ -8,7 +8,8 @@ import org.springframework.beans.BeanUtils;
 
 public class ConverterFormModificaPasswordToUtente {
     public static Utente convert(FormPasswordModificata form, Utente utente) {
-        utente.setPassword(form.getPassword()); // Assumiamo che la password sia già criptata nel form
+        utente.setPassword(form.getPassword());
+        utente.setPassword(DigestUtils.md5Hex(utente.getPassword()));
         return utente;
     }
 }

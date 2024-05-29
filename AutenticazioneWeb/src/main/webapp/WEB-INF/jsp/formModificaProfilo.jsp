@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-8" style = "margin-top: 30px;">
                         <button class="btn bottone" type="submit" id="salva">Salva</button>
-                        <button class="btn bottone" type="submit" id="modificaPassword" onclick = "modifica_password"> Modifica Password </button>
+                        <button class="btn modificaPsw" type="submit" id="modificaPassword" formaction = "modifica_password" formmethod = "GET"> Modifica Password </button>
                     </div>
                 </form:form>
             </div>

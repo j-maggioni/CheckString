@@ -41,11 +41,12 @@
              <h3  class="col-6, montserrat" id = "titoloGiochi"> Score: <span id="score" class="score">0</span> punti</h3>
              <h3 class= "col-6" id="timer">00:00</h3>
             </div>
-            <div id = "rispostaSbagliata" class="alert alert-danger" style="display: none;" role="alert">
-              Risposta sbagliata
-            </div>
-            <div class="img-container mb-2" style=" width: 100%; height: 240px; text-align: center;" >
+
+            <div class="img-container mb-2" style=" width: 100%; height: 240px; text-align: center; margin-top: 30px" >
                 <img id="imgBandiera" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/383px-Flag_of_the_People%27s_Republic_of_China.svg.png" style="text-align: center; width: fit-content; max-height: 240px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;" alt="flag" class="img">
+            </div>
+            <div id = "rispostaSbagliata" role="alert">
+                          Risposta sbagliata
             </div>
               <!--   Buttons    -->
             <div class="row mt-5 gap-2 align-items-center justify-content-center">

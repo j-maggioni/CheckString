@@ -4,21 +4,16 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-interface EmptyPasswordValidator {}
-interface MatchingPasswordValidator {}
-
 public class FormPasswordModificata {
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale",
-            groups = {EmptyPasswordValidator.class})
+            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale")
     private String password;
 
-    @NotEmpty(groups = {MatchingPasswordValidator.class})
+    @NotEmpty()
     private String confermaPassword;
 
-    @AssertTrue(message = "Le password non corrispondono",
-            groups = {MatchingPasswordValidator.class})
+    @AssertTrue(message = "Le password non corrispondono")
     private boolean isValidPassword() {
         return password.equals(confermaPassword);
     }

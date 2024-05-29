@@ -34,7 +34,6 @@
                     </div>
                     <div class="modal-footer justify-content-center">
 
-
                     <form:form id="giocoVO_gioco2" method="POST" action="salvaScore" modelAttribute="partita">
                         <form:input for="data" path="data" value="${partita.data}" type="hidden"/>
                         <form:input for="punti" path="punti" type="hidden"/>
@@ -52,6 +51,9 @@
         </div>
         <div class="col-12 d-flex justify-content-center align-items-center" style = "margin-top: 30px; text-align: center;">
             <h1 id="nazione" style="margin: 0;">Italia</h1>
+        </div>
+        <div id = "rispostaSbagliata" role="alert">
+            Risposta sbagliata
         </div>
         <!-- Buttons -->
         <div class="row mt-5 gap-2 align-items-center justify-content-center">
