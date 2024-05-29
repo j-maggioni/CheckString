@@ -20,7 +20,7 @@ public class RicercheRecentiServiceImpl implements RicercheRecentiService {
         if (existingRicerca == null) { // Se non c'è un record con lo stesso input, aggiungi la nuova riga
             dao.add(ricerca);
         } else {
-            if(!ricerca.getStandard().getNome().equalsIgnoreCase(existingRicerca.getStandard().getNome())) {
+            if(!ricerca.getStandard().getNomeENG().equalsIgnoreCase(existingRicerca.getStandard().getNomeENG())) {
                 existingRicerca.setStandard(ricerca.getStandard());
                 dao.update(existingRicerca);
             }
