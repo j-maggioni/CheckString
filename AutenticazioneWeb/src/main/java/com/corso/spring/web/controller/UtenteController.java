@@ -142,29 +142,29 @@ public class UtenteController {
 
 		Map<String,List<GiocoVO>> giochi = new HashMap<>();
 		List<GiocoVO> bandieraList = new ArrayList<>();
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaBandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
+		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_bandiera));
 //		bandieraList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaBandiera));
 
 		List<GiocoVO> capitaleList = new ArrayList<>();
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaCapitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
+		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_capitale));
 //		capitaleList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaCapitale));
 
 		List<GiocoVO> nazioneList = new ArrayList<>();
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.IndovinaNazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
+		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0,GiochiEnum.indovina_nazione));
 //		nazioneList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
 //				GiochiEnum.IndovinaNazione));
 
-		giochi.put(GiochiEnum.IndovinaBandiera.name(), bandieraList);
-		giochi.put(GiochiEnum.IndovinaCapitale.name(), capitaleList);
-		giochi.put(GiochiEnum.IndovinaNazione.name(), nazioneList);
+		giochi.put(GiochiEnum.indovina_bandiera.name(), bandieraList);
+		giochi.put(GiochiEnum.indovina_capitale.name(), capitaleList);
+		giochi.put(GiochiEnum.indovina_nazione.name(), nazioneList);
 
 		model.addAttribute("giochi",giochi);
 

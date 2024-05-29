@@ -1,12 +1,13 @@
-/*document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     // elementi del DOM da manipolare
     var nazioneHTML = document.getElementById("nazione");
-    let scoreHTML = document.querySelector(".score");
+    let scoreHTML = document.getElementById("score");
     let capitale1 = document.getElementById("capitale1");
     let capitale2 = document.getElementById("capitale2");
     let capitale3 = document.getElementById("capitale3");
     let capitale4 = document.getElementById("capitale4");
     let nextQuestionBtn = document.getElementById("nextQuestion");
+    let timerHTML = document.getElementById("timer");
 
     // variabili
     let arrayCapitali = [];
@@ -14,6 +15,7 @@
     let arrayDomande = [];
     let domandaAttuale = {};
     let score = 0;
+    let timer;
 
     // Controllo la risposta
     const checkAnswer = (htmlelement, capitaleText) => {
@@ -21,8 +23,14 @@
         if (rispostaCorretta === capitaleText) {
             score += 10;
             scoreHTML.textContent = score;
+            htmlelement.style.backgroundColor = 'lightblue';
         } else {
-            alert("Risposta Sbagliata");
+            let mesg = document.getElementById("rispostaSbagliata") ;
+            mesg.style.display = "block" ;
+            // Nascondi l'elemento dopo un secondo
+            setTimeout(() => {
+                mesg.style.display = "none";
+            }, 1000); // 1000 millisecondi corrispondono a 1 secondo
         }
         getNextQuestion();
     };
@@ -36,7 +44,7 @@
     // Recupero dati dal Json
     const recuperaPaesi = async () => {
         try {
-            let response = await fetch('../json/all.json');
+            let response = await fetch('./resources/json/all.json');
             let responseJson = await response.json();
             responseJson.forEach((element) => {
                 let paese = {
@@ -65,150 +73,79 @@
             questionObj.rispostaCorretta = paese.capitale;
             questionObj.answers = [...arrayFinal].sort(() => Math.random() - 0.5);
             arrayDomandeToReturn.push(questionObj);
+            arrayDomande.push(questionObj);
         });
         return arrayDomandeToReturn;
     };
 
     // Metodo per prendere la domanda successiva
-    const getNextQuestion = () => {
+    const getNextQuestion = async (capitale) => {
         if (arrayDomande.length === 0) {
             arrayDomande = prepareQuestions();
         }
-        if (arrayDomande.length > 0) {
-            let randomIndex = Math.floor(Math.random() * arrayDomande.length);
-            let nextQuestion = arrayDomande.splice(randomIndex, 1)[0];
-            domandaAttuale = nextQuestion;
-            nazioneHTML.innerHTML = nextQuestion.nazione;
-            capitale1.textContent = nextQuestion.answers[0];
-            capitale2.textContent = nextQuestion.answers[1];
-            capitale3.textContent = nextQuestion.answers[2];
-            capitale4.textContent = nextQuestion.answers[3];
-        } else {
-            alert('Gioco finito! Il tuo punteggio è: ' + score);
-            score = 0;
-            scoreHTML.textContent = score;
-            initializeGame();
-        }
+
+        let DomandeEsclusaPreced = arrayDomande.filter(c => c.nazione !== capitale);
+        let randomIndex = Math.floor(Math.random() * DomandeEsclusaPreced.length);
+        let DomandaNonRipetuta = DomandeEsclusaPreced[randomIndex];
+        domandaAttuale = DomandaNonRipetuta;
+
+        nazioneHTML.innerHTML = DomandaNonRipetuta.nazione;
+        capitale1.textContent = DomandaNonRipetuta.answers[0];
+        capitale2.textContent = DomandaNonRipetuta.answers[1];
+        capitale3.textContent = DomandaNonRipetuta.answers[2];
+        capitale4.textContent = DomandaNonRipetuta.answers[3];
+
     };
 
     // Prima pagina del gioco
     const initializeGame = async () => {
-        arrayCapitali = await recuperaPaesi();
-        arrayDomande = prepareQuestions();
-        getNextQuestion();
+        arrayPaesi = await recuperaPaesi();
+        arrayDomande = await prepareQuestions();
+        if (arrayDomande.length > 0) {
+            let randomIndex = Math.floor(Math.random() * arrayDomande.length);
+            let firstQuestion = arrayDomande[randomIndex];
+            domandaAttuale = firstQuestion;
+            nazioneHTML.innerHTML = firstQuestion.nazione;
+            capitale1.textContent = firstQuestion.answers[0];
+            capitale2.textContent = firstQuestion.answers[1];
+            capitale3.textContent = firstQuestion.answers[2];
+            capitale4.textContent = firstQuestion.answers[3];
+            startTimer(120, timerHTML);
+        }
     };
-
     initializeGame();
 
     // Add event listener to the next question button
-    nextQuestionBtn.addEventListener('click', () => getNextQuestion());
-});*/
-    document.addEventListener("DOMContentLoaded", () => {
-        // elementi del DOM da manipolare
-        var nazioneHTML = document.getElementById("nazione");
-        let scoreHTML = document.querySelector(".score");
-        let capitale1 = document.getElementById("capitale1");
-        let capitale2 = document.getElementById("capitale2");
-        let capitale3 = document.getElementById("capitale3");
-        let capitale4 = document.getElementById("capitale4");
-        let nextQuestionBtn = document.getElementById("nextQuestion");
+    nextQuestionBtn.addEventListener('click',() => getNextQuestion() );
 
-        // variabili
-        let arrayCapitali = [];
-        let arraySoloNomi = [];
-        let arrayDomande = [];
-        let domandaAttuale = {};
-        let score = 0;
+    // Funzione per avviare il timer
+    const startTimer = (duration, display) => {
+        let timer = duration, minutes, seconds;
+        let interval = setInterval(() => {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        // Controllo la risposta
-        const checkAnswer = (htmlelement, capitaleText) => {
-            let rispostaCorretta = domandaAttuale.rispostaCorretta;
-            if (rispostaCorretta === capitaleText) {
-                score += 10;
-                scoreHTML.textContent = score;
-            } else {
-                alert("Risposta Sbagliata");
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) { // quando scade il timer
+                clearInterval(interval);
+                let modal = document.getElementById("gameOverModal_gioco2")
+                modal.style.display = "contents"
+                document.getElementById("contenutoGioco").style.display = "none"
+
+                var scoreField = document.getElementById("punti");
+                scoreField.value = score;
             }
-            getNextQuestion();
-        };
+        }, 1000);
+    };
+});
 
-        // EventListeners da aggiungere
-        capitale1.addEventListener('click', () => checkAnswer(capitale1, capitale1.textContent));
-        capitale2.addEventListener('click', () => checkAnswer(capitale2, capitale2.textContent));
-        capitale3.addEventListener('click', () => checkAnswer(capitale3, capitale3.textContent));
-        capitale4.addEventListener('click', () => checkAnswer(capitale4, capitale4.textContent));
+document.getElementById('viewLeaderboardButton_gioco2').addEventListener('click', function(event) {
+    event.preventDefault();
 
-        // Recupero dati dal Json
-        const recuperaPaesi = async () => {
-            try {
-                let response = await fetch('./resources/json/all.json');
-                let responseJson = await response.json();
-                console.log("json resolt" + JSON.stringify(responseJson))
-                responseJson.forEach((element) => {
-                    let paese = {
-                        nome: element.name.common,
-                        capitale: element.capital ? element.capital[0] : 'No capital'
-                    };
-                    arraySoloNomi.push(paese.capitale);
-                    arrayCapitali.push(paese);
-                });
-                return arrayCapitali;
-            } catch (error) {
-                console.log("Error while fetching data from backend, msg: " + error);
-            }
-        };
+    var form = document.getElementById("giocoVO_gioco2");
+    form.submit();
 
-        // Preparo arrayDomande
-        const prepareQuestions = () => {
-            let arrayDomandeToReturn = [];
-            if (arrayCapitali === undefined || arrayCapitali === null) {
-            arrayCapitali = recuperaPaesi()
-            }
-            arrayCapitali.forEach((paese) => {
-                let questionObj = {};
-                let arrayFinal = [];
-                let arrayCapitaliDiverse = arraySoloNomi.filter(capitale => capitale !== paese.capitale);
-                let arra3Anwsers = [...arrayCapitaliDiverse].sort(() => Math.random() - 0.5).slice(0, 3);
-                arrayFinal.push(paese.capitale, arra3Anwsers[0], arra3Anwsers[1], arra3Anwsers[2]);
-                questionObj.nazione = paese.nome;
-                questionObj.rispostaCorretta = paese.capitale;
-                questionObj.answers = [...arrayFinal].sort(() => Math.random() - 0.5);
-                arrayDomandeToReturn.push(questionObj);
-            });
-            return arrayDomandeToReturn;
-        };
-
-        // Metodo per prendere la domanda successiva
-        const getNextQuestion = () => {
-            if (arrayDomande.length === 0) {
-                arrayDomande = prepareQuestions();
-            }
-            if (arrayDomande.length > 0) {
-                let randomIndex = Math.floor(Math.random() * arrayDomande.length);
-                let nextQuestion = arrayDomande.splice(randomIndex, 1)[0];
-                domandaAttuale = nextQuestion;
-                nazioneHTML.innerHTML = nextQuestion.nazione;
-                capitale1.textContent = nextQuestion.answers[0];
-                capitale2.textContent = nextQuestion.answers[1];
-                capitale3.textContent = nextQuestion.answers[2];
-                capitale4.textContent = nextQuestion.answers[3];
-            } else {
-                alert('Gioco finito! Il tuo punteggio è: ' + score);
-                score = 0;
-                scoreHTML.textContent = score;
-                initializeGame();
-            }
-        };
-
-        // Prima pagina del gioco
-        const initializeGame = async () => {
-            arrayCapitali = await recuperaPaesi();
-            arrayDomande = prepareQuestions();
-            getNextQuestion();
-        };
-
-        initializeGame();
-
-        // Add event listener to the next question button
-        nextQuestionBtn.addEventListener('click', () => getNextQuestion());
-    });
+});

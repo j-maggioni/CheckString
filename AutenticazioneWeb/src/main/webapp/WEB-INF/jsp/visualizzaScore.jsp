@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risultati del Gioco</title>
+     <%@ include file="includes.jsp" %>
     <style>
         .container {
             text-align: center;
@@ -36,8 +37,8 @@
     <div class="container">
         <h1>Risultati</h1>
 
-        <h2>Il tuo punteggio è stato di <span id="current-score"></span></h2>
-        <table id="game-scores">  ////////// <!--${score}-->
+        <h2>Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></h2>
+        <table id="game-scores">
             <tr>
                 <th>Posizione</th>
                 <th>Punteggio</th>
@@ -50,8 +51,9 @@
             <tr><td>5</td><td></td><td></td></tr>
         </table>
 
-        <button class="btn close-btn btn-lg" type="button" onclick="restartGame()" style="background-color: rgb(183, 79, 79); color: white; font-family: cursive">Rigioca</button>
-    </div>
+        <button class="btn btn-primary" type="button" id="tryAgain"
+        onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
+        </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -70,17 +72,6 @@
                 });
             };
 
-            const displayCurrentScore = (scoreId) => {
-                let currentScore = localStorage.getItem(scoreId) || 0;
-                document.getElementById('current-score').textContent = currentScore;
-            };
-
-            const restartGame = () => {
-                window.location.href = 'gioco2.jsp'; <!--penso non ne sono sicurio-->
-            };
-
-            displayCurrentScore('current-score');
-            displayScores('game-scores', 'game-scores');
         });
     </script>
 </body>

@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     // elementi del DOM da manipolare
-    var imgBandieraHTML = document.getElementById("imgBandiera");
+    var nazioneHTML = document.getElementById("nazione");
     let scoreHTML = document.getElementById("score");
-    let scelta1 = document.getElementById("scelta1");
-    let scelta2 = document.getElementById("scelta2");
-    let scelta3 = document.getElementById("scelta3");
-    let scelta4 = document.getElementById("scelta4");
+    let capitale1 = document.getElementById("capitale1");
+    let capitale2 = document.getElementById("capitale2");
+    let capitale3 = document.getElementById("capitale3");
+    let capitale4 = document.getElementById("capitale4");
     let nextQuestionBtn = document.getElementById("nextQuestion");
     let timerHTML = document.getElementById("timer");
 
     // variabili
-    let arrayPaesi = [];
+    let arrayCapitali = [];
     let arraySoloNomi = [];
     let arrayDomande = [];
     let domandaAttuale = {};
@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let timer;
 
     // Controllo la risposta
-    const checkAnswer = (htmlelement, sceltaText) => {
+    const checkAnswer = (htmlelement, capitaleText) => {
         let rispostaCorretta = domandaAttuale.rispostaCorretta;
-        if (rispostaCorretta === sceltaText) {
+        if (rispostaCorretta === capitaleText) {
             score += 10;
             scoreHTML.textContent = score;
             htmlelement.style.backgroundColor = 'lightblue';
-        } else { // se la risposta è sbagliata
+        } else {
             let mesg = document.getElementById("rispostaSbagliata") ;
             mesg.style.display = "block" ;
             // Nascondi l'elemento dopo un secondo
@@ -36,25 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // EventListeners da aggiungere
-    scelta1.addEventListener('click', () => checkAnswer(scelta1,scelta1.textContent));
-    scelta2.addEventListener('click', () => checkAnswer(scelta2,scelta2.textContent));
-    scelta3.addEventListener('click', () => checkAnswer(scelta3,scelta3.textContent));
-    scelta4.addEventListener('click', () => checkAnswer(scelta4,scelta4.textContent));
+    capitale1.addEventListener('click', () => checkAnswer(capitale1, capitale1.textContent));
+    capitale2.addEventListener('click', () => checkAnswer(capitale2, capitale2.textContent));
+    capitale3.addEventListener('click', () => checkAnswer(capitale3, capitale3.textContent));
+    capitale4.addEventListener('click', () => checkAnswer(capitale4, capitale4.textContent));
 
-    // Recupero dati dal API
+    // Recupero dati dal Json
     const recuperaPaesi = async () => {
         try {
             let response = await fetch('./resources/json/all.json');
             let responseJson = await response.json();
             responseJson.forEach((element) => {
                 let paese = {
-                    bandiera: element.flags.png,
-                    nome: element.name.common
+                    nome: element.name.common,
+                    capitale: element.capital ? element.capital[0] : 'No capital'
                 };
-                arraySoloNomi.push(paese.nome);
-                arrayPaesi.push(paese);
+                arraySoloNomi.push(paese.capitale);
+                arrayCapitali.push(paese);
             });
-            return arrayPaesi;
+            return arrayCapitali;
         } catch (error) {
             console.log("Error while fetching data from backend, msg: " + error);
         }
@@ -63,14 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Preparo arrayDomande
     const prepareQuestions = () => {
         let arrayDomandeToReturn = [];
-        arrayPaesi.forEach((paese) => {
+        arrayCapitali.forEach((paese) => {
             let questionObj = {};
             let arrayFinal = [];
-            let arrayPaesiDiversi = arraySoloNomi.filter(nome => nome !== paese.nome);
-            let arra3Anwsers = [...arrayPaesiDiversi].sort(() => Math.random() - 0.5).slice(0, 3);
-            arrayFinal.push(paese.nome, arra3Anwsers[0], arra3Anwsers[1], arra3Anwsers[2]);
-            questionObj.imgBandiera = paese.bandiera;
-            questionObj.rispostaCorretta = paese.nome;
+            let arrayCapitaliDiverse = arraySoloNomi.filter(capitale => capitale !== paese.capitale);
+            let arra3Anwsers = [...arrayCapitaliDiverse].sort(() => Math.random() - 0.5).slice(0, 3);
+            arrayFinal.push(paese.capitale, arra3Anwsers[0], arra3Anwsers[1], arra3Anwsers[2]);
+            questionObj.nazione = paese.nome;
+            questionObj.rispostaCorretta = paese.capitale;
             questionObj.answers = [...arrayFinal].sort(() => Math.random() - 0.5);
             arrayDomandeToReturn.push(questionObj);
             arrayDomande.push(questionObj);
@@ -79,24 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Metodo per prendere la domanda successiva
-    const getNextQuestion = async (imgurl) => {
-        let img = "";
-        if (imgurl) {
-            img = imgurl;
-        }
+    const getNextQuestion = async (capitale) => {
         if (arrayDomande.length === 0) {
-            arrayDomande = await prepareQuestions();
+            arrayDomande = prepareQuestions();
         }
-        let DomandeEsclusaPreced = arrayDomande.filter(dom => dom.imgBandiera !== img.src);
+
+        let DomandeEsclusaPreced = arrayDomande.filter(c => c.nazione !== capitale);
         let randomIndex = Math.floor(Math.random() * DomandeEsclusaPreced.length);
         let DomandaNonRipetuta = DomandeEsclusaPreced[randomIndex];
         domandaAttuale = DomandaNonRipetuta;
 
-        imgBandieraHTML.setAttribute('src', DomandaNonRipetuta.imgBandiera);
-        scelta1.textContent = DomandaNonRipetuta.answers[0];
-        scelta2.textContent = DomandaNonRipetuta.answers[1];
-        scelta3.textContent = DomandaNonRipetuta.answers[2];
-        scelta4.textContent = DomandaNonRipetuta.answers[3];
+        nazioneHTML.innerHTML = DomandaNonRipetuta.nazione;
+        capitale1.textContent = DomandaNonRipetuta.answers[0];
+        capitale2.textContent = DomandaNonRipetuta.answers[1];
+        capitale3.textContent = DomandaNonRipetuta.answers[2];
+        capitale4.textContent = DomandaNonRipetuta.answers[3];
+
     };
 
     // Prima pagina del gioco
@@ -107,11 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let randomIndex = Math.floor(Math.random() * arrayDomande.length);
             let firstQuestion = arrayDomande[randomIndex];
             domandaAttuale = firstQuestion;
-            imgBandieraHTML.setAttribute('src', firstQuestion.imgBandiera);
-            scelta1.textContent = firstQuestion.answers[0];
-            scelta2.textContent = firstQuestion.answers[1];
-            scelta3.textContent = firstQuestion.answers[2];
-            scelta4.textContent = firstQuestion.answers[3];
+            nazioneHTML.innerHTML = firstQuestion.nazione;
+            capitale1.textContent = firstQuestion.answers[0];
+            capitale2.textContent = firstQuestion.answers[1];
+            capitale3.textContent = firstQuestion.answers[2];
+            capitale4.textContent = firstQuestion.answers[3];
             startTimer(120, timerHTML);
         }
     };
@@ -133,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (--timer < 0) { // quando scade il timer
                 clearInterval(interval);
-                let modal = document.getElementById("gameOverModal_gioco1")
+                let modal = document.getElementById("gameOverModal_gioco3")
                 modal.style.display = "contents"
                 document.getElementById("contenutoGioco").style.display = "none"
 
@@ -142,12 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }, 1000);
     };
-});
+});*/
 
-document.getElementById('viewLeaderboardButton_gioco1').addEventListener('click', function(event) {
+document.getElementById('viewLeaderboardButton_gioco3').addEventListener('click', function(event) {
     event.preventDefault();
 
-    var form = document.getElementById("giocoVO_gioco1");
+    var form = document.getElementById("giocoVO_gioco3");
     form.submit();
 
 });

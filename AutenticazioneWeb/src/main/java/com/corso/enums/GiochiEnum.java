@@ -1,7 +1,7 @@
 package com.corso.enums;
 
 public enum GiochiEnum {
-    IndovinaBandiera,
-    IndovinaCapitale,
-    IndovinaNazione;
+    indovina_bandiera,
+    indovina_capitale,
+    indovina_nazione;
 }
