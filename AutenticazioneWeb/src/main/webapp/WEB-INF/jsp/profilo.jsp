@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <jsp:include page="navBar.jsp"></jsp:include>
-
+ ${giochi}
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +80,7 @@
                     <div id="accordion">
                         <div class="collapse" id="collapseExample1" data-parent="#accordion">
                             <div class="card card-body">
-                                <table class="table" id = "table1" style = "display: none !important">
+                                <table class="table" id = "table1" style = "display: none">
                                     <tbody>
                                     <tr>
                                         <th> </th>
@@ -89,18 +89,19 @@
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=X6CJMckcVrBj&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaBandiera'][0].punti}</td>
-                                        <td>${giochi['IndovinaBandiera'][0].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_bandiera'][0].punti}</td>
+                                        <td>${giochi['indovina_bandiera'][0].data}</td>
                                     </tr>
+                                   
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=dgAxfaiZaNr6&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaBandiera'][1].punti}</td>
-                                        <td>${giochi['IndovinaBandiera'][1].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_bandiera'][1].punti}</td>
+                                        <td>${giochi['indovina_bandiera'][1].data}</td>
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=lMwvkoCmvpSJ&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaBandiera'][2].punti}</td>
-                                        <td>${giochi['IndovinaBandiera'][2].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_bandiera'][2].punti}</td>
+                                        <td>${giochi['indovina_bandiera'][2].data}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -124,18 +125,18 @@
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=X6CJMckcVrBj&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaCapitale'][0].punti}</td>
-                                        <td>${giochi['IndovinaCapitale'][0].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_capitale'][0].punti}</td>
+                                        <td>${giochi['indovina_capitale'][0].data}</td>
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=dgAxfaiZaNr6&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaCapitale'][1].punti}</td>
-                                        <td>${giochi['IndovinaCapitale'][1].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_capitale'][1].punti}</td>
+                                        <td>${giochi['indovina_capitale'][1].data}</td>
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=lMwvkoCmvpSJ&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaCapitale'][2].punti}</td>
-                                        <td>${giochi['IndovinaCapitale'][2].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_capitale'][2].punti}</td>
+                                        <td>${giochi['indovina_capitale'][2].data}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -159,18 +160,18 @@
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=X6CJMckcVrBj&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaNazione'][0].punti}</td>
-                                        <td>${giochi['IndovinaNazione'][0].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_nazione'][0].punti}</td>
+                                        <td>${giochi['indovina_nazione'][0].data}</td>
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=dgAxfaiZaNr6&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaNazione'][1].punti}</td>
-                                        <td>${giochi['IndovinaNazione'][1].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_nazione'][1].punti}</td>
+                                        <td>${giochi['indovina_nazione'][1].data}</td>
                                     </tr>
                                     <tr>
                                         <td><img src = "https://img.icons8.com/?size=100&id=lMwvkoCmvpSJ&format=png&color=000000" width="30" height="30" ></td>
-                                        <td style = "text-align: center;">${giochi['IndovinaNazione'][2].punti}</td>
-                                        <td>${giochi['IndovinaNazione'][2].data}</td>
+                                        <td style = "text-align: center;">${giochi['indovina_nazione'][2].punti}</td>
+                                        <td>${giochi['indovina_nazione'][2].data}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -214,23 +215,23 @@
     <script src="./resources/js/ControlliModificaProfilo.js"></script>
     <script>
 
-   var gioco1 = ${giochi['indovina_bandiera'][0].punti};
-   var gioco2 = ${giochi['indovina_capitale'][0].punti};
-   var gioco3 = ${giochi['indovina_nazione'][0].punti};
+   var gioco1 = ${giochi['indovina_bandiera'][0]};
+   var gioco2 = ${giochi['indovina_capitale'][0]};
+   var gioco3 = ${giochi['indovina_nazione'][0]};
 
-    if (gioco1 != 0) {
+    if (gioco1) {
         document.getElementById('table1').style.display = "inline"
     } else {
         document.getElementById('link1').style.display = "inline"
     }
 
-    if (gioco2 != 0) {
+    if (gioco2) {
             document.getElementById("table2").style.display = "inline"
     } else {
         document.getElementById("link2").style.display = "inline"
     }
 
-    if (gioco3 != 0) {
+    if (gioco3) {
             document.getElementById("table3").style.display = "inline"
     } else {
         document.getElementById("link3").style.display = "inline"
