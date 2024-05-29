@@ -6,7 +6,6 @@ import com.corso.model.Paesi;
 import com.corso.service.PaesiService;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class PaesiServiceImpl implements PaesiService {
@@ -23,6 +22,7 @@ public class PaesiServiceImpl implements PaesiService {
     public List<Paesi> findAll() {
         return dao.findAll() ;
     }
+
     @Transactional
     @Override
     public Paesi findBySigla(String codice){
@@ -34,6 +34,7 @@ public class PaesiServiceImpl implements PaesiService {
         }
         return null;
     }
+
     @Transactional
     @Override
     public Paesi findByNome(String nome){
@@ -41,25 +42,17 @@ public class PaesiServiceImpl implements PaesiService {
     }
 
     @Override
-    public boolean addPaese(){
+    public void addPaese(){
         List<Paesi> paesi = dao.initPaesi();
-        for (Paesi paese : paesi) {
-            Paesi paeseFind = dao.findByCodice2(paese.getCodice2());
-            if(paeseFind == null){
-                dao.addPaese(paese);
-                return true;
-            } else {
-                if(paese.getCodice2().equalsIgnoreCase(paeseFind.getCodice2())) {
-                    paeseFind.setNome(paese.getNome());
-                    paeseFind.setCodice2(paese.getCodice2());
-                    paeseFind.setCodice3(paese.getCodice3());
-                    dao.update(paeseFind);
-                    return true;
-                }
-            }
 
+        for (Paesi paese : paesi) {
+            try {
+                dao.addPaese(paese);
+            } catch (Exception e){
+                System.out.println("Paese già esistente");
+                e.printStackTrace();
+            }
         }
-        return false;
     }
 
 }

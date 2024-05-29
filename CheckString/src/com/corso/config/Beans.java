@@ -41,7 +41,7 @@ public class Beans {
     private static String dbName = "checkstring";
     private static String dburl = "jdbc:mysql://localhost:3306/"+dbName+"?useSSL=false";
     private static String dbuser = "root";
-    private static String dbpass = "";
+    private static String dbpass = "Jessy1999";
 
 	@Bean(name="dataSource")
     public DataSource getDataSource () {
@@ -78,7 +78,7 @@ public class Beans {
         adapter.setDatabase(Database.MYSQL);   // obbligatorio: serve per tradurre le query nel particolare Dialetto
 
         adapter.setGenerateDdl(true);          //facoltativo, attiva il DDL cio� hibernate creer� le strutture nel DB se non sono gi� essitenti
-        adapter.setShowSql(true);              // mostra l'SQL, comodo per i corsi e per il debug ma in produzione solitamente � a false
+        adapter.setShowSql(false);              // mostra l'SQL, comodo per i corsi e per il debug ma in produzione solitamente � a false
         return adapter;
     }
 

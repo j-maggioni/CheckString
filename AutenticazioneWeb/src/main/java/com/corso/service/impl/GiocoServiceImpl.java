@@ -1,7 +1,7 @@
 package com.corso.service.impl;
 
 import com.corso.dao.GiocoDAO;
-import com.corso.enums.GiochiEnum;
+
 import com.corso.model.Gioco;
 import com.corso.service.GiocoService;
 import org.springframework.stereotype.Service;
@@ -26,25 +26,25 @@ public class GiocoServiceImpl implements GiocoService {
 
     @Override
     @Transactional
-    public List<Gioco> getAll(GiochiEnum gioco) {
+    public List<Gioco> getAll(String gioco) {
         return dao.findAll(gioco);
     }
 
     @Override
     @Transactional
-    public List<Gioco> getAllBest(GiochiEnum gioco) {
+    public List<Gioco> getAllBest(String gioco) {
         return dao.findAllBest(gioco);
     }
 
     @Override
     @Transactional
-    public List<Gioco> getUserAll(String utente, GiochiEnum gioco) {
+    public List<Gioco> getUserAll(String utente, String gioco) {
         return dao.findAllPerUser(utente, gioco);
     }
 
     @Override
     @Transactional
-    public List<Gioco> getUserAllBest(String utente, GiochiEnum gioco) {
+    public List<Gioco> getUserAllBest(String utente, String gioco) {
         return dao.findBestPerUser(utente, gioco);
     }
 }

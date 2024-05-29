@@ -12,15 +12,14 @@ public class ConverterGiocoToGiocoVO {
     public static GiocoVO convert(Gioco gioco){
         GiocoVO giocoVO = new GiocoVO();
         BeanUtils.copyProperties(gioco, giocoVO);
+        giocoVO.setUtente(gioco.getUtente().getEmail());
         return giocoVO;
     }
 
     public static List<GiocoVO> convertList(List<Gioco> giochi){
         List<GiocoVO> giocoVOList = new ArrayList<GiocoVO>();
         for(Gioco gioco: giochi) {
-            GiocoVO giocoVO = new GiocoVO();
-            BeanUtils.copyProperties(gioco, giocoVO);
-            giocoVOList.add(giocoVO);
+            giocoVOList.add(convert(gioco));
         }
         return giocoVOList;
     }

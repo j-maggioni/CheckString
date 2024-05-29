@@ -1,14 +1,14 @@
 package com.corso.model;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity(name = "paesi")
 @NamedNativeQueries({
 		@NamedNativeQuery(
 				name = "Paesi.init",
-				query = "SELECT Code as codice3,Code2 as codice2, Name as nome " +
-						"FROM world.country",
-						//"WHERE NOT EXISTS (SELECT 1 FROM checkstring.paesi);",
+				query = "SELECT Code as codice3, Code2 as codice2, Name as nomeENG, null as nomeITA FROM world.country",
 				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.All",
@@ -16,7 +16,7 @@ import javax.persistence.*;
 				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.ByCode2",
-				query = "SELECT * FROM paesi WHERE codice2 = :codice2 ",
+				query = "SELECT * FROM paesi WHERE codice2 = :codice2 ;",
 				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.ByCode3",
@@ -24,15 +24,14 @@ import javax.persistence.*;
 				resultClass = Paesi.class),
 
 		@NamedNativeQuery(name = "Paesi.ByNome",
-				query = "SELECT * FROM paesi WHERE nome = :nome ;",
+				query = "SELECT * FROM paesi WHERE nomeITA = :nomeITA ;",
 				resultClass = Paesi.class) ,
 })
 
 public class Paesi {
 
-	@Column(name="nome")
-	//@NotNull
-	private String nome;
+	@Column(name="nomeENG")
+	private String nomeENG;
 
 	@Id
 	@Column(name="codice2")
@@ -41,13 +40,25 @@ public class Paesi {
 	@Column(name="codice3")
 	private String codice3;
 
+	@Column(name="nomeITA", nullable = true)
+	private String nomeITA;
 
-	public String getNome() {
-		return nome;
+	public Paesi() {
+
+	}
+	public Paesi(String nome, String codice2, String codice3) {
+		this.nomeENG = nome;
+		this.codice2 = codice2;
+		this.codice3 = codice3;
+		this.nomeITA = null;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getNomeENG() {
+		return nomeENG;
+	}
+
+	public void setNomeENG(String nomeENG) {
+		this.nomeENG = nomeENG;
 	}
 
 	public String getCodice2() {
@@ -66,21 +77,21 @@ public class Paesi {
 		this.codice3 = codice3;
 	}
 
-	public Paesi() {
-
+	public String getNomeITA() {
+		return nomeITA;
 	}
-	public Paesi(String nome, String codice2, String codice3) {
-		this.nome = nome;
-		this.codice2 = codice2;
-		this.codice3 = codice3 ;
+
+	public void setNomeITA(String nomeITA) {
+		this.nomeITA = nomeITA;
 	}
 
 	@Override
 	public String toString() {
 		return "Paesi{" +
-				"nome='" + nome + '\'' +
+				"nomeENG='" + nomeENG + '\'' +
 				", codice2='" + codice2 + '\'' +
 				", codice3='" + codice3 + '\'' +
+				", nomeITA='" + nomeITA + '\'' +
 				'}';
 	}
 }

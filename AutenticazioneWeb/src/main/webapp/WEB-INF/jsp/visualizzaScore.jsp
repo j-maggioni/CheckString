@@ -1,81 +1,131 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="navBar.jsp"></jsp:include>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risultati del Gioco</title>
-     <%@ include file="includes.jsp" %>
+    <title>Riepilogo Risultati Giochi</title>
+    <%@ include file="includes.jsp" %>
+
     <style>
         .container {
             text-align: center;
             margin: 20px;
         }
-        .btn {
+        .btn-spacing {
             margin: 10px;
         }
-        table {
-            width: 50%;
-            margin: 0 auto 20px;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
+        .highlight {
+            background-color: yellow; /* Cambia il colore a tuo piacimento */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Risultati</h1>
+<div id="carouselExampleInterval" class="carousel slide carousel-container" data-ride="carousel"
+        data-pause="false" data-interval="6000">
+        <div class="carousel-inner"></div>
+    </div>
 
-        <h2>Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></h2>
-        <table id="game-scores">
-            <tr>
-                <th>Posizione</th>
-                <th>Punteggio</th>
-                <th>Data</th>
-            </tr>
-            <tr><td>1</td><td></td><td></td></tr>
-            <tr><td>2</td><td></td><td></td></tr>
-            <tr><td>3</td><td></td><td></td></tr>
-            <tr><td>4</td><td></td><td></td></tr>
-            <tr><td>5</td><td></td><td></td></tr>
-        </table>
+    <div class="overlay">
+<h2 style = "margin-left: 10px" class = "permanent-marker-regular">Risultati</h2>
+    <p style = "margin-top: 40px; text-align: center">Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></p>
+
+        <div class="row justify-content-center" style="margin-top: 30px;">
+                   <div class="col-auto btn-spacing">
+                       <button class="btn gioco" type="button"
+                        data-toggle="collapse" data-target="#collapseGenerale"
+                         aria-expanded="true" aria-controls="collapseGenerale">
+                           Classifica Generale
+                       </button>
+                   </div>
+                   <div class="col-auto btn-spacing">
+                       <button class="btn gioco" type="button"
+                       data-toggle="collapse" data-target="#collapsePersonale"
+                        aria-expanded="false" aria-controls="collapsePersonale">
+                           Classifica Personale
+                       </button>
+                   </div>
+               </div>
+            <div id="accordion">
+                <div class="collapse show" id="collapseGenerale" data-parent="#accordion">
+                    <div class="card card-body">
+                        <div id="classificaGenerale">
+                                <p>Classifica Generale</p>
+                                <table class="table" id = "game-scores">
+                                    <tr>
+                                        <th>Posizione</th>
+                                        <th>Punteggio</th>
+                                        <th>Utente</th>
+                                    </tr>
+                                    <c:forEach var="scoreData" items="${classificaGenerale}">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>${scoreData.getPunti()}</td>
+                                            <td>${scoreData.getUtente()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="collapsePersonale" data-parent="#accordion">
+                    <div class="card card-body">
+                    <div id="classificaPersonale">
+                                <p>Classifica Personale</p>
+                                <table class = "table" id="personal-scores">
+                                    <tr>
+                                        <th>Posizione</th>
+                                        <th>Punteggio</th>
+                                        <th>Data</th>
+                                    </tr>
+                                    <c:forEach var="personalScoreData" items="${storicoPersonale}">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>${personalScoreData.getPunti()}</td>
+                                            <td>${personalScoreData.getData()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+    </div>
+
 
         <button class="btn btn-primary" type="button" id="tryAgain"
         onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
         </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const displayScores = (gameId, tableId) => {
-                let scores = JSON.parse(localStorage.getItem(gameId)) || [];
-                let table = document.getElementById(tableId);
+        function showGenerale() {
+            document.getElementById('classificaGenerale').style.display = 'block';
+            document.getElementById('classificaPersonale').style.display = 'none';
+        }
 
-                scores.forEach((scoreData, index) => {
-                    if (index < 5) {
-                        let row = table.rows[index + 1];
-                        let cell2 = row.cells[1];
-                        let cell3 = row.cells[2];
-                        cell2.textContent = scoreData.score;
-                        cell3.textContent = new Date(scoreData.date).toLocaleDateString('it-IT');
-                    }
-                });
-            };
-
-        });
+        function showPersonale() {
+            document.getElementById('classificaGenerale').style.display = 'none';
+            document.getElementById('classificaPersonale').style.display = 'block';
+        }
     </script>
+    <script>
+    // Evidenzia l'ultimo punteggio
+    let scoreCells = document.querySelectorAll('.score');
+    scoreCells.forEach(cell => {
+        if (cell.getAttribute('data-score') == currentScore) {
+            cell.parentElement.classList.add('highlight');
+        }
+
+displayCurrentScore('current-score');
+});
+</script>
 </body>
 </html>
-
 
 

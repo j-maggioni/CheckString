@@ -23,16 +23,16 @@ public class SigleSpecialiDB extends CheckString {
 
     @Override
     public Esito checkInput(String input) {
-        System.out.println("Provo con l'algoritmo " + this.getName());
-        SigleSpeciali ricerca = serviceSigleSpeciali.findBySigla(input);
-        if (ricerca != null) {
-            return new Esito(true, ricerca.getSigla(), ricerca.getPaese(),
-                    this.getName());
-        }
-        if (super.getNext() != null) {
-            return super.getNext().checkInput(input);
-        } else {
+//        System.out.println("Provo con l'algoritmo " + this.getName());
+//        SigleSpeciali ricerca = serviceSigleSpeciali.findBySigla(input);
+//        if (ricerca != null) {
+//            return new Esito(true, ricerca.getSigla(), ricerca.getPaese(),
+//                    this.getName());
+//        }
+//        if (super.getNext() != null) {
+//            return super.getNext().checkInput(input);
+//        } else {
             return new Esito(false, input, "NESSUNA PAROLA TROVATA", "None");
-        }
+        //}
     }
 }

@@ -23,9 +23,9 @@ public class Ranking {
 	private static ArrayList<String> paesi;
 	private static String[] algoritmiUsati = {"Contained","Contains","Levenstein 1",
 											"Levenstein 2","Levenstein 3","Levenstein 4","Soundex",
-											"InserimentoManuale", "RicercaDB", "SigleSpecialiDB"};
-	private static String[] algoritmiNonAddestrati = {"InserimentoManuale", "RicercaDB", "SigleSpecialiDB"};
-	private static String[] algoritmiIgnorati = {"InserimentoManuale"};
+											"RicercaDB"};
+	private static String[] algoritmiNonAddestrati = {"RicercaDB"};
+	private static String[] algoritmiIgnorati = {};
 
 	private static BeanFactory factory;
 	private static RankingAlgoritmiService serviceRanking;
@@ -37,7 +37,6 @@ public class Ranking {
 	public static void algorithmRanking() throws Exception {
 		paesi = new ArrayList<String>();
 
-		//ParoleStandard s = new DBParoleStandard();
 		ParoleStandard s = new LocaleParoleStandard();
 
 		for (Standard p: s.getStandards()){

@@ -1,7 +1,5 @@
 package com.corso.model;
 
-import com.corso.enums.GiochiEnum;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,17 +12,17 @@ import javax.persistence.*;
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllBest",
-                query = "SELECT * FROM utenti.giochi WHERE gioco=:gioco ORDER BY punti DESC LIMIT 3 ;",
+                query = "SELECT * FROM utenti.giochi WHERE gioco=:gioco ORDER BY punti DESC LIMIT 5 ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findAllPerUser",
-                query = "SELECT * FROM giochi WHERE utente=:utente AND gioco=:gioco ;",
+                query = "SELECT * FROM giochi WHERE utente=:utente AND gioco=:gioco ORDER BY data ;",
                 resultClass = Gioco.class
         ),
         @NamedNativeQuery(
                 name = "Gioco.findBestPerUser",
-                query = "SELECT * FROM utenti.giochi WHERE utente=:utente AND gioco=:gioco4 ORDER BY punti DESC LIMIT 3; ;",
+                query = "SELECT * FROM utenti.giochi WHERE utente=:utente AND gioco=:gioco ORDER BY punti DESC LIMIT 3; ;",
                 resultClass = Gioco.class
         )
 })
@@ -45,13 +43,13 @@ public class Gioco {
     private Utente utente;
 
     @Column(name="gioco")
-    private GiochiEnum gioco;
+    private String gioco;
 
     public Gioco() {
 
     }
 
-    public Gioco(String data, int punti, Utente utente, GiochiEnum gioco) {
+    public Gioco(String data, int punti, Utente utente, String gioco) {
         this.data = data;
         this.punti = punti;
         this.utente = utente;
@@ -66,11 +64,11 @@ public class Gioco {
         this.id = id;
     }
 
-    public String getData() {
+    public java.lang.String getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(java.lang.String data) {
         this.data = data;
     }
 
@@ -90,11 +88,11 @@ public class Gioco {
         this.utente = utente;
     }
 
-    public GiochiEnum getGioco() {
+    public String getGioco() {
         return gioco;
     }
 
-    public void setGioco(GiochiEnum gioco) {
+    public void setGioco(String gioco) {
         this.gioco = gioco;
     }
 }

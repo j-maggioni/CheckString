@@ -1,6 +1,6 @@
 package com.corso.dao;
 
-import com.corso.enums.GiochiEnum;
+
 import com.corso.model.Gioco;
 
 import javax.transaction.Transactional;
@@ -11,14 +11,14 @@ public interface GiocoDAO {
     public void add(Gioco gioco);
 
     @Transactional
-    List<Gioco> findAll(GiochiEnum gioco);
+    List<Gioco> findAll(String gioco);
 
     @Transactional
-    List<Gioco> findAllBest(GiochiEnum gioco);
+    List<Gioco> findAllBest(String gioco);
 
     @Transactional
-    List<Gioco> findAllPerUser(String utente, GiochiEnum gioco);
+    List<Gioco> findAllPerUser(String utente, String gioco);
 
     @Transactional
-    List<Gioco> findBestPerUser(String utente, GiochiEnum gioco);
+    List<Gioco> findBestPerUser(String utente, String gioco);
 }

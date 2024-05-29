@@ -4,8 +4,6 @@ import com.corso.algoritmi.CheckString;
 import com.corso.algoritmi.Esito;
 import com.corso.algoritmi.Ranking;
 import com.corso.config.Beans;
-import com.corso.model.Paesi;
-import com.corso.model.RankingAlgoritmi;
 import com.corso.model.RicercheRecenti;
 import com.corso.model.SigleSpeciali;
 import com.corso.service.PaesiService;
@@ -15,9 +13,7 @@ import com.corso.service.SigleSpecialiService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Client {
 
@@ -99,7 +95,7 @@ public class Client {
 
 	private boolean approvazioneUtente(Esito esito){
 		System.out.println("\nInput: " + esito.getParolaInput() + "\tParola trovata: " +
-				servicePaesi.findBySigla(esito.getParolaStandard()).getNome());
+				servicePaesi.findBySigla(esito.getParolaStandard()).getNomeENG());
 		System.out.print("\nLa parola trovata corrisponde all'input inserito? Y/N ");
 		Scanner in = new Scanner(System.in);
 		char response = in.next().charAt(0);

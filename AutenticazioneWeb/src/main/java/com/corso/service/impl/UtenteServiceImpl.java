@@ -55,23 +55,18 @@ public class UtenteServiceImpl implements UtenteService {
             utenteInDB.setNome(utente.getNome());
             utenteInDB.setCognome(utente.getCognome());
             utenteInDB.setEmail(utente.getEmail());
-            String password;
-            if (!utente.getPassword().isEmpty()) {
-                password = utente.getPassword();
-            } else {
-                password = utenteInDB.getPassword();
+            if (utente.getPassword() != null && !utente.getPassword().isEmpty()) {
+                utenteInDB.setPassword(utente.getPassword());
             }
-            utenteInDB.setPassword(password);
             utenteInDB.setNazione(utente.getNazione());
             utenteInDB.setPrefisso(utente.getPrefisso());
             utenteInDB.setTelefono(utente.getTelefono());
             dao.update(utenteInDB);
             return utenteInDB;
         } else {
-            System.out.println("NO UPDATE");
+            System.out.println("Utente non trovato per l'aggiornamento.");
             return null;
         }
-
     }
 
     @Override
