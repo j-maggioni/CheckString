@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body id="bgGiochi">
+<body style = "background: linear-gradient(45deg, #46BC50, #A3E26D);">
     <div class="modal fade" id="gameOverModal_gioco3" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
@@ -49,9 +49,10 @@
     <div id="contenutoGioco">
         <div class="container">
             <div class="row mt-2 d-flex justify-content-center">
-                <h3  class="col-6" style=" font-weight: 600;"> Score: <span id="score" class="score" style="color: rgb(183, 79, 79);">0</span></h3>
-                <h3 class= "col-6" id="timer" style="font-weight: 600; font-size: 40px; color: rgb(95, 95, 95);">00:00</h3>
+                <h3  class="col-6, montserrat" id = "titoloGiochi"> Score : <span id="score" class="score">0</span> punti</h3>
+                <h3 class= "col-6" id="timer">00:00</h3>
             </div>
+
             <div id = "rispostaSbagliata" class="alert alert-danger" style="display: none;" role="alert">
               Risposta sbagliata
             </div>
@@ -71,7 +72,7 @@
             </div-->
         </div>
         <form id="nextQuestion" class="mt-4" style="text-align: center; margin-bottom: 80px !important; margin-top: 50px !important;">
-            <button class="btn close-btn btn-lg" type="button" style="background-color: rgb(183, 79, 79); color: white; font-family: cursive">Next
+            <button class="btn esci btn-lg" type="button">Next
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
                 </svg>
@@ -79,6 +80,11 @@
         </form>
     </div>
     <script src="./resources/js/gioco3.js"></script>
+
+</body>
+</html>
+<script src="${pageContext.request.contextPath}/resources/js/ControlliSfondoHome.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/ControlliNavBar.js"></script>
 
 </body>
 </html>

@@ -5,8 +5,6 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-interface EmptyPasswordValidator {}
-interface MatchingPasswordValidator {}
 
 @GroupSequence({FormUtenteModificato.class, EmptyPasswordValidator.class, MatchingPasswordValidator.class})
 public class FormUtenteModificato {
@@ -16,20 +14,6 @@ public class FormUtenteModificato {
     @NotEmpty(message = "Inserisci un cognome")
     private String cognome;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "La password deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale",
-            groups = {EmptyPasswordValidator.class})
-    private String password;
-
-    @NotEmpty(groups = {MatchingPasswordValidator.class})
-    private String confermaPassword;
-
-    @AssertTrue(message = "Le password non corrispondono",
-            groups = {MatchingPasswordValidator.class})
-    private boolean isValidPassword() {
-        return password.equals(confermaPassword);
-    }
-
     @NotEmpty(message = "Inserisci una nazione")
     private String nazione;
 
@@ -38,7 +22,7 @@ public class FormUtenteModificato {
     private String telefono;
 
     @NotEmpty
-    @Pattern(regexp = "(\\+\\d{1,3}\\s?)", message = "Inserisci un numero di telefono valido")
+    @Pattern(regexp = "^\\+\\d{1,3}\\s?$", message = "Inserisci un prefisso valido")
     private String prefisso;
 
 
@@ -58,21 +42,7 @@ public class FormUtenteModificato {
         this.cognome = cognome;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfermaPassword() {
-        return confermaPassword;
-    }
-
-    public void setConfermaPassword(String confermaPassword) {
-        this.confermaPassword = confermaPassword;
-    }
 
     public String getNazione() {
         return nazione;
@@ -103,8 +73,6 @@ public class FormUtenteModificato {
         return "FormUtenteModificato{" +
                 "nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
-                ", password='" + password + '\'' +
-                ", confermaPassword='" + confermaPassword + '\'' +
                 ", nazione='" + nazione + '\'' +
                 ", prefisso='" + prefisso + '\'' +
                 ", telefono='" + telefono + '\'' +

@@ -15,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -89,24 +88,24 @@ public class UtenteController {
 
 	@PostMapping("/accedi")
 	public String accedi(HttpSession session, @ModelAttribute("utente") @Valid FormLogin login,
-					  BindingResult bindingResult, Model model) {
+						 BindingResult bindingResult, Model model) {
 		System.out.println("passaggio dal controller metodo login");
 
 		boolean emailHasErrors = bindingResult.hasFieldErrors("email");
 		boolean passwordHasErrors = bindingResult.hasFieldErrors("password");
 
-        if (emailHasErrors) {
+		if (emailHasErrors) {
 			String error;
 			model.addAttribute("path", "globalError");
-            if (passwordHasErrors) {
-                error = "Accesso non eseguito! Inserisci delle credenziali valide.";
-            } else  {
+			if (passwordHasErrors) {
+				error = "Accesso non eseguito! Inserisci delle credenziali valide.";
+			} else  {
 				error = "Accesso non eseguito! Inserire una e-mail valida";
-            }
+			}
 			bindingResult.rejectValue("globalError", "error.utente", error);
-        } else {
-            model.addAttribute("path", "*");
-        }
+		} else {
+			model.addAttribute("path", "*");
+		}
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("loginHasErrors", "inline");
@@ -172,13 +171,12 @@ public class UtenteController {
 	}
 
 
-	@GetMapping(path={"/modifica_profilo"})
+	@GetMapping("/modifica_profilo")
 	public String modificaProfilo(HttpSession session, Model model) {
 		System.out.println("passaggio dal controller metodo formModificaProfilo");
 		model.addAttribute("editOK", "none");
 		model.addAttribute("utente",
 				ConverterUtenteVOToFormModificaProfilo.convert((UtenteVO) session.getAttribute("utente")));
-
 		return "formModificaProfilo";
 	}
 
@@ -189,21 +187,16 @@ public class UtenteController {
 		System.out.println("passaggio dal controller metodo modificaProfilo");
 		model.addAttribute("editOK", "none");
 
-		if(formUtenteModificato.getPassword().isEmpty() && formUtenteModificato.getConfermaPassword().isEmpty()){
-			bindingResult.reject("password", null);
-		}
-
 		if (bindingResult.hasErrors()){
 			return "formModificaProfilo";
 		} else {
 			String email = ((UtenteVO) session.getAttribute("utente")).getEmail();
-			Utente utente = ConverterFormModificaProfiloToUtente.convert(formUtenteModificato,email);
+			Utente utente = ConverterFormModificaProfiloToUtente.convert(formUtenteModificato, email);
 
 			Utente updatedUtente = utenteService.updateUtente(utente);
 			if (updatedUtente != null) {
 				model.addAttribute("editOK", "inline");
 				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(updatedUtente);
-
 				model.addAttribute("utente", utenteVO);
 				session.setAttribute("utente", utenteVO);
 				return "profilo";
@@ -212,6 +205,48 @@ public class UtenteController {
 			}
 		}
 	}
+
+	@GetMapping("/modifica_password")
+	public String modificaPasswordForm(HttpSession session, Model model) {
+		System.out.println("passaggio dal controller metodo modificaPasswordForm");
+		model.addAttribute("utente",
+				ConverterUtenteVOToFormModificaPassword.convert((UtenteVO) session.getAttribute("utente")));
+		return "modificaPassword";
+	}
+
+	@PostMapping({"/modifica_password"})
+	public String modificaPassword(HttpSession session,
+								   @Valid @ModelAttribute("formPassword") FormPasswordModificata formPasswordModificata,
+								   BindingResult bindingResult, Model model) {
+		System.out.println("passaggio dal controller metodo modificaPassword");
+
+		if(formPasswordModificata.getPassword().isEmpty() && formPasswordModificata.getConfermaPassword().isEmpty()){
+			bindingResult.reject("password", "Password fields cannot be empty");
+		}
+
+		if (!formPasswordModificata.getPassword().equals(formPasswordModificata.getConfermaPassword())) {
+			bindingResult.reject("confermaPassword", "Passwords do not match");
+		}
+
+		if (bindingResult.hasErrors()){
+			return "formModificaProfilo";
+		} else {
+			Utente utente = (Utente) session.getAttribute("utente");
+			Utente updatedUtente = ConverterFormModificaPasswordToUtente.convert(formPasswordModificata, utente);
+
+			updatedUtente = utenteService.updateUtente(updatedUtente);
+			if (updatedUtente != null) {
+				model.addAttribute("editOK", "inline");
+				UtenteVO utenteVO = ConverterUtenteToUtenteVO.convert(updatedUtente);
+				model.addAttribute("utente", utenteVO);
+				session.setAttribute("utente", utenteVO);
+				return "profilo";
+			} else {
+				return "formModificaProfilo";
+			}
+		}
+	}
+
 
 	@GetMapping("/elimina_utente")
 	public String eliminaUtente(HttpSession session) {

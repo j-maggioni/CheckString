@@ -10,8 +10,7 @@ public class ConverterUtenteVOToFormModificaProfilo {
     public static FormUtenteModificato convert(UtenteVO utenteVO){
         FormUtenteModificato utenteModificato = new FormUtenteModificato();
         BeanUtils.copyProperties(utenteVO, utenteModificato);
-        utenteModificato.setPassword("");
-        utenteModificato.setConfermaPassword("");
         return utenteModificato;
     }
 }
+
