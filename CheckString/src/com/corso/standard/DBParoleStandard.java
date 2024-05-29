@@ -29,7 +29,7 @@ public class DBParoleStandard implements ParoleStandard {
         List<Paesi> paesi = servicePaesi.findAll();
 
         for (Paesi paese: paesi){
-            paroleStandard.add(new Standard(paese.getCodice2(),paese.getNome()));
+            paroleStandard.add(new Standard(paese.getCodice2(),paese.getNomeENG()));
         }
         return paroleStandard;
 	}
