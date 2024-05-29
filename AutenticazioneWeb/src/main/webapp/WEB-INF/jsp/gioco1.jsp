@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="navBar.jsp"></jsp:include>
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
      <div id="contenutoGioco">
         <div>
             <div class="row mt-2 d-flex justify-content-center">
-             <h3  class="col-6, montserrat" id = "titoloGiochi"> Score : <span id="score" class="score">0</span> punti</h3>
+             <h3  class="col-6, montserrat" id = "titoloGiochi"> Score: <span id="score" class="score">0</span> punti</h3>
              <h3 class= "col-6" id="timer">00:00</h3>
             </div>
             <div id = "rispostaSbagliata" class="alert alert-danger" style="display: none;" role="alert">
