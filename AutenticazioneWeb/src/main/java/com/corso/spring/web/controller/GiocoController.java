@@ -36,7 +36,6 @@ public class GiocoController {
 		System.out.println("passaggio dal controller metodo gioco1");
 
 		model.addAttribute("partita", istanziaPartita(GiochiEnum.indovina_bandiera, session));
-		System.out.println(model.getAttribute("partita"));
 
 		return "gioco1";
 	}
@@ -45,7 +44,7 @@ public class GiocoController {
 	public String gioco2(Model model, HttpSession session) {
 		System.out.println("passaggio dal controller metodo gioco2");
 
-		model.addAttribute("partita", istanziaPartita(GiochiEnum.indovina_capitale, session ));
+		model.addAttribute("partita", istanziaPartita(GiochiEnum.indovina_capitale, session));
 
 		return "gioco2";
 	}
@@ -54,7 +53,7 @@ public class GiocoController {
 	public String gioco3(Model model, HttpSession session) {
 		System.out.println("passaggio dal controller metodo gioco3");
 
-		model.addAttribute("partita", istanziaPartita(GiochiEnum.indovina_nazione, session ));
+		model.addAttribute("partita", istanziaPartita(GiochiEnum.indovina_nazione, session));
 
 		return "gioco3";
 	}
@@ -71,17 +70,15 @@ public class GiocoController {
 
 		model.addAttribute("gioco_prec",partita.getGioco().name());
 
-		List<GiocoVO> classificaGenerale = new ArrayList<>();
-		classificaGenerale = ConverterGiocoToGiocoVO.convertList(giocoService.getAllBest(partita.getGioco()));
+		List<GiocoVO> classificaGenerale = ConverterGiocoToGiocoVO.convertList(giocoService.getAllBest(partita.getGioco()));
 
 		model.addAttribute("classificaGenerale",classificaGenerale);
-		System.out.println(model.getAttribute("classificaGenerale"));
 
-		List<GiocoVO> storicoPersonale = new ArrayList<>();
-		storicoPersonale = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+		List<GiocoVO> storicoPersonale = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAll(utenteVO.getEmail(),
 				partita.getGioco()));
 
 		model.addAttribute("storicoPersonale",storicoPersonale);
+		System.out.println(storicoPersonale);
 
 		return "visualizzaScore";
 

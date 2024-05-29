@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    ${classificaGenerale}
-    ${storicoPersonale}
+
+${storicoPersonale}
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -28,7 +29,7 @@
     <div class="container">
     <h1>Risultati</h1>
 
-    <h2>Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></h2>
+    <p>Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></p>
 
         <div class="row justify-content-center" style="margin-top: 30px;">
                    <div class="col-auto btn-spacing">
@@ -49,19 +50,19 @@
 
                 <div class="collapse" id="collapseGenerale">
                     <div class="card card-body">
-                    <div id="classificaGenerale" style="display: none;">
-                                <h2>Classifica Generale</h2>
+                    <div id="classificaGenerale">
+                                <p>Classifica Generale</p>
                                 <table id="game-scores">
                                     <tr>
                                         <th>Posizione</th>
                                         <th>Punteggio</th>
-                                        <th>Nome Utente</th>
+                                        <th>Utente</th>
                                     </tr>
                                     <c:forEach var="scoreData" items="${classificaGenerale}">
                                         <tr>
                                             <td>1</td>
-                                            <td>${scoreData.punti}</td>
-                                            <td>${scoreData.utente}</td>
+                                            <td>${scoreData.getPunti()}</td>
+                                            <td>${scoreData.getUtente()}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
@@ -71,8 +72,8 @@
                 </div>
                 <div class="collapse" id="collapsePersonale">
                     <div class="card card-body">
-                    <div id="classificaPersonale" style="display: none;">
-                                <h2>Classifica Personale</h2>
+                    <div id="classificaPersonale">
+                                <p>Classifica Personale</p>
                                 <table id="personal-scores">
                                     <tr>
                                         <th>Posizione</th>
@@ -82,8 +83,8 @@
                                     <c:forEach var="personalScoreData" items="${storicoPersonale}">
                                         <tr>
                                             <td>1</td>
-                                             <td>${personalscoreData.punti}</td>
-                                             <td>${personalscoreData.utente}</td>
+                                            <td>${personalscoreData.getPunti()}</td>
+                                            <td>${personalscoreData.getData()}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
