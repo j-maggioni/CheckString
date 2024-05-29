@@ -21,7 +21,7 @@
                     <path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 010 1L9 8l2.354 2.354a.5.5 0 11-1 1L8 9.707l-2.354 2.647a.5.5 0 01-1-1L7 8 4.646 5.646a.5.5 0 010-1z"/>
                 </svg>
             </button>
-           <h3 style = "margin-left: 50px">Profilo utente</h3>
+           <h3 style = "margin-left: 50px" class = "permanent-marker-regular">Profilo utente</h3>
         <div class="margini">
             <div class="row g-3 col-md-12">
                 <div class="col-md-6">
@@ -52,10 +52,10 @@
                 </div>
 
                 <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-                    <div class="w-100 d-flex justify-content-end" style = "margin-right: 290px;">
+                    <div class="w-100 d-flex justify-content-end" style = "margin-left: 40px;">
                         <div>
-                            <h4 style = "margin-left: 65px;">Riepilogo risultati giochi</h4>
-                            <div class="row justify-content-center" style="margin-top: 30px; margin-left: 30px;">
+                            <h4 style = "text-align: center" class = "permanent-marker-regular">Riepilogo risultati giochi</h4>
+                            <div class="row justify-content-center" style="margin-top: 30px; margin-right: 3px">
                                 <div class="col-auto btn-spacing">
                                     <button class="btn gioco" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
                                     Indovina la bandiera
@@ -80,8 +80,7 @@
                     <div id="accordion">
                         <div class="collapse" id="collapseExample1" data-parent="#accordion">
                             <div class="card card-body">
-                                <table class="table">
-                                    <p class = "titoloGioco">Indovina la bandiera</p>
+                                <table class="table" id = "table1" style = "display: none !important">
                                     <tbody>
                                     <tr>
                                         <th> </th>
@@ -105,12 +104,18 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div id = "link1" style = "display: none !important">
+                                    <a class="nav-link" href="indovina_bandiera" id="gioco1Btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg> Indovina la bandiera
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="collapse" id="collapseExample2" data-parent="#accordion">
                             <div class="card card-body">
-                                <p class = "titoloGioco">Indovina la capitale</p>
-                                <table class="table">
+                                <table class="table" id = "table2" style = "display: none !important">
                                     <tbody>
                                     <tr>
                                         <th> </th>
@@ -134,12 +139,18 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div id = "link2" style = "display: none !important">
+                                    <a class="nav-link" href="indovina_capitale" id="gioco2Btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                        </svg> Indovina la capitale
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="collapse" id="collapseExample3" data-parent="#accordion">
                             <div class="card card-body">
-                                 <p class = "titoloGioco">Indovina la nazione</p>
-                                <table class="table">
+                                <table class="table" id = "table3" style = "display: none !important">
                                     <tbody>
                                     <tr>
                                         <th> </th>
@@ -163,6 +174,13 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div id = "link3" style = "display: none !important">
+                                   <a class="nav-link" href="indovina_nazione" id="gioco3Btn">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16">
+                                          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                                      </svg>
+                                      Indovina la nazione</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -194,5 +212,31 @@
 
     </div>
     <script src="./resources/js/ControlliModificaProfilo.js"></script>
+    <script>
+
+   var gioco1 = ${giochi['IndovinaBandiera'][0].punti};
+   var gioco2 = ${giochi['IndovinaCapitale'][0].punti};
+   var gioco3 = ${giochi['IndovinaNazione'][0].punti};
+
+
+    if (gioco1 != 0) {
+        document.getElementById('table1').style.display = "inline"
+    } else {
+        document.getElementById('link1').style.display = "inline"
+    }
+
+    if (gioco2 != 0) {
+            document.getElementById("table2").style.display = "inline"
+    } else {
+        document.getElementById("link2").style.display = "inline"
+    }
+
+    if (gioco3 != 0) {
+            document.getElementById("table3").style.display = "inline"
+    } else {
+        document.getElementById("link3").style.display = "inline"
+    }
+
+    </script>
 </body>
 </html>

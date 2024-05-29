@@ -2,5 +2,5 @@
     pageEncoding="ISO-8859-1"%>
 
 <jsp:include page="navBar.jsp"></jsp:include>
-
+<%@ include file="includes.jsp" %>
 <%@include  file="../../resources/html/gioco3.html" %>
