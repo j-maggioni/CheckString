@@ -23,17 +23,105 @@ body {
     }
 }
 
-/* NAVBAR */
-.nav-link {
-    color: #b084cc;
+.permanent-marker-regular {
+      font-family: "Permanent Marker", cursive;
+      font-weight: 400;
+      font-style: normal;
 }
 
-.nav-link:visited {
+.montserrat {
+      font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-style: normal;
+}
+
+.error {
+    color: crimson !important;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+/* HOME */
+
+#messaggioBenvenuto {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    z-index: 4;
+    white-space: pre-wrap;
+}
+
+
+#map-icon {
+    position: absolute;
+    top: 63%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    animation: bounce 1.5s infinite alternate; /* Animazione */
+    z-index: 4;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(-20px);
+    }
+}
+
+#accediMex {
+    position: absolute;
+    top: 84%;
+    left: 25%;
+    text-align: center;
+    z-index: 5;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #665687;
+    padding: 10px 20px;
+    border: 2px solid #665687;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#NomeGioco {
+    position: absolute;
+    top: 45% !important;
+    left: 55% !important;
+    text-align: center;
+    display: none;
+    z-index: 6;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #665687;
+    padding: 10px 20px;
+    border: 2px solid #665687;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* NAVBAR */
+.nav-link {
+    color: #665687;
+}
+
+.nav-link: visited {
     color: #b084cc;
 }
 
 .nav-link:hover {
     color: #20c997;
+}
+
+.container-xxl {
+    background-image: url('../../resources/img/cloud.jpg');
+    padding: 10px;
 }
 
 /*MESSAGGIO DEI CONTROLLI*/
@@ -43,12 +131,21 @@ body {
     display: none;
 }
 
+
 /*TITOLI*/
+
+h1 {
+    color:  #665687;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
 
 h2 {
     text-align: center;
-    color: #20c997;
-    margin-top: 22% !important;
+    color: #b084cc;
 }
 
 h3 {
@@ -73,6 +170,39 @@ h5 {
 
 }
 
+#h3Giochi {
+font-weight: 600;
+    color: #acfcd9 !important;
+    margin-top: 20px !important;
+}
+
+.title-container {
+    position: absolute;
+    top: 90px; /* Regola la posizione verticale secondo le necessità */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Posizionamento sopra il renderer Three.js */
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia l'opacità qui */
+    color: #665687;
+    font-family: cursive;
+    text-align: center;
+    padding: 10px 20px;
+    border: 2px solid #665687;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #665687, 0 0 20px #665687, 0 0 30px #665687;
+    }
+    to {
+        box-shadow: 0 0 20px #665687, 0 0 30px #665687, 0 0 40px #665687;
+    }
+}
+
+
 /*BOTTONI*/
 
 .esci {
@@ -86,32 +216,37 @@ h5 {
 }
 
 .gioco {
-    background-color: #acfcd9 !important ;
+    background-color: #f0ffff !important;
     border-radius: 100px;
-    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-    color: #190933 !important;
+    box-shadow: rgba(176, 132, 204, 0.2) 0 -25px 18px -14px inset, rgba(176, 132, 204, 0.15) 0 1px 2px, rgba(176, 132, 204, 0.15) 0 2px 4px, rgba(176, 132, 204, 0.15) 0 4px 8px, rgba(176, 132, 204, 0.15) 0 8px 16px, rgba(176, 132, 204, 0.15) 0 16px 32px;
+    color: #665687 !important; /* Testo bianco per un migliore contrasto */
     cursor: pointer;
     display: inline-block;
-    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-    padding: 7px 20px;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 10px;
     text-align: center;
     text-decoration: none;
     transition: all 250ms;
     border: 0;
-    font-size: 16px;
+    font-size: 12px;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
 }
 
 .gioco:hover {
-    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+    box-shadow: rgba(176, 132, 204, 0.35) 0 -25px 18px -14px inset, rgba(176, 132, 204, 0.25) 0 1px 2px, rgba(176, 132, 204, 0.25) 0 2px 4px, rgba(176, 132, 204, 0.25) 0 4px 8px, rgba(176, 132, 204, 0.25) 0 8px 16px, rgba(176, 132, 204, 0.25) 0 16px 32px;
     transform: scale(1.05) rotate(-1deg);
 }
 
 .gioco:focus {
     outline: none;
     box-shadow: 0 0 0 0 !important;
+}
+
+.gioco:active {
+    background-color:  #665687 !important;
+    color: #f0ffff !important;
 }
 
 .bottone:focus {
@@ -155,14 +290,23 @@ h5 {
     height: 24px;
 }
 
+.bottoneG {
+    background-color: #20c997 !important;
+}
+
+.modificaPsw {
+    background-color: #b084cc !important;
+    color: white !important;
+    margin-left: 10px;
+}
 
 
 /*CAROUSEL SFONDO*/
 
 .carousel-container {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     z-index: 0;
 }
 
@@ -175,30 +319,42 @@ h5 {
 
 .overlay {
     position: absolute;
-        top: 400px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 15px;
-        border-radius: 5px;
-        display: inline-block;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.overlayL {
+      position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       background-color: rgba(255, 255, 255, 0.95);
+       padding: 15px;
+       border-radius: 5px;
+       flex-direction: column;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+       max-width: 600px;
 }
 
 .overlayP {
     position: absolute;
-        top: 400px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 15px;
-        border-radius: 5px;
-        display: inline-block;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        max-width: 90%; /* Sostituisci con la larghezza massima desiderata */
-        width: 90%; /* Usa una percentuale per rendere il contenitore responsive */
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 90%; /* Sostituisci con la larghezza massima desiderata */
+    width: 90%; /* Usa una percentuale per rendere il contenitore responsive */
 }
-
 
 /*PROGRESS BAR*/
 
@@ -231,6 +387,7 @@ h5 {
 input {
    border: solid 1.5px #b084cc;
 }
+
 input[type=text]:hover,
 input[type=password]:hover {
   box-shadow: 0 0 5pt 0.5pt #b084cc;
@@ -246,14 +403,14 @@ input[type=password]:focus {
 /* MAPPA */
 
 #map {
-        height: 500px;
-        width: 500px;
-        position: absolute;
-        top: 15%;
-        left: 33%;
-        border-radius: 100% 100% 100% 100%;
-        border: 2px solid #20c997;
-        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    top: 15%;
+    left: 33%;
+    border-radius: 100% 100% 100% 100%;
+    border: 2px solid #20c997;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
 }
 
 /* ---------------------- css per la mappa --------------------- */
@@ -282,21 +439,23 @@ input[type=password]:focus {
     fill: #000080;
   }
    */
+
   html {
     box-sizing: border-box;
   }
   *, *:before, *:after {
     box-sizing: inherit;
   }
+
   html, body {
     height: 100%;
   }
+
   body {
     background: #21252b;
-  
     color: #d3ddef;
   }
-  
+
   .ag-canvas {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -304,10 +463,10 @@ input[type=password]:focus {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-  
+
     position: relative;
     visibility: visible;
-  
+
     width: 100%;
     height: 100%;
     padding: 3rem 1rem;
@@ -329,7 +488,7 @@ input[type=password]:focus {
     stroke-width: 0.5;
     transition: 0.5s;
   }
-  
+
   @media screen and (max-width: 767px) {
     .ag-canvas {
       -webkit-flex-flow: row wrap;
@@ -343,4 +502,38 @@ input[type=password]:focus {
       margin-left: 0;
     }
   }
-  
+
+  /* GIOCHI */
+
+  .score {
+      color: rgb(183, 79, 79) !important;
+  }
+
+  #timer {
+      font-weight: 600;
+      font-size: 40px;
+      color: #5dd9c1 !important;
+      margin-top: 80px !important;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  }
+
+  #titoloGiochi {
+       font-weight: 600;
+       color: #665687 !important;
+  }
+
+  #rispostaSbagliata {
+      position: absolute;
+      top: 17%;
+      left: 19%;
+      text-align: center;
+      z-index: 5;
+      display: none;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #665687;
+      padding: 10px 20px;
+      border: 2px solid #665687;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+

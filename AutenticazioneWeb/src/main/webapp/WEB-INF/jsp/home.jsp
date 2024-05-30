@@ -179,7 +179,7 @@
     }
 
     function typewriterEffect() {
-        const text = "Benvenuto su PippoAdventures! Registrati o effettua il login per iniziare una nuova avventura! Poi clicca sul mappamondo per scoprire i tre giochi disponibili! Buon divertimento!";
+        const text = "Benvenuto su PippoAdventures!\n Registrati o effettua il login per iniziare una nuova avventura!\n Poi clicca sul mappamondo per scoprire i tre giochi disponibili!\n Buon divertimento!";
         let i = 0;
         const speed = 30; // Velocità della macchina da scrivere in millisecondi
 
