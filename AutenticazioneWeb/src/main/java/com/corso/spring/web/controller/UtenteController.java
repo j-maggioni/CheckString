@@ -27,7 +27,7 @@ public class UtenteController {
 
 	@Autowired
 	GiocoService giocoService;
-
+	
 	@GetMapping(path={"/","/home"})
 	public String home(HttpSession session) {
 		System.out.println("passaggio dal controller metodo home");
@@ -139,26 +139,14 @@ public class UtenteController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		Map<String,List<GiocoVO>> giochi = new HashMap<>();
-		List<GiocoVO> bandieraList = new ArrayList<>();
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_bandiera.name(), utenteVO.getEmail()));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_bandiera.name(), utenteVO.getEmail()));
-		bandieraList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_bandiera.name(), utenteVO.getEmail()));
-//		bandieraList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
-//				GiochiEnum.IndovinaBandiera));
+		List<GiocoVO> bandieraList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+				GiochiEnum.indovina_bandiera.name()));
 
-		List<GiocoVO> capitaleList = new ArrayList<>();
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_capitale.name(), utenteVO.getEmail()));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_capitale.name(), utenteVO.getEmail()));
-		capitaleList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_capitale.name(), utenteVO.getEmail()));
-//		capitaleList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
-//				GiochiEnum.IndovinaCapitale));
+		List<GiocoVO> capitaleList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+				GiochiEnum.indovina_capitale.name()));
 
-		List<GiocoVO> nazioneList = new ArrayList<>();
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_nazione.name(), utenteVO.getEmail()));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_nazione.name(), utenteVO.getEmail()));
-		nazioneList.add(new GiocoVO(dateFormat.format(currentDate),0, GiochiEnum.indovina_nazione.name(), utenteVO.getEmail()));
-//		nazioneList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
-//				GiochiEnum.IndovinaNazione));
+		List<GiocoVO> nazioneList = ConverterGiocoToGiocoVO.convertList(giocoService.getUserAllBest(utenteVO.getEmail(),
+				GiochiEnum.indovina_nazione.name()));
 
 		giochi.put(GiochiEnum.indovina_bandiera.name(), bandieraList);
 		giochi.put(GiochiEnum.indovina_capitale.name(), capitaleList);
@@ -249,7 +237,8 @@ public class UtenteController {
 
 	@GetMapping("/elimina_utente")
 	public String eliminaUtente(HttpSession session) {
-		Utente utente = (Utente) session.getAttribute("utente");
+		UtenteVO utenteVO = (UtenteVO) session.getAttribute("utente");
+		Utente utente = ConverterUtenteVOToUtente.convert(utenteVO);
 		utenteService.delete(utente.getEmail());
 		session.removeAttribute("utente");
 		session.invalidate();
