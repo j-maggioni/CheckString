@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             capitale2.textContent = firstQuestion.answers[1];
             capitale3.textContent = firstQuestion.answers[2];
             capitale4.textContent = firstQuestion.answers[3];
-            startTimer(120, timerHTML);
+            startTimer(60, timerHTML);
         }
     };
     initializeGame();
@@ -133,10 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearInterval(interval);
                 let modal = document.getElementById("gameOverModal_gioco2")
                 modal.style.display = "contents"
-                document.getElementById("contenutoGioco").style.display = "none"
+                document.getElementById("contenutoGioco2").style.display = "none"
 
                 var scoreField = document.getElementById("punti");
                 scoreField.value = score;
+                                console.log('ScoreField.value = ' +scoreField.value)
+                                console.log('ScoreField.value = ' +score)
             }
         }, 1000);
     };

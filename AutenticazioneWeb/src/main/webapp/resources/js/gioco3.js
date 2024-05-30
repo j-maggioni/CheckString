@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nazione4HTML.textContent = firstQuestion.answers[3];
             domandaAttuale = firstQuestion;
             arrayDomandeGiaFatte.push(firstQuestion);
-            startTimer(5, timerHTML);
+            startTimer(60, timerHTML);
         }
     };
 
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 modal.style.display = "contents";
                 var scoreField = document.getElementById("punti");
                 scoreField.value = score;
+
             }
         }, 1000);
     };

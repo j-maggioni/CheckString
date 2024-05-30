@@ -23,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (rispostaCorretta === sceltaText) {
             score += 10;
             scoreHTML.textContent = score;
-            htmlelement.style.backgroundColor = 'lightblue';
         } else { // se la risposta è sbagliata
             let mesg = document.getElementById("rispostaSbagliata") ;
             mesg.style.display = "block" ;
             // Nascondi l'elemento dopo un secondo
             setTimeout(() => {
                 mesg.style.display = "none";
-            }, 1000); // 1000 millisecondi corrispondono a 1 secondo
+            }, 1000); 
         }
         getNextQuestion();
     };
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scelta2.textContent = firstQuestion.answers[1];
             scelta3.textContent = firstQuestion.answers[2];
             scelta4.textContent = firstQuestion.answers[3];
-            startTimer(120, timerHTML);
+            startTimer(60, timerHTML);
         }
     };
     initializeGame();

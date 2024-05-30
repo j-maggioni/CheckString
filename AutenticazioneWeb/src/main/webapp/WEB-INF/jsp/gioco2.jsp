@@ -36,7 +36,7 @@
 
                     <form:form id="giocoVO_gioco2" method="POST" action="salvaScore" modelAttribute="partita">
                         <form:input for="data" path="data" value="${partita.data}" type="hidden"/>
-                        <form:input for="punti" path="punti" type="hidden"/>
+                        <form:input id="punti" for="punti" path="punti" type="hidden"/>
                         <form:input for="gioco" path="gioco" value="${partita.gioco}" type="hidden"/>
                         <button class="btn btn-secondary" type="submit" id="viewLeaderboardButton_gioco2">Vedi il tuo punteggio</button>
                     </form:form>
@@ -45,6 +45,7 @@
             </div>
         </div>
     <div>
+    <div id="contenutoGioco2">
         <div class="row mt-2 d-flex justify-content-center">
                 <h3  class="col-6, montserrat" id = "titoloGiochi"> Score : <span id="score" class="score">0</span> punti</h3>
                 <h3 class= "col-6" id="timer">00:00</h3>
@@ -74,6 +75,7 @@
             </svg>
         </button>
     </form>
+   </div>
     <script src="./resources/js/gioco2.js"></script>
 
 </body>

@@ -32,7 +32,8 @@
     <div class="overlay">
 <h2 style = "margin-left: 10px" class = "permanent-marker-regular">Risultati</h2>
     <p style = "margin-top: 40px; text-align: center">Il tuo punteggio &egrave; stato di <span id="current-score">${partita.punti}</span></p>
-
+            <button class="btn gioco col-12" style="text-align : center" type="button" id="tryAgain"
+             onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
         <div class="row justify-content-center" style="margin-top: 30px;">
                    <div class="col-auto btn-spacing">
                        <button class="btn gioco" type="button"
@@ -56,13 +57,11 @@
                                 <p>Classifica Generale</p>
                                 <table class="table" id = "game-scores">
                                     <tr>
-                                        <th>Posizione</th>
                                         <th>Punteggio</th>
                                         <th>Utente</th>
                                     </tr>
                                     <c:forEach var="scoreData" items="${classificaGenerale}">
                                         <tr>
-                                            <td>1</td>
                                             <td>${scoreData.getPunti()}</td>
                                             <td>${scoreData.getUtente()}</td>
                                         </tr>
@@ -78,13 +77,11 @@
                                 <p>Classifica Personale</p>
                                 <table class = "table" id="personal-scores">
                                     <tr>
-                                        <th>Posizione</th>
                                         <th>Punteggio</th>
                                         <th>Data</th>
                                     </tr>
                                     <c:forEach var="personalScoreData" items="${storicoPersonale}">
                                         <tr>
-                                            <td>1</td>
                                             <td>${personalScoreData.getPunti()}</td>
                                             <td>${personalScoreData.getData()}</td>
                                         </tr>
@@ -99,9 +96,7 @@
     </div>
 
 
-        <button class="btn btn-primary" type="button" id="tryAgain"
-        onclick="location.href = '${gioco_prec}'">Gioca di nuovo</button>
-        </div>
+
 
     <script>
         function showGenerale() {
